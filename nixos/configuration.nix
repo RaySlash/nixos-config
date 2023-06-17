@@ -7,8 +7,8 @@
 
 	networking.hostName = "nixos-rpi";
 	networking.networkmanager.enable = true;
-	networking.firewall.allowedTCPPorts = [ 80 3000 85 ];
-	networking.firewall.allowedUDPPorts = [ 80 ];
+	networking.firewall.allowedTCPPorts = [ 80 3000 ];
+	networking.firewall.allowedUDPPorts = [ 80 53 ];
 	networking.firewall.enable = true;
 	# networking.proxy.default = "http://user:password@proxy:port/";
 	# networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -42,6 +42,7 @@
 		openssl
 		apacheHttpd
 		adguardhome
+		gnupg
 	];
 
 	programs = {
