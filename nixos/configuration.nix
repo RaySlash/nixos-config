@@ -18,6 +18,7 @@
 
       ./hardware-configuration.nix
       ./services.nix
+      ./virtualisation.nix
   ];
 
   nixpkgs = {
@@ -90,15 +91,17 @@
   users.users = {
     smj = {
       isNormalUser = true;
-      extraGroups = ["wheel"];
+      extraGroups = [ "wheel" "libvirtd" ];
+      shell = pkgs.zsh;
     };
   };
 
   environment = {
     variables.EDITOR = "nvim";
+    shells = with pkgs; [ zsh ];
     gnome.excludePackages = (with pkgs; [
-        gnome-photos
-        gnome-tour
+      gnome-photos
+      gnome-tour
     ]) ++ (with pkgs.gnome; [
       cheese # webcam tool
       gnome-music
@@ -116,9 +119,10 @@
     ]);
     systemPackages = with pkgs; [
       exa
-        libclang
-        gcc
-        git
+      libclang
+      gcc
+      git
+      zsh
     ];
   };
 

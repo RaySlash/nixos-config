@@ -17,7 +17,8 @@
 # You can also split up your configuration and import pieces of it here:
 # ./nvim.nix
     ./services.nix
-      ./theme.nix
+    ./theme.nix
+    ./virtualisation.nix
   ];
 
   nixpkgs = {
@@ -52,7 +53,30 @@
 
 # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [
+    htop
+		fd
+		ripgrep
+		lazygit
+		tree-sitter
+    unzip
+		wget
+		imv
+    helvum
+    pavucontrol
+		openrgb-with-all-plugins
+    catppuccin-gtk
+		papirus-icon-theme
+		luajit
+    oversteer
+		libreoffice-fresh
+		protonup-qt
+		protontricks
+		wineWowPackages.waylandFull
+    vlc
+    gimp-with-plugins
+    lua-language-server
+  ];
 
 # Enable home-manager and git
   programs.home-manager.enable = true;

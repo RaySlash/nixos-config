@@ -34,8 +34,12 @@
       vimAlias = true;
       vimdiffAlias = true;
     };
-  };
-  alacritty = {
+    git = {
+			enable = true;
+			userEmail = "stevemathewjoy@gmail.com";
+			userName = "RaySlash";
+		};
+    alacritty = {
 			enable = true;
 			settings = {
 				window = {
@@ -145,4 +149,5 @@
 				};
 			}; 
 		};
-                                        }
+  };
+}

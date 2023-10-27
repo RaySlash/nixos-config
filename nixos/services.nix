@@ -31,12 +31,12 @@
       syntaxHighlighting.enable = true;
       autosuggestions.enable = true;
       zsh-autoenv.enable = true;
+      enableCompletion = true;
+      histSize = 10000;
       ohMyZsh = {
         enable = true;
         theme = "robbyrussell";
       };
-      enableCompletion = true;
-      histSize = 10000;
       shellAliases = {
         ls = "exa --icons";
         ll = "exa --icons -l";
