@@ -1,0 +1,208 @@
+/* No Tabs, One Line URL bar, Fixed button bar */
+:root:is([tabsintitlebar], [sizemode="fullscreen"]) {
+  --uc-window-control-width: 90px; /* Space reserved for window controls (Win10) */
+  --uc-window-drag-space-pre: 30px; /* left side*/
+  --uc-window-drag-space-post: 30px; /* right side*/
+}
+
+:root:is([tabsintitlebar][sizemode="maximized"], [sizemode="fullscreen"]) {
+  --uc-window-drag-space-pre: 0px; /* Remove pre space */
+}
+
+@media  (-moz-platform: windows-win7),
+(-moz-platform: windows-win8),
+(-moz-os-version: windows-win7),
+(-moz-os-version: windows-win8){
+  :root:is([tabsintitlebar], [sizemode="fullscreen"]) {
+    --uc-window-control-width: 105px;
+  }
+}
+
+#nav-bar{
+  border-inline: var(--uc-window-drag-space-pre,0px) solid var(--toolbar-bgcolor);
+  border-inline-style: solid !important;
+  border-right-width: calc(var(--uc-window-control-width,0px) + var(--uc-window-drag-space-post,0px));
+}
+
+:root[tabsintitlebar]{ --uc-toolbar-height: 40px; }
+:root[tabsintitlebar][uidensity="compact"]{ --uc-toolbar-height: 32px }
+
+#TabsToolbar{ visibility: collapse !important }
+
+:root[sizemode="fullscreen"] #TabsToolbar > :is(#window-controls,.titlebar-buttonbox-container){
+  visibility: visible !important;
+  z-index: 2;
+}
+
+:root:not([inFullscreen]) #nav-bar{
+  margin-top: calc(0px - var(--uc-toolbar-height,0px));
+}
+
+:root[tabsintitlebar] #toolbar-menubar[autohide="true"]{
+  min-height: unset !important;
+  height: var(--uc-toolbar-height,0px) !important;
+  position: relative;
+}
+
+#toolbar-menubar[autohide="false"]{
+  margin-bottom: var(--uc-toolbar-height,0px)
+}
+
+:root[tabsintitlebar] #toolbar-menubar[autohide="true"] #main-menubar{
+  -moz-box-flex: 1;
+  -moz-box-align: stretch;
+  background-color: var(--toolbar-bgcolor,--toolbar-non-lwt-bgcolor);
+  background-clip: padding-box;
+  border-right: 30px solid transparent;
+  border-image: linear-gradient(to left, transparent, var(--toolbar-bgcolor,--toolbar-non-lwt-bgcolor) 30px) 20 / 30px
+}
+
+#toolbar-menubar:not([inactive]){ z-index: 2 }
+#toolbar-menubar[autohide="true"][inactive] > #menubar-items {
+  opacity: 0;
+  pointer-events: none;
+  margin-left: var(--uc-window-drag-space-pre,0px)
+}   
+
+/* Titlebar Buttons */
+
+.titlebar-button { 
+  transition: all 0.3s ease !important;
+  padding: 8px 10px !important;
+  background: none !important;
+}
+.titlebar-button.titlebar-close {
+  padding-right: 26px !important;
+}
+.titlebar-button > .toolbarbutton-icon {
+  transition: all 0.3s ease !important;
+  list-style-image: none;
+  border-radius: 15px;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+
+.titlebar-button:hover > .toolbarbutton-icon {
+  background: none !important;
+}
+.titlebar-button.titlebar-min > .toolbarbutton-icon {
+  list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-267,-272)"><g id="min_btn"><rect x="269" y="278" width="10" height="2" style="fill:rgb(235,203,139);"/></g></g></svg>');
+}
+.titlebar-button.titlebar-max > .toolbarbutton-icon,
+.titlebar-button.titlebar-restore > .toolbarbutton-icon {
+  list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-599,-254)"><g id="max_btn" transform="matrix(0.707107,-0.707107,0.707107,0.707107,-9.17935,502.829)"><path d="M602,263L610,263L610,260.995L613,263.995L610,266.995L610,264.99L602,264.99L602,266.995L599,263.995L602,260.995L602,263Z" style="fill:rgb(163,190,140);"/></g></g></svg>');
+}
+.titlebar-button.titlebar-close > .toolbarbutton-icon {
+  list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-632,-255)"><path id="close_btn" d="M638.979,260.586L643.221,256.343L644.635,257.757L640.393,262L644.635,266.243L643.221,267.657L638.979,263.414L634.736,267.657L633.322,266.243L637.564,262L633.322,257.757L634.736,256.343L638.979,260.586Z" style="fill:rgb(191,97,106);"/></g></svg>');
+}
+.titlebar-button.titlebar-min:hover > .toolbarbutton-icon {
+  list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-566,-296)"><g id="min_hover_btn" transform="matrix(1,0,0,1,0,20)"><path d="M574,282L578,282L578,284L574,284L574,288L572,288L572,284L568,284L568,282L572,282L572,278L574,278L574,282Z" style="fill:rgb(235,203,139);"/></g></g></svg>');
+}
+.titlebar-button.titlebar-max:hover > .toolbarbutton-icon,
+.titlebar-button.titlebar-restore:hover > .toolbarbutton-icon {
+  list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-599,-296)"><g id="max_hover_btn" transform="matrix(1,0,0,1,33,20)"><path d="M574,282L578,282L578,284L574,284L574,288L572,288L572,284L568,284L568,282L572,282L572,278L574,278L574,282Z" style="fill:rgb(163,190,140);"/></g></g></svg>');
+}
+.titlebar-button.titlebar-close:hover > .toolbarbutton-icon {
+  list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-631,-296)"><g id="close_hover_btn" transform="matrix(1,0,0,1,64.957,20)"><path d="M574,282L578,282L578,284L574,284L574,288L572,288L572,284L568,284L568,282L572,282L572,278L574,278L574,282Z" style="fill:rgb(191,97,106);"/></g></g></svg>');
+}
+
+/* URL Bar Centered Text */
+#urlbar .urlbar-input-box {
+  text-align: center !important;
+}
+
+#urlbar-input-container {
+  background-color: var(--sfsecondary) !important;
+  border: 1px solid rgb(30, 30, 46) !important;
+}
+
+#urlbar-container {
+  margin-left: 0 !important;
+}
+
+
+/* Sidebar */
+#sidebar-box{
+  --sidebar-width: 53px;
+  --sidebar-hover-width: 266px;
+  --autohide-sidebar-delay: 200ms; /* Delay before hiding the sidebar */
+  position: relative;
+  min-width: var(--sidebar-width) !important;
+  width: var(--sidebar-width) !important;
+  max-width: var(--sidebar-width) !important;
+  z-index:1;
+}
+
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-switcher-target::before{
+  content: "";
+  display: -moz-inline-box;
+}
+
+#sidebar-icon{ -moz-box-ordinal-group: 0 }
+#sidebar-title{ display: none }
+#sidebar-box[positionend]{ direction: rtl }
+#sidebar-box[positionend] > *{ direction: ltr }
+
+#sidebar-box[positionend]:-moz-locale-dir(rtl){ direction: ltr }
+#sidebar-box[positionend]:-moz-locale-dir(rtl) > *{ direction: rtl }
+
+#main-window[sizemode="fullscreen"] #sidebar-box{ --sidebar-width: 1px; }
+
+#sidebar-splitter{ 
+  display: none !important;
+}
+
+
+#sidebar-header{ display: none !important}
+
+#sidebar{
+  transition: box-shadow 0.1s linear, min-width 75ms linear var(--autohide-sidebar-delay) !important;
+  min-width: var(--sidebar-width) !important;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.3) !important;
+  will-change:  min-width !important;
+}
+#sidebar:hover{
+  min-width: var(--sidebar-hover-width) !important;
+  transition-delay: 0ms !important;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.25) !important;
+}
+
+#sidebar-box {
+  box-shadow: 0 20px 0 rgba(0, 0, 0, 0.25) !important;
+  transition: box-shadow 0.1s linear !important;
+}
+
+#sidebar-box:hover {	
+  box-shadow: 3px 32px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+.sidebar-panel{
+  background-color: transparent !important;
+  color: var(--newtab-text-primary-color) !important;
+}
+
+.sidebar-panel #search-box{
+  -moz-appearance: none !important;
+  background-color: rgba(249,249,250,0.1) !important; 
+  color: inherit !important;
+}
+
+/* Add sidebar divider and give it background */
+
+#sidebar,
+#sidebar-header{
+  background-color: var(--toolbar-bgcolor) !important;
+  border-inline: 1px solid rgb(30, 30, 46);
+  border-inline-width: 0px 1px;
+}
+
+#sidebar-box:not([positionend]) > :-moz-locale-dir(rtl),
+#sidebar-box[positionend] > *{
+  border-inline-width: 1px 0px;
+}
+
+/* Move statuspanel to the other side when sidebar is hovered so it doesn't get covered by sidebar */
+
+#sidebar-box:not([positionend]):hover ~ #appcontent #statuspanel{ inset-inline: auto 0px !important; }
+#sidebar-box:not([positionend]):hover ~ #appcontent #statuspanel-label{ margin-inline: 0px !important; border-left-style: solid !important; }
