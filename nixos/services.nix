@@ -2,15 +2,6 @@
 
   services = {
     udev.packages = with pkgs; [ openrgb-with-all-plugins ];
-    xserver = {
-      enable = true;
-      desktopManager.gnome.enable = true;
-      displayManager = {
-        gdm.enable = true;
-        gdm.wayland = true;
-        defaultSession ="gnome-xorg";
-      };
-    };
     pipewire = {
       enable = true;
       alsa.enable = true;
