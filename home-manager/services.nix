@@ -27,13 +27,6 @@
         userContent = builtins.readFile ./firefox/userContent.css;
       };
     };
-    # neovim = {
-    #   enable = true;
-    #   defaultEditor = true;
-    #   viAlias = true;
-    #   vimAlias = true;
-    #   vimdiffAlias = true;
-    # };
     git = {
 			enable = true;
 			userEmail = "stevemathewjoy@gmail.com";
