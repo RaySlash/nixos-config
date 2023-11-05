@@ -11,10 +11,6 @@
     inputs.home-manager.nixosModules.home-manager
 
       ./hardware-configuration.nix
-      ./services.nix
-      ./gnome.nix
-      ./hyprland.nix
-      ./virtualisation.nix
   ];
 
   nixpkgs = {
@@ -46,23 +42,17 @@
     };
   };
 
-  networking.hostName = "frost";
+  networking.hostName = "rpi";
   networking.networkmanager.enable = true;
+	services.openssh.enable = true;
 
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    initrd.kernelModules = [ "amdgpu" ];
-    blacklistedKernelModules = [ "hid-thrustmaster" ];
-    kernelModules = [ "i2c-dev" "hid-tmff2" ];
-    extraModulePackages = [
-      (config.boot.kernelPackages.callPackage ../pkgs/hid-tmff2/default.nix {})
-    ];
   };
 
   boot.loader = {
-    systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 6;
-    efi.canTouchEfiVariables = true;
+    grub.enable = false;
+    generic-extlinux-compatible.enable = true;
   };
 
   hardware.pulseaudio.enable = false;
@@ -85,7 +75,7 @@
   users.users = {
     smj = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "libvirtd" ];
+      extraGroups = [ "wheel" ];
       shell = pkgs.zsh;
     };
   };

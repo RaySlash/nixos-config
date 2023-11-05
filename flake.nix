@@ -32,7 +32,7 @@
     homeManagerModules = import ./modules/home-manager;
 
     nixosConfigurations = {
-      frost = nixpkgs.lib.nixosSystem {
+      rpi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
           ./nixos/configuration.nix
