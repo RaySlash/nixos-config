@@ -42,18 +42,18 @@
 		lazygit
 		tree-sitter
     unzip
+    p7zip
 		wget
 		imv
     helvum
     pavucontrol
 		openrgb-with-all-plugins
-    catppuccin-gtk
-		papirus-icon-theme
+    ungoogled-chromium
 		luajit
     oversteer
 		libreoffice-fresh
 		protonup-qt
-		protontricks
+		unstable.protontricks
 		wineWowPackages.waylandFull
     vlc
     gimp-with-plugins

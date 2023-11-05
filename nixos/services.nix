@@ -14,8 +14,10 @@
     kdeconnect.enable = true;
     steam = {
       enable = true;
+      package = pkgs.unstable.steam;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
+      gamescopeSession.enable = true;
     };
     zsh = {
       enable = true;

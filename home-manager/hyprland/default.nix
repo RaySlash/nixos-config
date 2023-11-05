@@ -91,4 +91,14 @@
     };
     style = builtins.readFile ./wofi.css;
   };
+
+  home.packages = with pkgs; [
+    wlogout
+    swaybg
+    wl-clipboard
+    wlr-randr
+    grim
+    slurp
+  ];
+
 }

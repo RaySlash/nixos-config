@@ -34,6 +34,7 @@
 		};
     alacritty = {
 			enable = true;
+      package = pkgs.unstable.alacritty;
 			settings = {
 				window = {
 					colors = {
