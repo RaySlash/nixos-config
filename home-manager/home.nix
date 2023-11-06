@@ -12,14 +12,11 @@
 # outputs.homeManagerModules.example
 
 # Or modules exported from other flakes (such as nix-colors):
-inputs.hyprland.homeManagerModules.default
 
 # You can also split up your configuration and import pieces of it here:
 # ./nvim.nix
-    ./hyprland
     ./services.nix
     ./theme.nix
-    ./virtualisation.nix
   ];
 
   nixpkgs = {
@@ -51,19 +48,9 @@ inputs.hyprland.homeManagerModules.default
     unzip
 		wget
 		imv
-    helvum
-    pavucontrol
-		openrgb-with-all-plugins
     catppuccin-gtk
 		papirus-icon-theme
 		luajit
-    oversteer
-		libreoffice-fresh
-		protonup-qt
-		protontricks
-		wineWowPackages.waylandFull
-    vlc
-    gimp-with-plugins
     lua-language-server
   ];
 

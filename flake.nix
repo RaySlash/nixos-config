@@ -21,6 +21,7 @@
   } @ inputs: let
   inherit (self) outputs;
   systems = [
+    "aarch64-linux"
     "x86_64-linux"
   ];
   forAllSystems = nixpkgs.lib.genAttrs systems;

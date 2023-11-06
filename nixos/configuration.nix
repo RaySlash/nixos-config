@@ -11,6 +11,8 @@
     inputs.home-manager.nixosModules.home-manager
 
       ./hardware-configuration.nix
+      ./services.nix
+      ../pkgs/dwm-luke
   ];
 
   nixpkgs = {
@@ -59,7 +61,6 @@
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    driSupport32Bit = true;
   };
 
   time.timeZone = "Australia/Brisbane";
