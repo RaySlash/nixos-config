@@ -10,7 +10,7 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nurpkgs.url = "github:nix-community/NUR/master";
 
-    hyprland.url = "github:hyprwm/Hyprland/main";
+    # hyprland.url = "github:hyprwm/Hyprland/main";
   };
 
   outputs = {

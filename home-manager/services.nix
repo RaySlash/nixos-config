@@ -2,38 +2,6 @@
 
   programs = {
     gpg.enable = true;
-    firefox = {
-      enable = true;
-      profiles.smj = {
-        name = "smj";
-        isDefault = true;
-# extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-#   ublock-origin
-#   sidebery
-#   enhancer-for-youtube
-#   bitwarden
-#   darkreader
-#   privacy-badger
-#   firefox-color
-# ];
-        search.default = "DuckDuckGo";
-        search.force = true;
-        search.order = [
-          "DuckDuckGo"
-            "Google"
-        ];
-# For userchrome, set toolkit.legacyUserProfileCustomizations.stylesheets preference to true in about:config
-        userChrome = builtins.readFile ./firefox/userChrome.css;
-        userContent = builtins.readFile ./firefox/userContent.css;
-      };
-    };
-    # neovim = {
-    #   enable = true;
-    #   defaultEditor = true;
-    #   viAlias = true;
-    #   vimAlias = true;
-    #   vimdiffAlias = true;
-    # };
     git = {
 			enable = true;
 			userEmail = "stevemathewjoy@gmail.com";

@@ -16,7 +16,6 @@
 # You can also split up your configuration and import pieces of it here:
 # ./nvim.nix
     ./services.nix
-    ./theme.nix
   ];
 
   nixpkgs = {
@@ -44,7 +43,6 @@
 		fd
 		ripgrep
 		lazygit
-		tree-sitter
     unzip
 		wget
 		imv

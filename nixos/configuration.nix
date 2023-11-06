@@ -12,7 +12,6 @@
 
       ./hardware-configuration.nix
       ./services.nix
-      ../pkgs/dwm-luke
   ];
 
   nixpkgs = {
@@ -48,10 +47,6 @@
   networking.networkmanager.enable = true;
 	services.openssh.enable = true;
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-  };
-
   boot.loader = {
     grub.enable = false;
     generic-extlinux-compatible.enable = true;
@@ -70,7 +65,7 @@
 		keyMap = "us";
 	};
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override { fonts = [ "Hack" ]; })
   ];
 
   users.users = {

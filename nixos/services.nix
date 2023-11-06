@@ -7,10 +7,23 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+    openssh = {
+      enable = true;
+    };
     xserver = {
       enable = true;
-      desktopManager.xfce.enable = true;
-      displayManager.defaultSession = "xfce";
+      windowManager.dwm = {
+        enable = true;
+        # package = pkgs.dwm.override {
+        #   patches = [
+        #   (pkgs.fetchpatch {
+        #     url = "https://dwm.suckless.org/patches/dwm-systray-6.4.diff";
+        #     hash = "";
+        #   })
+        #   ];
+        # };
+      };
+      displayManager.gdm.enable = true;
     };
   };
   programs.zsh = {
