@@ -15,6 +15,8 @@
 
 # You can also split up your configuration and import pieces of it here:
 # ./nvim.nix
+    ./sway
+    ./firefox
     ./services.nix
   ];
 
@@ -56,6 +58,7 @@
   programs.home-manager.enable = true;
   programs.git.enable = true;
   programs.neovim.enable = true;
+
 
 # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";

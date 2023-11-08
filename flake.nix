@@ -9,6 +9,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nurpkgs.url = "github:nix-community/NUR/master";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    swayfx.url = "github:WillPower3309/swayfx/master";
 
     # hyprland.url = "github:hyprwm/Hyprland/main";
   };

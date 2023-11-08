@@ -9,9 +9,12 @@
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.nixos-hardware.nixosModules.raspberry-pi-4
 
       ./hardware-configuration.nix
       ./services.nix
+      ./cache.nix
+      ./sway
   ];
 
   nixpkgs = {
@@ -45,19 +48,26 @@
 
   networking.hostName = "rpi";
   networking.networkmanager.enable = true;
-	services.openssh.enable = true;
 
-  boot.loader = {
-    grub.enable = false;
-    generic-extlinux-compatible.enable = true;
+  boot.kernelPackages = pkgs.linuxPackages_rpi4;
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
+    deviceTree = {
+      enable = true;
+      # filter = "*rpi-4-*.dtb";
+    };
+    raspberry-pi."4" = {
+      fkms-3d.enable = true;
+      # audio.enable = true;
+      apply-overlays-dtmerge.enable = true;
+    };
   };
-
-  hardware.pulseaudio.enable = false;
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-  };
-
+  
+  hardware.pulseaudio.enable = true;
+  
   time.timeZone = "Australia/Brisbane";
 	i18n.defaultLocale = "en_US.UTF-8";
 	console = {
@@ -71,7 +81,7 @@
   users.users = {
     smj = {
       isNormalUser = true;
-      extraGroups = [ "wheel" ];
+      extraGroups = [ "wheel" "video" ];
       shell = pkgs.zsh;
     };
   };
@@ -85,6 +95,8 @@
       gcc
       git
       zsh
+      libraspberrypi
+      raspberrypi-eeprom
     ];
   };
 

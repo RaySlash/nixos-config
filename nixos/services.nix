@@ -1,29 +1,15 @@
 { config, pkgs, lib, inputs, outputs, ...}: {
 
   services = {
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
     openssh = {
       enable = true;
     };
     xserver = {
       enable = true;
-      windowManager.dwm = {
-        enable = true;
-        # package = pkgs.dwm.override {
-        #   patches = [
-        #   (pkgs.fetchpatch {
-        #     url = "https://dwm.suckless.org/patches/dwm-systray-6.4.diff";
-        #     hash = "";
-        #   })
-        #   ];
-        # };
+      displayManager = {
+        gdm.enable = true;
+        gdm.wayland = true;
       };
-      displayManager.gdm.enable = true;
     };
   };
   programs.zsh = {
@@ -44,4 +30,5 @@
       nix-update = "sudo nixos-rebuild switch";
     };
   };
+  programs.light.enable = true;
 }
