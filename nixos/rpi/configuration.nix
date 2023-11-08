@@ -9,12 +9,12 @@
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.nixos-hardware.nixosModules.raspberry-pi-4
 
       ./hardware-configuration.nix
       ./services.nix
-      ./gnome.nix
-      ./hyprland.nix
-      ./virtualisation.nix
+      ./cache.nix
+      ./sway
   ];
 
   nixpkgs = {
@@ -46,32 +46,28 @@
     };
   };
 
-  networking.hostName = "frost";
+  networking.hostName = "rpi";
   networking.networkmanager.enable = true;
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    initrd.kernelModules = [ "amdgpu" ];
-    blacklistedKernelModules = [ "hid-thrustmaster" ];
-    kernelModules = [ "i2c-dev" "hid-tmff2" ];
-    extraModulePackages = [
-      (config.boot.kernelPackages.callPackage ../pkgs/hid-tmff2/default.nix {})
-    ];
+  boot.kernelPackages = pkgs.linuxPackages_rpi4;
+  hardware = {
+    opengl = {
+      enable = true;
+      driSupport = true;
+    };
+    deviceTree = {
+      enable = true;
+      # filter = "*rpi-4-*.dtb";
+    };
+    raspberry-pi."4" = {
+      fkms-3d.enable = true;
+      # audio.enable = true;
+      apply-overlays-dtmerge.enable = true;
+    };
   };
-
-  boot.loader = {
-    systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 6;
-    efi.canTouchEfiVariables = true;
-  };
-
-  hardware.pulseaudio.enable = false;
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
+  
+  hardware.pulseaudio.enable = true;
+  
   time.timeZone = "Australia/Brisbane";
 	i18n.defaultLocale = "en_US.UTF-8";
 	console = {
@@ -79,13 +75,13 @@
 		keyMap = "us";
 	};
   fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    (nerdfonts.override { fonts = [ "Hack" ]; })
   ];
 
   users.users = {
     smj = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "libvirtd" ];
+      extraGroups = [ "wheel" "video" ];
       shell = pkgs.zsh;
     };
   };
@@ -99,6 +95,8 @@
       gcc
       git
       zsh
+      libraspberrypi
+      raspberrypi-eeprom
     ];
   };
 

@@ -1,16 +1,23 @@
 {
-  description = "NixOS-config for RaySlash";
+  description = "Personal Flake NixOS config - RaySlash";
 
   inputs = {
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager/release-23.05";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    home-manager = {
+      url = "github:nix-community/home-manager/release-23.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    swayfx.url = "github:WillPower3309/swayfx/master";
+    hyprland.url = "github:hyprwm/Hyprland/main";
+
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nurpkgs.url = "github:nix-community/NUR/master";
 
-    hyprland.url = "github:hyprwm/Hyprland/main";
   };
 
   outputs = {
@@ -35,7 +42,13 @@
       frost = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./nixos/configuration.nix
+          ./nixos/frost/configuration.nix
+        ];
+      };
+      rpi = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/rpi/configuration.nix
         ];
       };
     };
