@@ -6,10 +6,6 @@
     };
     xserver = {
       enable = true;
-      displayManager = {
-        gdm.enable = true;
-        gdm.wayland = true;
-      };
     };
   };
   programs.zsh = {
@@ -21,7 +17,7 @@
     histSize = 10000;
     ohMyZsh = {
       enable = true;
-      theme = "robbyrussell";
+      theme = "mortalscumbag";
     };
     shellAliases = {
       ls = "exa --icons";
@@ -30,5 +26,4 @@
       nix-update = "sudo nixos-rebuild switch";
     };
   };
-  programs.light.enable = true;
 }

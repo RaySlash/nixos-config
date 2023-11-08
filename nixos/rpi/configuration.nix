@@ -11,10 +11,10 @@
     inputs.home-manager.nixosModules.home-manager
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
 
+      # ./sway
       ./hardware-configuration.nix
       ./services.nix
       ./cache.nix
-      ./sway
   ];
 
   nixpkgs = {
@@ -42,7 +42,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
     users = {
-      smj = import ../home-manager/home.nix;
+      smj = import ../../home-manager/rpi/home.nix;
     };
   };
 
