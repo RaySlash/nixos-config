@@ -12,6 +12,7 @@
 
       ./hardware-configuration.nix
       ./services.nix
+      ./cache.nix
       ./gnome.nix
       ./hyprland.nix
       ./virtualisation.nix
