@@ -10,6 +10,7 @@
   imports = [
     inputs.hyprland.homeManagerModules.default
     ./hyprland
+    ./firefox
     ./services.nix
     ./theme.nix
     ./virtualisation.nix
