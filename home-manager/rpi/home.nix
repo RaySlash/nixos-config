@@ -47,8 +47,6 @@
     unzip
 		wget
 		imv
-    catppuccin-gtk
-		papirus-icon-theme
 		luajit
     lua-language-server
   ];
