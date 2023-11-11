@@ -2,5 +2,4 @@
 # You can build them using 'nix build .#example'
 pkgs: {
 # example = pkgs.callPackage ./example { };
-        hid-tmff2 = pkgs.callPackage ./hid-tmff2 {};
-      }
+}

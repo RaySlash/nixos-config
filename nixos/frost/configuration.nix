@@ -56,7 +56,9 @@
     blacklistedKernelModules = [ "hid-thrustmaster" ];
     kernelModules = [ "i2c-dev" "hid-tmff2" ];
     extraModulePackages = [
-      (config.boot.kernelPackages.callPackage ../../pkgs/hid-tmff2/default.nix {})
+      # Using nixpkgs unstable to get the pkg
+      (config.boot.kernelPackages.callPackage
+      "${pkgs.unstable.path}/pkgs/os-specific/linux/hid-tmff2/default.nix" {})
     ];
   };
 
