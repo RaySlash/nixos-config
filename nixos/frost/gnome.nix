@@ -33,6 +33,8 @@
   ]);
 
   environment.systemPackages = with pkgs; [
+    wl-clipboard-x11
+    wl-clipboard
     gnome.gnome-tweaks
     gnomeExtensions.appindicator
     gnomeExtensions.freon

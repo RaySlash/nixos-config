@@ -6,12 +6,8 @@
     cursorTheme.package = pkgs.apple-cursor;
     iconTheme.name = "Papirus-Dark";
     iconTheme.package = pkgs.papirus-icon-theme;
-    theme.name = "Catppuccin-Mocha-Standard-Lavender-dark";
-    theme.package = pkgs.unstable.catppuccin-gtk.override {
-      accents = [ "lavender" ];
-      size = "standard";
-      variant = "mocha";
-    };
+    theme.name = "gruvbox-gtk-theme";
+    theme.package = pkgs.unstable.gruvbox-gtk-theme;
   };
 
   qt ={
@@ -20,6 +16,6 @@
 
   home.packages = with pkgs; [
 		papirus-icon-theme
-    unstable.catppuccin-gtk
+    unstable.gruvbox-gtk-theme
   ];
                                         }
