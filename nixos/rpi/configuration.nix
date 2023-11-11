@@ -14,6 +14,7 @@
       # ./sway
       ./hardware-configuration.nix
       ./services.nix
+      ./podman.nix
       ./cache.nix
   ];
 
