@@ -92,9 +92,18 @@
     style = builtins.readFile ./wofi.css;
   };
   
-  services.kdeconnect = {
-    enable = true;
-    indicator = true;
+  services = {
+    dunst = {
+      enable = true;
+      package = pkgs.unstable.dunst;
+      settings = builtins.readFile ./dunstrc;
+      iconTheme.name = "Papirus-Dark";
+      iconTheme.package = pkgs.papirus-icon-theme;
+    };
+    kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
   };
 
   home.packages = with pkgs.unstable; [
