@@ -5,7 +5,7 @@
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     extraConfig = builtins.readFile ./hyprland.conf;
   };
-
+  
   programs.waybar = {
     enable = true;
     package = pkgs.unstable.waybar;
@@ -91,14 +91,32 @@
     };
     style = builtins.readFile ./wofi.css;
   };
+  
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs.unstable; [
     wlogout
     swaybg
     wl-clipboard
     wlr-randr
     grim
     slurp
+    polkit_gnome
+    libva-utils
+    fuseiso
+    udiskie
+    gsettings-desktop-schemas
+    xdg-desktop-portal-hyprland
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    gnome.adwaita-icon-theme
+    gnome.gnome-themes-extra
+    qt5.qtwayland
+    qt6.qmake
+    qt6.qtwayland
   ];
 
 }

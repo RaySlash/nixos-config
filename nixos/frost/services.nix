@@ -2,6 +2,7 @@
 
   services = {
     udev.packages = with pkgs; [ openrgb-with-all-plugins ];
+    fstrim.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -17,7 +18,6 @@
       package = pkgs.unstable.steam;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
-      gamescopeSession.enable = true;
     };
     zsh = {
       enable = true;

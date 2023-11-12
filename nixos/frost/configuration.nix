@@ -9,12 +9,13 @@
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.hyprland.nixosModules.default
 
       ./hardware-configuration.nix
       ./services.nix
       ./cache.nix
-      ./gnome.nix
       ./hyprland.nix
+      ./gnome.nix
       ./virtualisation.nix
   ];
 
@@ -51,7 +52,7 @@
   networking.networkmanager.enable = true;
 
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_zen;
     initrd.kernelModules = [ "amdgpu" ];
     blacklistedKernelModules = [ "hid-thrustmaster" ];
     kernelModules = [ "i2c-dev" "hid-tmff2" ];
@@ -73,6 +74,12 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+    setLdLibraryPath = true;
   };
 
   time.timeZone = "Australia/Brisbane";

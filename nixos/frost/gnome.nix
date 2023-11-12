@@ -2,13 +2,7 @@
 
   services = {
     xserver = {
-      enable = true;
       desktopManager.gnome.enable = true;
-      displayManager = {
-        gdm.enable = true;
-        gdm.wayland = true;
-        defaultSession ="gnome-xorg";
-      };
     };
     udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   };
