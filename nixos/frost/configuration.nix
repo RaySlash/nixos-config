@@ -15,7 +15,6 @@
       ./services.nix
       ./cache.nix
       ./hyprland.nix
-      ./gnome.nix
       ./virtualisation.nix
   ];
 
