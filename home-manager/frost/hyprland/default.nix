@@ -110,18 +110,16 @@
     wlogout
     swaybg
     wl-clipboard
+    cliphist
     wlr-randr
     grim
     slurp
-    polkit_gnome
     libva-utils
     fuseiso
     udiskie
     gsettings-desktop-schemas
     xdg-desktop-portal
     xdg-desktop-portal-gtk
-    gnome.adwaita-icon-theme
-    gnome.gnome-themes-extra
     qt5.qtwayland
     qt6.qmake
     qt6.qtwayland
