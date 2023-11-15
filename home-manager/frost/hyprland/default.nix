@@ -96,7 +96,7 @@
     dunst = {
       enable = true;
       package = pkgs.unstable.dunst;
-      settings = builtins.readFile ./dunstrc;
+# FIXMEE      # settings = builtins.readFile ./dunstrc;
       iconTheme.name = "Papirus-Dark";
       iconTheme.package = pkgs.papirus-icon-theme;
     };
@@ -118,7 +118,6 @@
     fuseiso
     udiskie
     gsettings-desktop-schemas
-    xdg-desktop-portal-hyprland
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     gnome.adwaita-icon-theme

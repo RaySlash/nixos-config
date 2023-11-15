@@ -1,21 +1,35 @@
 { config, pkgs, inputs, outputs, ... }: {
 
+
   gtk = {
     enable = true;
     cursorTheme.name = "macOS-Monterey-White";
     cursorTheme.package = pkgs.apple-cursor;
     iconTheme.name = "Papirus-Dark";
     iconTheme.package = pkgs.papirus-icon-theme;
-    theme.name = "gruvbox-gtk-theme";
-    theme.package = pkgs.unstable.gruvbox-gtk-theme;
+    font.name = "FiraCode Nerd Font";
+    font.size = 12;
+    theme.name = "Catppuccin-Mocha-Standard-Lavender-Dark";
+    theme.package = (pkgs.catppuccin-gtk.override {
+      accents = [ "lavender" ];
+      size = "standard";
+      variant = "mocha";
+    });
   };
 
-  qt ={
-    enable = true;
-  };
+  home = {
+    pointerCursor = {
+      gtk.enable = true;
+      x11.enable = true;
+      name = "macOS-Monterey-White";
+      package = pkgs.apple-cursor;
+      size = 32;
+    };
 
-  home.packages = with pkgs; [
-		papirus-icon-theme
-    unstable.gruvbox-gtk-theme
-  ];
-                                        }
+    packages = with pkgs; [
+		  papirus-icon-theme
+      catppuccin-gtk
+    ];
+  };
+}
+

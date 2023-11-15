@@ -7,6 +7,17 @@
 			userEmail = "stevemathewjoy@gmail.com";
 			userName = "RaySlash";
 		};
+    obs-studio = {
+      enable = true;
+      package = pkgs.unstable.obs-studio;
+      plugins = with pkgs.unstable.obs-studio-plugins; [
+        wlrobs
+        obs-vaapi
+        obs-vkcapture
+        obs-gstreamer
+        obs-pipewire-audio-capture
+      ];
+    };
     alacritty = {
 			enable = true;
       package = pkgs.unstable.alacritty;

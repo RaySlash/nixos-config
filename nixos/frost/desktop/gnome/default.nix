@@ -3,6 +3,7 @@
   services = {
     xserver = {
       desktopManager.gnome.enable = true;
+      defaultSession ="gnome-xorg";
     };
     udev.packages = with pkgs; [ gnome.gnome-settings-daemon ];
   };

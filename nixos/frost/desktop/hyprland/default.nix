@@ -8,14 +8,7 @@
       gnome-keyring.enable = true;
     };
     xserver = {
-      enable = true;
-      layout = "us";
-      xkbVariant = "";
-      excludePackages = [ pkgs.xterm ];
-      libinput.enable = true;
       displayManager = {
-        gdm.enable = true;
-        gdm.wayland = true;
         defaultSession ="hyprland";
       };
     };

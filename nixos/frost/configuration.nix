@@ -14,8 +14,8 @@
       ./hardware-configuration.nix
       ./services.nix
       ./cache.nix
-      ./hyprland.nix
       ./virtualisation.nix
+      ./desktop
   ];
 
   nixpkgs = {
