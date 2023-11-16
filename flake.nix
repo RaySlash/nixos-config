@@ -52,6 +52,12 @@
           ./nixos/rpi/configuration.nix
         ];
       };
+      dell = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = [
+          ./nixos/dell/configuration.nix
+        ];
+      };
     };
   };
 }
