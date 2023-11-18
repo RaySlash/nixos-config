@@ -1,18 +1,20 @@
 {
   inputs,
-    outputs,
-    lib,
-    config,
-    pkgs,
-    ...
+  outputs,
+  lib,
+  config,
+  pkgs,
+  ...
 }: {
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    inputs.hyprland.nixosModules.default
 
       ./hardware-configuration.nix
       ./services.nix
       ./cache.nix
+      ./desktop
   ];
 
   nixpkgs = {
@@ -49,9 +51,12 @@
 
   boot = {
     blacklistedKernelModules = [ ];
-    initrd.kernelModules = [ "wl" ];
-    kernelModules = [ "wl" ];
-    extraModulePackages = with config.boot.kernelPackages; [ broadcom_sta ];
+    initrd.kernelModules = [ "wl" "nvidia" ];
+    kernelModules = [ "wl" "nvidia" ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      broadcom_sta
+      nvidia_x11_legacy470
+    ];
   };
 
   boot.loader = {
@@ -60,17 +65,32 @@
     efi.canTouchEfiVariables = true;
   };
 
-  hardware.pulseaudio.enable = false;
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    extraPackages = with pkgs; [
-      vaapiVdpau
-      libvdpau-va-gl
-    ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-    setLdLibraryPath = true;
+  hardware = {
+    pulseaudio.enable = false;
+    opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+      extraPackages = with pkgs; [
+        vaapiVdpau
+          libvdpau-va-gl
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
+      setLdLibraryPath = true;
+    };
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = false;
+      nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+      prime = {
+        sync.enable = true;
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:8:0:0";
+      };
+    };
   };
 
   time.timeZone = "Australia/Brisbane";

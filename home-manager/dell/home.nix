@@ -8,7 +8,9 @@
 }: {
 
   imports = [
+    inputs.hyprland.homeManagerModules.default
     ./firefox
+    ./hyprland
     ./services.nix
     ./theme.nix
   ];

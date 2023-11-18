@@ -1,0 +1,100 @@
+@define-color base   #1e1e2e;
+@define-color mantle #181825;
+@define-color crust  #11111b;
+
+@define-color text     #cdd6f4;
+@define-color subtext0 #a6adc8;
+@define-color subtext1 #bac2de;
+
+@define-color surface0 #313244;
+@define-color surface1 #45475a;
+@define-color surface2 #585b70;
+
+@define-color overlay0 #6c7086;
+@define-color overlay1 #7f849c;
+@define-color overlay2 #9399b2;
+
+@define-color blue      #89b4fa;
+@define-color lavender  #b4befe;
+@define-color sapphire  #74c7ec;
+@define-color sky       #89dceb;
+@define-color teal      #94e2d5;
+@define-color green     #a6e3a1;
+@define-color yellow    #f9e2af;
+@define-color peach     #fab387;
+@define-color maroon    #eba0ac;
+@define-color red       #f38ba8;
+@define-color mauve     #cba6f7;
+@define-color pink      #f5c2e7;
+@define-color flamingo  #f2cdcd;
+@define-color rosewater #f5e0dc;
+
+* {
+	border:        none;
+	border-radius: 0;
+	font-family:   FiraCode Nerd Font;
+	font-size:     14px;
+	box-shadow:  none;
+	text-shadow:   none;
+	transition-duration: 0s;
+}
+
+window {
+	color: @text;
+	background: rgba(30, 30, 46, 0.8);
+}
+
+window#waybar.solo {
+	color: @text;
+	background: shade(@base, 0.9);
+	border: 2px solid alpha(@crust, 0.3);
+}
+
+window#waybar.hidded {
+	opacity: 0.0;
+}
+
+#workspaces {
+	margin: 0 10px;
+}
+
+#workspaces button {
+	padding: 0 8px;
+	border-radius: 10px;
+	color: @text;
+}
+
+#workspaces button.active {
+	color: @blue;
+	background-color: @surface0;
+}
+
+#workspaces button.visible {
+	color: @text;
+}
+
+#workspaces button.urgent {
+	color: @green;
+}
+
+#pulseaudio, #pulseaudio.microphone{
+	min-width: 60px;
+}
+
+#pulseaudio, #pulseaudio.microphone{
+	padding: 0 0.5rem;
+	color: @green;
+	background-color: shade(@base, 0.9);
+}
+
+#tray{
+	padding: 0 10px;
+	background-color: shade(@base, 0.9);
+}
+
+#clock {
+	color: @flamingo;
+	background-color: shade(@crust, 0.9);
+	padding:     0px 1rem;
+	min-width:  140px;
+}
