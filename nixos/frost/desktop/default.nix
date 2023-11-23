@@ -22,10 +22,4 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    unstable.sddm-chili-theme
-    apple-cursor
-    papirus-icon-theme
-    catppuccin-gtk
-  ];
 }

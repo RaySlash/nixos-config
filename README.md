@@ -14,6 +14,19 @@ sudo nixos-rebuild boot --flake .#"replace_With_hostname"
 
 `rpi`: aarch64
 
+## TODO
+
+### Frost
+- Switch to hyprpaper in hyprland
+- Fix sddm theme
+- Show login only on one screen - sddm
+- Remove firefox and look for hardened-firefox or librewolf (flake if possible)
+- add Neovim config declarative to nixos-config
+
+## Dell
+- use sway/wayfire (lightest preferred)
+- Map `<ESC>` to different key due to non-operational `<ESC>` key
+
 ## Credits
  [github:Misterio77/nix-starter-config](https://github.com/Misterio77/nix-starter-configs)
  

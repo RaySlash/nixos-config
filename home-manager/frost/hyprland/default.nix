@@ -37,6 +37,8 @@
     };
   };
 
+  home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+
   home.packages = with pkgs.unstable; [
     wlogout
     swaybg
@@ -54,6 +56,8 @@
     qt5.qtwayland
     qt6.qmake
     qt6.qtwayland
+  ] ++ [
+    inputs.hyprpaper.packages.${pkgs.system}.hyprpaper
   ];
 
   programs.waybar = {
