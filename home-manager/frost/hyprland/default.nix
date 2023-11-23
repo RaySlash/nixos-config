@@ -51,9 +51,8 @@
     fuseiso
     udiskie
     gsettings-desktop-schemas
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
     qt5.qtwayland
+    libsForQt5.qt5.qtgraphicaleffects
     qt6.qmake
     qt6.qtwayland
   ] ++ [
