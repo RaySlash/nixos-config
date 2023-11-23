@@ -12,7 +12,15 @@
   };
 
   programs = {
+    dconf.enable = true;
     kdeconnect.enable = true;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
+    };
     steam = {
       enable = true;
       package = pkgs.unstable.steam;

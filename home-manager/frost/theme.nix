@@ -1,6 +1,5 @@
 { config, pkgs, inputs, outputs, ... }: {
 
-
   gtk = {
     enable = true;
     cursorTheme.name = "macOS-Monterey-White";

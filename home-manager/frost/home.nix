@@ -58,7 +58,9 @@
 		wineWowPackages.waylandFull
     vlc
     gimp-with-plugins
+    nodejs
     lua-language-server
+    nodePackages.vscode-css-languageserver-bin
   ];
 
 # Enable home-manager and git

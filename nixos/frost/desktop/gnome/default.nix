@@ -13,6 +13,7 @@
     gnome-tour
   ]) ++ (with pkgs.gnome; [
     cheese # webcam tool
+    nautilus
     gnome-music
     gnome-terminal
     gedit # text editor

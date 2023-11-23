@@ -91,6 +91,12 @@ window#waybar.hidded {
 	padding: 0 10px;
 	background-color: shade(@base, 0.9);
 }
+#app {
+	color: @flamingo;
+	background-color: shade(@crust, 0.9);
+	padding:     0px 0.5rem;
+	border-radius: 10px;
+}
 
 #clock {
 	color: @flamingo;

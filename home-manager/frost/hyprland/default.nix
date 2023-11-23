@@ -6,6 +6,56 @@
     extraConfig = builtins.readFile ./hyprland.conf;
   };
   
+
+  programs.wofi = {
+    enable = true;
+    package = pkgs.unstable.wofi;
+    settings = {
+      show = "drun";
+      width = 750;
+      height = 400;
+      always_parse_args = true;
+      show_all = false;
+      print_command = true;
+      insensitive = true;
+      prompt = "Type application name";
+    };
+    style = builtins.readFile ./wofi.css;
+  };
+  
+  services = {
+    dunst = {
+      enable = true;
+      package = pkgs.unstable.dunst;
+      configFile = builtins.readFile ./dunstrc;
+      iconTheme.name = "Papirus-Dark";
+      iconTheme.package = pkgs.papirus-icon-theme;
+    };
+    kdeconnect = {
+      enable = true;
+      indicator = true;
+    };
+  };
+
+  home.packages = with pkgs.unstable; [
+    wlogout
+    swaybg
+    wl-clipboard
+    cliphist
+    wlr-randr
+    grim
+    slurp
+    libva-utils
+    fuseiso
+    udiskie
+    gsettings-desktop-schemas
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    qt5.qtwayland
+    qt6.qmake
+    qt6.qtwayland
+  ];
+
   programs.waybar = {
     enable = true;
     package = pkgs.unstable.waybar;
@@ -15,7 +65,7 @@
         "output" = "DP-2";
         "position" = "top";
         "height" = 30;
-        "modules-left"= ["hyprland/workspaces"];
+        "modules-left"= ["app" "hyprland/workspaces"];
         "modules-center"= ["hyprland/window"];
         "modules-right"= ["tray" "pulseaudio" "pulseaudio#microphone" "clock"];
         "hyprland/window"= {
@@ -35,6 +85,14 @@
             "4"= [];
             "5"= [];
             "6"= [];
+          };
+        };
+        "app"= {
+          "format"= "{icon}";
+          "tooltip"= false;
+          "on-click"= "wofi --show drun -I";
+          "format-icons"= {
+            "default"= [""];
           };
         };
         "clock"= {
@@ -75,54 +133,4 @@
     };
     style = builtins.readFile ./waybar.css;
   };
-
-  programs.wofi = {
-    enable = true;
-    package = pkgs.unstable.wofi;
-    settings = {
-      show = "drun";
-      width = 750;
-      height = 400;
-      always_parse_args = true;
-      show_all = false;
-      print_command = true;
-      insensitive = true;
-      prompt = "Type application name";
-    };
-    style = builtins.readFile ./wofi.css;
-  };
-  
-  services = {
-    dunst = {
-      enable = true;
-      package = pkgs.unstable.dunst;
-# FIXMEE      # settings = builtins.readFile ./dunstrc;
-      iconTheme.name = "Papirus-Dark";
-      iconTheme.package = pkgs.papirus-icon-theme;
-    };
-    kdeconnect = {
-      enable = true;
-      indicator = true;
-    };
-  };
-
-  home.packages = with pkgs.unstable; [
-    wlogout
-    swaybg
-    wl-clipboard
-    cliphist
-    wlr-randr
-    grim
-    slurp
-    libva-utils
-    fuseiso
-    udiskie
-    gsettings-desktop-schemas
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    qt5.qtwayland
-    qt6.qmake
-    qt6.qtwayland
-  ];
-
 }
