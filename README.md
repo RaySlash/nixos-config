@@ -17,13 +17,9 @@ sudo nixos-rebuild boot --flake .#"replace_With_hostname"
 ## TODO
 
 ### Frost
-- Switch to hyprpaper in hyprland
-- Fix sddm theme
-- Show login only on one screen - sddm
-- Remove firefox and look for hardened-firefox or librewolf (flake if possible)
 - add Neovim config declarative to nixos-config
 
-## Dell
+### Dell
 - use sway/wayfire (lightest preferred)
 - Map `<ESC>` to different key due to non-operational `<ESC>` key
 

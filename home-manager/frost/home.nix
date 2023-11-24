@@ -59,6 +59,7 @@
     vlc
     gimp-with-plugins
     nodejs
+    unstable.webcord
     lua-language-server
     nodePackages.vscode-css-languageserver-bin
   ];
