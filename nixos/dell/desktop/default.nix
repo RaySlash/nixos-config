@@ -1,21 +1,36 @@
-{ config, pkgs, lib, inputs, outputs, ... }: {
+{ config, pkgs, lib, inputs, outputs, ... }:
 
+let 
+  sddm-chili-theme = pkgs.libsForQt5.callPackage ./sddm-chili-theme.nix { };
+in
+{
   imports = [
-
-    # ./gnome
-    ./hyprland
-
+    ./xfce
   ];
 
   services.xserver = {
     enable = true;
     layout = "us";
     xkbVariant = "";
-    videoDrivers = [ "nvidia" ];
     excludePackages = [ pkgs.xterm ];
-    displayManager = {
-      gdm.enable = true;
-      gdm.wayland = true;
+    displayManager.sddm = {
+      enable = true;
+      theme = "chili";
+      settings = {
+        Theme = {
+          CursorTheme = "macOS-Monterey-White";
+        };
+      };
     };
   };
+  
+  qt = {
+    enable = true;
+    platformTheme = "qt5ct";
+  };
+  
+  environment.systemPackages = with pkgs; [
+    sddm-chili-theme
+  ];
+
 }
