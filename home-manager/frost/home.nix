@@ -8,7 +8,6 @@
 }: {
 
   imports = [
-    inputs.hyprland.homeManagerModules.default
     ./hyprland
     ./firefox
     ./services.nix
@@ -58,10 +57,8 @@
 		wineWowPackages.waylandFull
     vlc
     gimp-with-plugins
-    nodejs
     unstable.webcord
     lua-language-server
-    nodePackages.vscode-css-languageserver-bin
   ];
 
 # Enable home-manager and git

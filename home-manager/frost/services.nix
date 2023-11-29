@@ -4,7 +4,7 @@
     gpg.enable = true;
     git = {
 			enable = true;
-			userEmail = "stevemathewjoy@gmail.com";
+			userEmail = "45141270+RaySlash@users.noreply.github.com";
 			userName = "RaySlash";
 		};
     obs-studio = {
