@@ -2,10 +2,8 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     extraConfig = builtins.readFile ./hyprland.conf;
   };
-  
 
   programs.wofi = {
     enable = true;
@@ -45,6 +43,7 @@
     wl-clipboard
     cliphist
     wlr-randr
+    hyprpaper
     grim
     slurp
     libva-utils
@@ -55,10 +54,8 @@
     libsForQt5.qt5.qtgraphicaleffects
     qt6.qmake
     qt6.qtwayland
-  ] ++ [
-    inputs.hyprpaper.packages.${pkgs.system}.hyprpaper
-  ];
-
+  ]; 
+  
   programs.waybar = {
     enable = true;
     package = pkgs.unstable.waybar;
@@ -68,7 +65,7 @@
         "output" = "DP-2";
         "position" = "top";
         "height" = 30;
-        "modules-left"= ["app" "hyprland/workspaces"];
+        "modules-left"= ["custom/app" "hyprland/workspaces"];
         "modules-center"= ["hyprland/window"];
         "modules-right"= ["tray" "pulseaudio" "pulseaudio#microphone" "clock"];
         "hyprland/window"= {
@@ -90,13 +87,10 @@
             "6"= [];
           };
         };
-        "app"= {
-          "format"= "{icon}";
+        "custom/app"= {
+          "format"= "";
           "tooltip"= false;
           "on-click"= "wofi --show drun -I";
-          "format-icons"= {
-            "default"= [""];
-          };
         };
         "clock"= {
           "format"= "{:%a %d %b %I:%M %p}";

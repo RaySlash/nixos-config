@@ -3,20 +3,16 @@
 
   inputs = {
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.05";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    swayfx.url = "github:WillPower3309/swayfx/master";
-    hyprland.url = "github:hyprwm/Hyprland/main";
-    hyprpaper.url = "github:hyprwm/hyprpaper/main";
     arkenfox.url = "github:dwarfmaster/arkenfox-nixos/main";
-
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nurpkgs.url = "github:nix-community/NUR/master";
 

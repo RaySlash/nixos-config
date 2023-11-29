@@ -9,7 +9,6 @@
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.hyprland.nixosModules.default
 
       ./hardware-configuration.nix
       ./services.nix
@@ -37,6 +36,11 @@
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
   };
 
@@ -81,13 +85,17 @@
     setLdLibraryPath = true;
   };
 
+  systemd.extraConfig = "
+    DefaultTimeoutStopSec=10s
+    ";
+
   time.timeZone = "Australia/Brisbane";
-	i18n.defaultLocale = "en_US.UTF-8";
-	console = {
-		font = "Lat2-Terminus16";
-		keyMap = "us";
-	};
-  fonts.fonts = with pkgs; [
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
+  fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
@@ -103,12 +111,17 @@
     variables.EDITOR = "nvim";
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
-      exa
-      libclang
-      gcc
-      git
-      zsh
+      eza
+        libclang
+        gcc
+        git
+        zsh
     ];
+  };
+
+  system.autoUpgrade = {
+    enable = true;
+    flake = "github:NixOS/nixpkgs/nixos-23.11";
   };
 
   system.stateVersion = "23.05";
