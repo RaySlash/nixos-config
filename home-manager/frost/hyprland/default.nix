@@ -8,6 +8,10 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     extraConfig = builtins.readFile ./hyprland.conf;
+    plugins = [
+      inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
+      inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
+    ];
   };
   
 
