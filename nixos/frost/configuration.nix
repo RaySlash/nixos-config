@@ -81,13 +81,17 @@
     setLdLibraryPath = true;
   };
 
+  systemd.extraConfig = "
+    DefaultTimeoutStopSec=10s
+  ";
+
   time.timeZone = "Australia/Brisbane";
 	i18n.defaultLocale = "en_US.UTF-8";
 	console = {
 		font = "Lat2-Terminus16";
 		keyMap = "us";
 	};
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
 
@@ -103,7 +107,7 @@
     variables.EDITOR = "nvim";
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
-      exa
+      eza
       libclang
       gcc
       git

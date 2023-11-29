@@ -39,8 +39,8 @@
         theme = "robbyrussell";
       };
       shellAliases = {
-        ls = "exa --icons";
-        ll = "exa --icons -l";
+        ls = "eza --icons";
+        ll = "eza --icons -l";
         vim = "nvim";
         nix-update = "sudo nixos-rebuild switch";
       };
