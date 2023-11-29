@@ -9,7 +9,6 @@
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.hyprland.nixosModules.default
 
       ./hardware-configuration.nix
       ./services.nix

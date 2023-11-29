@@ -1,19 +1,9 @@
 { config, pkgs, lib, inputs, outputs, ... }: {
 
-  imports = [
-    inputs.hyprland.homeManagerModules.default
-  ];
-
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     extraConfig = builtins.readFile ./hyprland.conf;
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.csgo-vulkan-fix
-      inputs.hyprland-plugins.packages.${pkgs.system}.borders-plus-plus
-    ];
   };
-  
 
   programs.wofi = {
     enable = true;
@@ -53,6 +43,7 @@
     wl-clipboard
     cliphist
     wlr-randr
+    hyprpaper
     grim
     slurp
     libva-utils
@@ -63,10 +54,8 @@
     libsForQt5.qt5.qtgraphicaleffects
     qt6.qmake
     qt6.qtwayland
-  ] ++ [
-    inputs.hyprpaper.packages.${pkgs.system}.hyprpaper
-  ];
-
+  ]; 
+  
   programs.waybar = {
     enable = true;
     package = pkgs.unstable.waybar;

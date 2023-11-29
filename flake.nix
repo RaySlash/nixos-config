@@ -12,14 +12,6 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    swayfx.url = "github:WillPower3309/swayfx/master";
-    hyprland.url = "github:hyprwm/Hyprland/main";
-    hyprpaper.url = "github:hyprwm/hyprpaper/main";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     arkenfox.url = "github:dwarfmaster/arkenfox-nixos/main";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nurpkgs.url = "github:nix-community/NUR/master";
