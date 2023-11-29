@@ -122,6 +122,7 @@
   system.autoUpgrade = {
     enable = true;
     flake = "github:NixOS/nixpkgs/nixos-23.11";
+    flags = ["--update-input" "nixpkgs" "--commit-lock-file"];
   };
 
   system.stateVersion = "23.05";
