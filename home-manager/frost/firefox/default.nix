@@ -21,13 +21,20 @@
       arkenfox = {
         enable = true;
         "0000".enable = true;
-        "0100".enable = true;
+        "0100" = {
+          enable = true;
+          "0102"."browser.startup.page".value = 3;
+          "0103"."browser.startup.homepage".value = "about:home";
+        };
         "0200".enable = true;
         "0300".enable = true;
         "0400".enable = true;
         "0600".enable = true;
         "0700".enable = true;
-        "0800".enable = true;
+        "0800" = {
+          enable = true;
+          "0807"."browser.urlbar.clipboard.featureGate".enable = true;
+        };
         "0900".enable = true;
         "1000".enable = true;
         "1200".enable = true;
@@ -41,9 +48,8 @@
         "4500" = {
           enable = true;
           "4504"."privacy.resistFingerprinting.letterboxing".enable = false;
+          "4520"."webgl.disabled".enable = false;
         };
-        "5000".enable = true;
-        "5500".enable = true;
       };
       userChrome = builtins.readFile ./userChrome.css;
       userContent = builtins.readFile ./userContent.css;
@@ -82,6 +88,7 @@
         darkreader
         privacy-badger
         firefox-color
+        gruvbox-dark-theme
       ];
     };
   };
