@@ -59,6 +59,8 @@
     gimp-with-plugins
     unstable.webcord
     lua-language-server
+    tridactyl-native
+    remmina
   ];
 
 # Enable home-manager and git

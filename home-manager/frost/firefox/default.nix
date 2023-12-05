@@ -89,6 +89,7 @@
         privacy-badger
         firefox-color
         gruvbox-dark-theme
+        tridactyl
       ];
     };
   };
