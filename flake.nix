@@ -56,6 +56,14 @@
           ./nixos/dell/configuration.nix
         ];
       };
+      live = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        system = "x86_64-linux";
+        modules = [
+          (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
+          ./nixos/iso/configuration.nix
+        ];
+      };
     };
   };
 }
