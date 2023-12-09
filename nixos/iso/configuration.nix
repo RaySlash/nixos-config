@@ -25,6 +25,26 @@
     };
   };
 
+
+  services = {
+    openssh = {
+      enable = true;
+    };
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    xserver = {
+      enable = true;
+      layout = "us";
+      xkbVariant = "";
+      excludePackages = [ pkgs.xterm ];
+      desktopManager.xfce.enable = true;
+    };
+  };
+
   programs = {
     git.enable = true;
     neovim.enable = true;
@@ -56,7 +76,14 @@
     ];
   };
 
-  networking.hostName = "nixos-live";
+  networking = {
+    hostName = "nixos-live";
+    networkmanager.enable = true;
+    wireless = {
+      enable = false;
+      iwd.enable = true;
+    };
+  };
 
   time.timeZone = "Australia/Brisbane";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -71,6 +98,13 @@
   environment = {
     variables.EDITOR = "nvim";
     shells = with pkgs; [ zsh ];
+    xfce.excludePackages = with pkgs.xfce; [
+      orage
+      ristretto
+      mousepad
+      xfburn
+      parole
+    ];
     systemPackages = with pkgs; [
       eza
       libclang
