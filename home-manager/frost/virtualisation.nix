@@ -1,8 +1,0 @@
-{ config, pkgs, inputs, outputs, ... }: {
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = ["qemu:///system"];
-      uris = ["qemu:///system"];
-    };
-  };
-}

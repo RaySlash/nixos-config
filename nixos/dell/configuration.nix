@@ -9,35 +9,11 @@
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    inputs.hyprland.nixosModules.default
+    ../../home-manager
 
       ./hardware-configuration.nix
-      ./services.nix
-      ./cache.nix
       ./desktop
   ];
-
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-      inputs.neovim-nightly-overlay.overlay
-    ];
-
-    config = {
-      allowUnfree = true;
-    };
-  };
-
-  nix = {
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
-    settings = {
-      experimental-features = "nix-command flakes";
-      auto-optimise-store = true;
-    };
-  };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
@@ -47,10 +23,8 @@
   };
 
   networking.hostName = "dell";
-  networking.networkmanager.enable = true;
 
   boot = {
-    blacklistedKernelModules = [ ];
     initrd.kernelModules = [ "wl" "nvidia" ];
     kernelModules = [ "wl" "nvidia" ];
     extraModulePackages = with config.boot.kernelPackages; [
@@ -66,18 +40,6 @@
   };
 
   hardware = {
-    pulseaudio.enable = false;
-    opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-      extraPackages = with pkgs; [
-        vaapiVdpau
-          libvdpau-va-gl
-      ];
-      extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-      setLdLibraryPath = true;
-    };
     nvidia = {
       modesetting.enable = true;
       powerManagement.enable = false;
@@ -93,34 +55,25 @@
     };
   };
 
-  time.timeZone = "Australia/Brisbane";
-	i18n.defaultLocale = "en_US.UTF-8";
-	console = {
-		font = "Lat2-Terminus16";
-		keyMap = "us";
-	};
-  fonts.fonts = with pkgs; [
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
-  ];
+  services = {
+    openssh = {
+      enable = true;
+    };
+  };
 
-  users.users = {
-    smj = {
-      isNormalUser = true;
-      extraGroups = [ "wheel" ];
-      shell = pkgs.zsh;
+  programs = {
+    dconf.enable = true;
+    thunar = {
+      enable = true;
+      plugins = with pkgs.xfce; [
+        thunar-archive-plugin
+        thunar-volman
+      ];
     };
   };
 
   environment = {
-    variables.EDITOR = "nvim";
-    shells = with pkgs; [ zsh ];
-    systemPackages = with pkgs; [
-      exa
-      libclang
-      gcc
-      git
-      zsh
-    ];
+    systemPackages = with pkgs; [ ];
   };
 
   system.stateVersion = "23.05";

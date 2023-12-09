@@ -1,12 +1,6 @@
 { config, pkgs, inputs, outputs, ... }:  {
 
   programs = {
-    gpg.enable = true;
-    git = {
-			enable = true;
-			userEmail = "45141270+RaySlash@users.noreply.github.com";
-			userName = "RaySlash";
-		};
     obs-studio = {
       enable = true;
       package = pkgs.unstable.obs-studio;

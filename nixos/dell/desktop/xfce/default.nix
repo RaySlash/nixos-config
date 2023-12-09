@@ -5,4 +5,12 @@
       enable = true;
     };
   };
+
+  environment.xfce.excludePackages = with pkgs.xfce; [
+    orage
+      ristretto
+      mousepad
+      xfburn
+      parole
+  ];
 }

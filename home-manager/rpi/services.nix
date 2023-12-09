@@ -1,12 +1,6 @@
 { config, pkgs, inputs, outputs, ... }: {
 
   programs = {
-    gpg.enable = true;
-    git = {
-			enable = true;
-			userEmail = "stevemathewjoy@gmail.com";
-			userName = "RaySlash";
-		};
     alacritty = {
 			enable = true;
 			settings = {

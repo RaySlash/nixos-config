@@ -18,6 +18,8 @@ sudo nixos-rebuild boot --flake .#"replace_With_hostname"
 
 ### Frost
 - add Neovim config declarative to nixos-config
+- make Firfox module
+- refactor home-manager
 
 ### Dell
 - use sway/wayfire (lightest preferred)

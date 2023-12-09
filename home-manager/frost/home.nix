@@ -11,28 +11,15 @@
     ./hyprland
     ./firefox
     ./services.nix
-    ./theme.nix
-    ./virtualisation.nix
+    ../default.nix
   ];
-
-  nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-
-      inputs.neovim-nightly-overlay.overlay
-      inputs.nurpkgs.overlay
-    ];
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
+  
+  # Virt-manager settings
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = ["qemu:///system"];
+      uris = ["qemu:///system"];
     };
-  };
-
-  home = {
-    username = "smj";
-    homeDirectory = "/home/smj";
   };
 
   home.packages = with pkgs; [
@@ -44,12 +31,13 @@
     unzip
     p7zip
 		wget
+		luajit
+    lua-language-server
 		imv
     helvum
     pavucontrol
 		openrgb-with-all-plugins
     ungoogled-chromium
-		luajit
     oversteer
 		libreoffice-fresh
 		protonup-qt
@@ -58,18 +46,8 @@
     vlc
     gimp-with-plugins
     unstable.webcord
-    lua-language-server
-    tridactyl-native
     remmina
   ];
 
-# Enable home-manager and git
-  programs.home-manager.enable = true;
-  programs.neovim.enable = true;
-
-# Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-# https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "23.05";
 }

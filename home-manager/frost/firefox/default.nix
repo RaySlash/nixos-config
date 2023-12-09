@@ -1,8 +1,9 @@
 { config, pkgs, lib, inputs, outputs, ... }: {
- 
- imports = [
-  inputs.arkenfox.hmModules.default
- ];
+
+  imports = [
+    inputs.arkenfox.hmModules.default
+  ];
+
   programs.firefox = {
     enable = true;
     arkenfox = {
@@ -16,7 +17,7 @@
       search.force = true;
       search.order = [
         "DuckDuckGo"
-        "Google"
+          "Google"
       ];
       arkenfox = {
         enable = true;
@@ -56,9 +57,9 @@
       settings = {
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "gfx.webrender.all" = true; # Force enable GPU acceleration
-        "media.ffmpeg.vaapi.enabled" = true;
+          "media.ffmpeg.vaapi.enabled" = true;
         "widget.dmabuf.force-enabled" = true; # Required in recent Firefoxes
-        "ui.key.accelKey" = 91;
+          "ui.key.accelKey" = 91;
         "reader.parse-on-load.force-enabled" = true;
         "privacy.webrtc.legacyGlobalIndicator" = false;
         "app.update.auto" = false;
@@ -82,15 +83,15 @@
       };
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
-        sidebery
-        enhancer-for-youtube
-        bitwarden
-        darkreader
-        privacy-badger
-        firefox-color
-        gruvbox-dark-theme
-        tridactyl
+          sidebery
+          enhancer-for-youtube
+          bitwarden
+          darkreader
+          privacy-badger
+          firefox-color
+          gruvbox-dark-theme
+          tridactyl
       ];
     };
   };
-}
+                                             }

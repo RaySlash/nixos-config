@@ -1,11 +1,10 @@
 { config, pkgs, lib, inputs, outputs, ... }:
 
 let 
-  sddm-chili-theme = pkgs.libsForQt5.callPackage ./sddm-chili-theme.nix { };
+  sddm-chili-theme = pkgs.libsForQt5.callPackage (inputs.nixpkgs + "/pkgs/data/themes/chili-sddm/default.nix") {};
 in
 {
   imports = [
-    # ./gnome
     ./hyprland
     ./xfce
   ];
