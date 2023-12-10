@@ -41,21 +41,21 @@
       frost = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./nixos/default.nix
+          ./nixos
           ./nixos/frost/configuration.nix
         ];
       };
       rpi = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./nixos/default.nix
+          ./nixos
           ./nixos/rpi/configuration.nix
         ];
       };
       dell = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
-          ./nixos/default.nix
+          ./nixos
           ./nixos/dell/configuration.nix
         ];
       };
@@ -64,7 +64,7 @@
         system = "x86_64-linux";
         modules = [
           (nixpkgs + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-          ./nixos/default.nix
+          ./nixos
           ./nixos/iso/configuration.nix
         ];
       };
