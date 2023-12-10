@@ -9,7 +9,6 @@
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
-    ../../home-manager
 
       ./hardware-configuration.nix
       ./desktop
