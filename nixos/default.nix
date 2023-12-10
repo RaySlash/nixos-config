@@ -72,35 +72,39 @@
     pulse.enable = true;
   };
 
-  programs.zsh = {
-    enable = true;
-    syntaxHighlighting.enable = true;
-    autosuggestions.enable = true;
-    zsh-autoenv.enable = true;
-    enableCompletion = true;
-    histSize = 10000;
-    ohMyZsh = {
+  programs = {
+    git.enable = true;
+    neovim.enable = true;
+    zsh = {
       enable = true;
-      theme = "robbyrussell";
+      syntaxHighlighting.enable = true;
+      autosuggestions.enable = true;
+      zsh-autoenv.enable = true;
+      enableCompletion = true;
+      histSize = 10000;
+      ohMyZsh = {
+        enable = true;
+        theme = "robbyrussell";
+      };
+      shellAliases = {
+        ls = "eza --icons";
+        ll = "eza --icons -l";
+        vim = "nvim";
+        nix-update = "sudo nixos-rebuild switch";
+      };
     };
-    shellAliases = {
-      ls = "eza --icons";
-      ll = "eza --icons -l";
-      vim = "nvim";
-      nix-update = "sudo nixos-rebuild switch";
-    };
-  };
 
-  environment = {
-    variables.EDITOR = "nvim";
-    shells = with pkgs; [ zsh ];
-    systemPackages = with pkgs; [
-      eza
-      libclang
-      gcc
-      git
-      zsh
-    ];
+    environment = {
+      variables.EDITOR = "nvim";
+      shells = with pkgs; [ zsh ];
+      systemPackages = with pkgs; [
+        eza
+        libclang
+        gcc
+        git
+        zsh
+      ];
+    };
   };
 
   system.autoUpgrade = {
