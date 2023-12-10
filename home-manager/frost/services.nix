@@ -16,6 +16,24 @@
 			enable = true;
       package = pkgs.unstable.alacritty;
       settings = {
+        font = {
+          normal = {
+            family = "Lilex Nerd Font";
+            style = "Regular";
+          };
+          bold = {
+            family = "Lilex Nerd Font";
+            style = "Bold";
+          };
+          italic = {
+            family = "Lilex Nerd Font";
+            style = "Italic";
+          };
+          bold_italic = {
+            family = "Lilex Nerd Font";
+            style = "Bold Italic";
+          };
+        };
         window = {
           colors = {
             primary = {
