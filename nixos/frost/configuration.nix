@@ -28,10 +28,8 @@
     initrd.kernelModules = [ "amdgpu" ];
     blacklistedKernelModules = [ "hid-thrustmaster" ];
     kernelModules = [ "i2c-dev" "hid-tmff2" ];
-    extraModulePackages = [
-      # Using nixpkgs unstable to get the pkg
-      (config.boot.kernelPackages.callPackage
-      "${pkgs.unstable.path}/pkgs/os-specific/linux/hid-tmff2/default.nix" {})
+    extraModulePackages = with config.boot.kernelPackages; [
+      hid-tmff2
     ];
   };
 

@@ -93,18 +93,18 @@
         nix-update = "sudo nixos-rebuild switch";
       };
     };
+  };
 
-    environment = {
-      variables.EDITOR = "nvim";
-      shells = with pkgs; [ zsh ];
-      systemPackages = with pkgs; [
-        eza
+  environment = {
+    variables.EDITOR = "nvim";
+    shells = with pkgs; [ zsh ];
+    systemPackages = with pkgs; [
+      eza
         libclang
         gcc
         git
         zsh
-      ];
-    };
+    ];
   };
 
   system.autoUpgrade = {

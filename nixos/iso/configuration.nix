@@ -1,5 +1,9 @@
 { config, lib, pkgs, inputs, outputs, ... }: {
 
+  programs = {
+    firefox.enable = true;
+  };
+
   services = {
     openssh = {
       enable = true;
@@ -31,6 +35,7 @@
 
   environment = {
     xfce.excludePackages = with pkgs.xfce; [
+      xfce4-terminal
       orage
       ristretto
       mousepad
@@ -41,6 +46,8 @@
       pciutils
       lshw
       networkmanager
+      nmap
+      alacritty
     ];
   };
 
