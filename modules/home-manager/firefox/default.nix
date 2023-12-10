@@ -1,8 +1,15 @@
-{ config, pkgs, lib, inputs, outputs, ... }: {
+{ config, lib, pkgs, inputs, ... }:
+let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.services.hardened-firefox;
+in {
+  imports = [ inputs.arkenfox.hmModules.default ];
 
-  imports = [
-    inputs.arkenfox.hmModules.default
-  ];
+  options.services.hardened-firefox = {
+    enable = mkEnableOption "hardened-firefox";
+  };
+
+  config = mkIf cfg.enable {
 
   programs.firefox = {
     enable = true;
@@ -17,7 +24,7 @@
       search.force = true;
       search.order = [
         "DuckDuckGo"
-          "Google"
+        "Google"
       ];
       arkenfox = {
         enable = true;
@@ -94,4 +101,5 @@
       ];
     };
   };
-                                             }
+};
+}

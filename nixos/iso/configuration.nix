@@ -13,11 +13,6 @@
     };
   };
 
-  programs = {
-    git.enable = true;
-    neovim.enable = true;
-  };
-
   boot = {
     initrd.kernelModules = [ "wl" ];
     kernelModules = [ "wl" ];

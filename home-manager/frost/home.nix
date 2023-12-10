@@ -8,10 +8,10 @@
 }: {
 
   imports = [
-    ./hyprland
-    ./firefox
-    ./services.nix
-    ../default.nix
+    outputs.homeManagerModules.hardened-firefox
+      ./hyprland
+      ./services.nix
+      ../default.nix
   ];
   
   # Virt-manager settings
@@ -21,6 +21,8 @@
       uris = ["qemu:///system"];
     };
   };
+
+  services.hardened-firefox.enable = true;
 
   home.packages = with pkgs; [
     htop
@@ -41,7 +43,7 @@
     oversteer
 		libreoffice-fresh
 		protonup-qt
-		unstable.protontricks
+		protontricks
 		wineWowPackages.waylandFull
     vlc
     gimp-with-plugins
