@@ -38,9 +38,14 @@ sudo nixos-rebuild boot --flake .#host
 
 ## To-Do
 ### frost
-- add Neovim config declarative to nixos-config
+- Fix rio startup opacity issue
+- Change the colorscheme and theming of wofi
+- Switch from catppuccin colors to gruvbox colors
 ### dell
 - Map `<ESC>` to `<Caps-Lock>`key due to non-operational `<ESC>` key
+### other misc.
+- Rebase neovim using [nvim-lua/kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
+- Flake-ify [rio](https://github.com/raphamorim/rio)
 
 ## Reference
 [github:Misterio77/nix-starter-config](https://github.com/Misterio77/nix-starter-configs)

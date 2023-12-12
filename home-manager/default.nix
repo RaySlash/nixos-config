@@ -20,6 +20,18 @@
     homeDirectory = "/home/smj";
   };
 
+  xdg = {
+    enable = true;
+    configFile = {
+      # Declare neovim-config from external git repo
+      "nvim".source = builtins.fetchGit {
+        url = "https://github.com/rayslash/neovim-config";
+        rev = "bc85324fb1a07155d9f5826925725dbc2c4bbab2";
+        allRefs = true;
+      };
+    };
+  };
+
   programs = {
     home-manager.enable = true;
     neovim.enable = true;

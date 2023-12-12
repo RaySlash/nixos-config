@@ -14,11 +14,11 @@
     };
     rio = {
       enable = true;
+      package = pkgs.unstable.rio;
       settings = {
         editor = "nvim";
         cursor = "▇";
         blinking-cursor = true;
-        use-kitty-keyboard-protocol = true;
         performance = "High";
         disable-renderer-when-unfocused = true;
         use-fork = true;
