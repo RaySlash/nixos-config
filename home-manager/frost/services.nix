@@ -29,37 +29,36 @@
           blur = true;
         };
         fonts = {
-          family = "Lilex Nerd Font";
+          family = "Hack Nerd Font";
           size = 18;
 
           regular = {
-            family = "Lilex Nerd Font";
+            family = "Hack Nerd Font";
             style = "Regular";
             weight = 400;
           };
 
           bold = {
-            family = "Lilex Nerd Font";
+            family = "Hack Nerd Font";
             style = "Bold";
             weight = 800;
           };
 
           italic = {
-            family = "Lilex Nerd Font";
+            family = "Hack Nerd Font";
             style = "Italic";
             weight = 400;
           };
 
           bold-italic = {
-            family = "Lilex Nerd Font";
+            family = "Hack Nerd Font";
             style = "Bold-Italic";
-            weight = 800;
+            weight = 600;
           };
         };
         # GruvboxDarkHard.toml
         # https://github.com/raphamorim/rio-terminal-themes/blob/main/themes/GruvboxDarkHard.toml
         colors = {
-          background = "#0F0D0E";
           foreground = "#ebdbb2";
           selection-background = "#665c54";
           selection-foreground = "#ebdbb2";
@@ -82,10 +81,7 @@
           light_white = "#ebdbb2";
         };
         navigation = {
-          mode = "CollapsedTab";
-          clickable = true;
-          use-current-path = false;
-          color-automation = [];
+          mode = "Plain";
         };
       };
     };

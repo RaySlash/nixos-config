@@ -53,9 +53,12 @@
     font = "Lat2-Terminus16";
     keyMap = "us";
   };
-  fonts.packages = with pkgs; [
-    (nerdfonts.override { fonts = [ "Lilex" ]; })
-  ];
+  fonts = {
+    fontDir.enable = true;
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "Hack" ]; })
+    ];
+  };
 
   users.users = {
     smj = {
