@@ -108,6 +108,7 @@
         gcc
         git
         zsh
+        gnumake
     ];
   };
 
