@@ -25,11 +25,16 @@
     home-manager.enable = true;
     neovim.enable = true;
     gpg.enable = true;
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
     git = {
-			enable = true;
-			userEmail = "45141270+RaySlash@users.noreply.github.com";
-			userName = "RaySlash";
-		};
+      enable = true;
+      userEmail = "45141270+RaySlash@users.noreply.github.com";
+      userName = "RaySlash";
+    };
   };
 
   # Theme
