@@ -61,7 +61,7 @@
     };
     steam = {
       enable = true;
-      package = pkgs.unstable.steam;
+      package = pkgs.steam;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
     };

@@ -14,7 +14,7 @@
     };
     rio = {
       enable = true;
-      package = pkgs.master.rio;
+      package = inputs.rio.packages.${pkgs.system}.default;
       settings = {
         editor = "nvim";
         cursor = "▇";

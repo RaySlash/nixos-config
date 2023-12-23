@@ -16,6 +16,7 @@
     arkenfox.url = "github:dwarfmaster/arkenfox-nixos/main";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nurpkgs.url = "github:nix-community/NUR/master";
+    rio.url = "github:rayslash/rio/flakeify";
 
   };
 
