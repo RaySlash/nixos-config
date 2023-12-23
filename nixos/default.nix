@@ -88,7 +88,7 @@
       histSize = 10000;
       ohMyZsh = {
         enable = true;
-        theme = "robbyrussell";
+        theme = "intheloop";
       };
       shellAliases = {
         ls = "eza --icons";
