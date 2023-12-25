@@ -26,29 +26,29 @@
 
   home.packages = with pkgs; [
     htop
-		fd
-		ripgrep
-		lazygit
-		tree-sitter
-    unzip
-    p7zip
-		wget
-		luajit
-    lua-language-server
-		imv
-    helvum
-    pavucontrol
-		openrgb-with-all-plugins
-    ungoogled-chromium
-    oversteer
-		libreoffice-fresh
-		protonup-qt
-		protontricks
-		wineWowPackages.waylandFull
-    vlc
-    gimp-with-plugins
-    unstable.webcord
-    remmina
+      fd
+      ripgrep
+      lazygit
+      tree-sitter
+      unzip
+      p7zip
+      wget
+      luajit
+      lua-language-server
+      imv
+      helvum
+      pavucontrol
+      openrgb-with-all-plugins
+      ungoogled-chromium
+      oversteer
+      libreoffice-fresh
+      protonup-qt
+      protontricks
+      wineWowPackages.waylandFull
+      vlc
+      gimp-with-plugins
+      vesktop
+      remmina
   ];
 
   home.stateVersion = "23.05";

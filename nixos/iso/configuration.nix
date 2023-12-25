@@ -1,8 +1,4 @@
-{ config, lib, pkgs, inputs, outputs, ... }: {
-
-  programs = {
-    firefox.enable = true;
-  };
+{ config, lib, pkgs, ... }: {
 
   services = {
     openssh = {
@@ -48,6 +44,7 @@
       networkmanager
       nmap
       alacritty
+      ungoogled-chromium
     ];
   };
 
