@@ -7,7 +7,6 @@
 
   programs.wofi = {
     enable = true;
-    package = pkgs.unstable.wofi;
     settings = {
       show = "drun";
       width = 750;
@@ -24,7 +23,6 @@
   services = {
     dunst = {
       enable = true;
-      package = pkgs.unstable.dunst;
       configFile = builtins.readFile ./dunstrc;
       iconTheme.name = "Papirus-Dark";
       iconTheme.package = pkgs.papirus-icon-theme;
@@ -37,7 +35,7 @@
 
   home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
 
-  home.packages = with pkgs.unstable; [
+  home.packages = with pkgs; [
     wlogout
     swaybg
     wl-clipboard
@@ -55,10 +53,14 @@
     qt6.qmake
     qt6.qtwayland
   ]; 
+
+  programs.eww = {
+    enable = true;
+    package = pkgs.eww-wayland;
+  };
   
   programs.waybar = {
     enable = true;
-    package = pkgs.unstable.waybar;
     settings = {
       mainBar = {
         "layer" = "top";
