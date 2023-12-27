@@ -68,18 +68,26 @@
     };
   };
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+  services = {
+    envfs.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
   };
 
   programs = {
     git.enable = true;
     neovim.enable = true;
+    nix-ld.enable = true;
+    command-not-found.enable = false;
     zsh = {
       enable = true;
+      interactiveShellInit = ''
+        source ${pkgs.nix-index}/etc/profile.d/command-not-found.sh
+      '';
       syntaxHighlighting.enable = true;
       autosuggestions.enable = true;
       zsh-autoenv.enable = true;
@@ -108,6 +116,7 @@
         git
         zsh
         gnumake
+        nix-index
     ];
   };
 

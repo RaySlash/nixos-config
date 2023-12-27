@@ -36,6 +36,8 @@
   home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
 
   home.packages = with pkgs; [
+    eww-wayland
+    socat
     wlogout
     swaybg
     wl-clipboard
@@ -54,10 +56,11 @@
     qt6.qtwayland
   ]; 
 
-  programs.eww = {
-    enable = true;
-    package = pkgs.eww-wayland;
-  };
+  # programs.eww = {
+  #   enable = true;
+  #   package = pkgs.eww-wayland;
+  #   configDir = ~/.config/eww;
+  # };
   
   programs.waybar = {
     enable = true;
