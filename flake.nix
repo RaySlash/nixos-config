@@ -5,7 +5,6 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-master.url = "github:nixos/nixpkgs/master";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
@@ -16,7 +15,7 @@
     arkenfox.url = "github:dwarfmaster/arkenfox-nixos/main";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nurpkgs.url = "github:nix-community/NUR/master";
-    rio.url = "github:rayslash/rio/flakeify";
+    rio.url = "github:raphamorim/rio/0.0.x";
 
   };
 
