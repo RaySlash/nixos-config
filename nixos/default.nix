@@ -79,6 +79,10 @@
   programs = {
     git.enable = true;
     neovim.enable = true;
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
     zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
@@ -93,8 +97,15 @@
       shellAliases = {
         ls = "eza --icons";
         ll = "eza --icons -l";
-        vim = "nvim";
-        nix-update = "sudo nixos-rebuild switch";
+        vim = "nvim .";
+        gl = "git log";
+        gs = "git status";
+        gc = "git commit";
+        gc-all = "git add . && git commit -m \"update\"";
+        gp = "git push";
+        nix-boot = "sudo nixos-rebuild boot --flake";
+        nix-switch = "sudo nixos-rebuild switch --flake";
+        nix-shell = "nix-shell --run zsh";
       };
     };
   };

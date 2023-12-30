@@ -26,8 +26,8 @@
     gpg.enable = true;
     direnv = {
       enable = true;
-      enableZshIntegration = true;
       nix-direnv.enable = true;
+      enableZshIntegration = true;
     };
     git = {
       enable = true;

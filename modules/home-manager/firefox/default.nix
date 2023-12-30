@@ -42,6 +42,8 @@ in {
         "0800" = {
           enable = true;
           "0807"."browser.urlbar.clipboard.featureGate".enable = true;
+          "0810"."browser.formfill.enable".enable = true;
+          "0820"."layout.css.visited_links_enabled".enable = true;
         };
         "0900".enable = true;
         "1000".enable = true;
@@ -52,7 +54,10 @@ in {
         "2400".enable = true;
         "2600".enable = true;
         "2700".enable = true;
-        "2800".enable = true;
+        "2800" = {
+          enable = true;
+          "2810"."privacy.sanitize.sanitizeOnShutdown".enable = false;
+        };
         "4500" = {
           enable = true;
           "4504"."privacy.resistFingerprinting.letterboxing".enable = false;

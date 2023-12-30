@@ -22,7 +22,6 @@
         performance = "High";
         disable-renderer-when-unfocused = true;
         use-fork = true;
-
         window = {
           foreground-opacity = 1.0;
           background-opacity = 0.7;
@@ -31,32 +30,27 @@
         fonts = {
           family = "Hack Nerd Font";
           size = 18;
-
           regular = {
             family = "Hack Nerd Font";
             style = "Regular";
             weight = 400;
           };
-
           bold = {
             family = "Hack Nerd Font";
             style = "Bold";
             weight = 800;
           };
-
           italic = {
             family = "Hack Nerd Font";
             style = "Italic";
             weight = 400;
           };
-
           bold-italic = {
             family = "Hack Nerd Font";
             style = "Bold-Italic";
             weight = 600;
           };
         };
-        # GruvboxDarkHard.toml
         # https://github.com/raphamorim/rio-terminal-themes/blob/main/themes/GruvboxDarkHard.toml
         colors = {
           foreground = "#ebdbb2";
