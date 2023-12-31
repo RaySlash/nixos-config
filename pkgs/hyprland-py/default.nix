@@ -1,5 +1,4 @@
-{ lib, buildPythonPackage, fetchFromGitHub
-, wayland }:
+{ lib, buildPythonPackage, fetchFromGitHub, wayland, hyprland, ... }:
 
 buildPythonPackage rec {
   pname = "hyprland";
@@ -11,10 +10,10 @@ buildPythonPackage rec {
     rev    = "${version}";
     sha256 = "sha256-Y+egKatlH9rTbxoUqcoAzHURF0X3xFd0eSJRXhBlD5g=";
   };
-  propagatedBuildInputs = [ wayland ];
+
+  propagatedBuildInputs = [ wayland hyprland ];
 
   nativeCheckInputs = [ ];
-
 
   meta = with lib; {
     description = "An unoffical async python wrapper for hyprland's IPC";

@@ -12,7 +12,6 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    arkenfox.url = "github:dwarfmaster/arkenfox-nixos/main";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nurpkgs.url = "github:nix-community/NUR/master";
     rio.url = "github:raphamorim/rio/0.0.x";
