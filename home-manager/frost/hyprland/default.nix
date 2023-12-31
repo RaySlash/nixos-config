@@ -22,16 +22,6 @@
   
   services = {
     cliphist.enable = true;
-    stalonetray = {
-      enable = true;
-      config = {
-        background = "#1d2021";
-        decorations = null;
-        geometry = "3x1-600+0";
-        icon_size = 16;
-        sticky = true;
-      };
-    };
     dunst = {
       enable = true;
       configFile = builtins.readFile ./dunstrc;
@@ -57,7 +47,10 @@
     wl-clipboard
     wlr-randr
     wlogout
+    wirelesstools
     hyprpaper
+    python3
+    socat
     grim
     slurp
     libva-utils
