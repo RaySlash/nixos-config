@@ -50,6 +50,7 @@
   };
 
   programs = {
+    java.enable = true;
     dconf.enable = true;
     kdeconnect.enable = true;
     thunar = {

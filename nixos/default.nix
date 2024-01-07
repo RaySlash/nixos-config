@@ -97,7 +97,7 @@
       shellAliases = {
         ls = "eza --icons";
         ll = "eza --icons -l";
-        vim = "nvim .";
+        vim = "nvim";
         gl = "git log";
         gs = "git status";
         gc = "git commit";

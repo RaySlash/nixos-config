@@ -1,0 +1,107 @@
+; TODO: active workspace
+
+(defpoll date :interval "30" "date '+%a, %d %b'")
+(defpoll time :interval "30" "date '+%I:%M %p'")
+(defpoll spercent :interval "2" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/Volume: //;s/0.00/0/;s/0\\.//;s/\\.//;s/$/%/;s/.* //;s/]%/]/'")
+(defpoll mpercent :interval "2" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | sed 's/Volume: //;s/0.00/0/;s/0\\.//;s/\\.//;s/$/%/;s/.* //;s/]%/]/'")
+(defpoll ctitle :interval "2" "hyprctl activewindow | grep title | sed 's/^.title:\ //' | head -c 80")
+(defpoll netip :interval "2" "ip a | grep 'wl' | grep 'inet' | awk '{print $2}' | sed 's/...$//'")
+(defpoll netssid :interval "2" "nmcli connection show --active | awk 'FNR == 2 {print $1}'")
+(deflisten workspace :initial '(box :class "workspaces" :orientation "h" :spacing 10 :valign "center" :space-evenly "true" (button :onclick "hyprctl dispatch workspace 1" "1") (button :class "activeworkspace" :onclick "hyprctl dispatch workspace 2" "2") (button :onclick "hyprctl dispatch workspace 3" "3") (button :onclick "hyprctl dispatch workspace 4" "4") (button :onclick "hyprctl dispatch workspace 5" "5") (button :onclick "hyprctl dispatch workspace 6" "6"))' "python3 ~/.config/eww/scripts/activeworkspace.py")
+
+(defwindow bar 
+  :monitor 1
+  :geometry (geometry :x "0%"
+            :y "5px"
+            :width "99.3%"
+            :height "30px"
+            :anchor "top center")
+  :stacking "overlay"
+  :exclusive true
+  :focusable false
+  :namespace "bar"
+(fullbar))
+
+;; (defwindow net
+;;   :monitor 1
+;;   :geometry (geometry :x "60%"
+;;             :y "20px"
+;;             :width "30%"
+;;             :height "50px")
+;;   :stacking "fg"
+;;   :exclusive true
+;;   :focusable false
+;;   :namespace "net"
+;;   (netstats))
+;;
+;; (defwidget netstats []
+;;   (box :orientation "h"
+;;     :class "netpopup"
+;;     (button :onclick "")) 
+;; )
+
+(defwidget fullbar []
+  (box :orientation "h"
+    :class "container"
+    (leftbar)
+    (title)
+    (rightbar)))
+
+(defwidget leftbar []
+ (box :orientation "h"
+  :halign "start"
+  :class "leftbar"
+  :space-evenly false
+  :spacing 20
+  (launcher)
+  (workspaces)))
+
+(defwidget rightbar []
+  (box :orientation "h"
+    :halign "end"
+    :class "rightbar"
+    :space-evenly false
+    :spacing 20
+    (internet)
+    (volume)
+    (clock)))
+
+(defwidget launcher []
+  (box :orientation "h"
+    :class "launcher" 
+  (button :onclick "wofi --show drun -I &"
+  " ")))
+
+(defwidget title []
+  (box :orientation "h"
+    :class "title"
+  "${ctitle}"))
+
+(defwidget internet []
+  (box :orientation "h"
+    :class "internet"
+    :spacing 10
+    :space-evenly false
+    "󰤥" {netssid}))
+
+(defwidget volume []
+  (box :orientation "h"
+    :class "volume"
+    :spacing 10
+    :space-evenly false
+    (box :spacing 10 :space-evenly false "" {spercent})
+    (box :spacing 5 :space-evenly false "󰍬" {mpercent})))
+
+(defwidget clock []
+  (box :orientation "h"
+    :class "clock"
+    :space-evenly false
+    :spacing 10
+  (button :onclick ""
+    date)
+  (button :onclick ""
+    time)))
+
+(defwidget workspaces []
+  (box :valign "center"
+(literal :content workspace)))

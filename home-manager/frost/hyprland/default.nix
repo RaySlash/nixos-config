@@ -43,14 +43,12 @@
   home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
 
   home.packages = with pkgs; [
-    eww-wayland
     wl-clipboard
     wlr-randr
     wlogout
     wirelesstools
     hyprpaper
-    python3
-    socat
+    python3     #for eww scripts
     grim
     slurp
     libva-utils
@@ -62,10 +60,10 @@
     qt6.qtwayland
   ]; 
 
-  # programs.eww = {
-  #   enable = true;
-  #   package = pkgs.eww-wayland;
-  #   configDir = ./eww;
-  # };
+  programs.eww = {
+    enable = true;
+    package = pkgs.eww-wayland;
+    configDir = ./eww;
+  };
   
 }

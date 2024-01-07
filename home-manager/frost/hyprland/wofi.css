@@ -1,15 +1,14 @@
-/* Mocha Lavender */
-@define-color accent #babbf1;
-@define-color txt #cad3f5;
-@define-color bg #24273a;
-@define-color bg2 #494d64;
+@define-color accent #b8bb26;
+@define-color accent2 #79740e;
+@define-color txt #f9f5d7;
+@define-color bg #1d2021;
+@define-color bg2 #32302f;
 
  * {
-    font-family: 'Hack Nerd Font', monospace;
+    font-family: "Atkinson Hyperlegible", "Hack Nerd Font", monospace;
     font-size: 14px;
  }
 
- /* Window */
  window {
     margin: 0px;
     padding: 10px;
@@ -19,7 +18,6 @@
     animation: slideIn 0.5s ease-in-out both;
  }
 
- /* Slide In */
  @keyframes slideIn {
     0% {
        opacity: 0;
@@ -30,7 +28,6 @@
     }
  }
 
- /* Inner Box */
  #inner-box {
     margin: 5px;
     padding: 10px;
@@ -39,7 +36,6 @@
     animation: fadeIn 0.5s ease-in-out both;
  }
 
- /* Fade In */
  @keyframes fadeIn {
     0% {
        opacity: 0;
@@ -50,22 +46,18 @@
     }
  }
 
- /* Outer Box */
  #outer-box {
-    margin: 5px;
     padding: 10px;
     border: none;
     background-color: @bg;
  }
 
- /* Scroll */
  #scroll {
     margin: 0px;
     padding: 10px;
     border: none;
  }
 
- /* Input */
  #input {
     margin: 5px;
     padding: 10px;
@@ -75,7 +67,6 @@
     animation: fadeIn 0.5s ease-in-out both;
  }
 
- /* Text */
  #text {
     margin: 5px;
     padding: 10px;
@@ -84,9 +75,8 @@
     animation: fadeIn 0.5s ease-in-out both;
  }
 
- /* Selected Entry */
  #entry:selected {
-   background-color: @accent;
+   background-color: @accent2;
  }
 
  #entry:selected #text {
