@@ -103,6 +103,8 @@ in {
         firefox-color
         gruvbox-dark-theme
         enhancer-for-youtube
+        sponsorblock
+        redirector
       ];
     };
   };
