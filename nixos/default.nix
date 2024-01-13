@@ -5,7 +5,6 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
-      inputs.neovim-nightly-overlay.overlay
     ];
     config = {
       allowUnfree = true;
@@ -78,7 +77,7 @@
 
   programs = {
     git.enable = true;
-    neovim.enable = true;
+    nix-ld.enable = true;
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -115,11 +114,11 @@
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
       eza
-        libclang
-        gcc
-        git
-        zsh
-        gnumake
+      libclang
+      gcc
+      git
+      zsh
+      gnumake
     ];
   };
 

@@ -6,7 +6,6 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
 
-      inputs.neovim-nightly-overlay.overlay
       inputs.nurpkgs.overlay
     ];
     config = {
@@ -22,7 +21,6 @@
 
   programs = {
     home-manager.enable = true;
-    neovim.enable = true;
     gpg.enable = true;
     direnv = {
       enable = true;
@@ -61,8 +59,9 @@
     };
 
     packages = with pkgs; [
-		  papirus-icon-theme
+      papirus-icon-theme
       catppuccin-gtk
+      inputs.nvim.packages.${system}.default
     ];
   };
 

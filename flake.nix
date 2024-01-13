@@ -12,10 +12,12 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nurpkgs.url = "github:nix-community/NUR/master";
     rio.url = "github:raphamorim/rio/0.0.x";
-
+    nvim = {
+      url = "github:rayslash/nvim-config/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

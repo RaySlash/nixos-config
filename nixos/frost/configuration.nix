@@ -21,8 +21,12 @@
     };
   };
 
-  networking.hostName = "frost";
-
+  networking = {
+    hostName = "frost";
+    firewall = {
+      enable = false;
+    };
+  };
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     initrd.kernelModules = [ "amdgpu" ];

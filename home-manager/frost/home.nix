@@ -9,6 +9,7 @@
 
   imports = [
     outputs.homeManagerModules.hardened-firefox
+
       ./hyprland
       ./services.nix
       ../default.nix
