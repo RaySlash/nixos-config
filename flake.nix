@@ -10,13 +10,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nurpkgs.url = "github:nix-community/NUR";
-    rio.url = "github:raphamorim/rio/0.0.x";
     nvim = {
       url = "github:rayslash/nvim-config/nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nurpkgs.url = "github:nix-community/NUR";
   };
 
   outputs = {
