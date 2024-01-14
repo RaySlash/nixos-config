@@ -2,7 +2,6 @@
   description = "Personal Flake NixOS config - RaySlash";
 
   inputs = {
-
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
@@ -11,8 +10,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nurpkgs.url = "github:nix-community/NUR/master";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nurpkgs.url = "github:nix-community/NUR";
     rio.url = "github:raphamorim/rio/0.0.x";
     nvim = {
       url = "github:rayslash/nvim-config/nix";
