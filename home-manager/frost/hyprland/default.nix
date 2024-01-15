@@ -48,12 +48,10 @@
     wlogout
     wirelesstools
     hyprpaper
-    python3     #for eww scripts
     grim
     slurp
     libva-utils
     fuseiso
-    socat
     gsettings-desktop-schemas
     qt5.qtwayland
     libsForQt5.qt5.qtgraphicaleffects
