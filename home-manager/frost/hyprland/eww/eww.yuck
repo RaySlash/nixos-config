@@ -1,13 +1,12 @@
 ; TODO: active workspace
 
-(defpoll date :interval "30" "date '+%a, %d %b'")
-(defpoll time :interval "30" "date '+%I:%M %p'")
-(defpoll spercent :interval "2" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/Volume: //;s/0.00/0/;s/0\\.//;s/\\.//;s/$/%/;s/.* //;s/]%/]/'")
-(defpoll mpercent :interval "2" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | sed 's/Volume: //;s/0.00/0/;s/0\\.//;s/\\.//;s/$/%/;s/.* //;s/]%/]/'")
-(defpoll ctitle :interval "2" "hyprctl activewindow | grep title | sed 's/^.title:\ //' | head -c 80")
-(defpoll netip :interval "2" "ip a | grep 'wl' | grep 'inet' | awk '{print $2}' | sed 's/...$//'")
-(defpoll netssid :interval "2" "nmcli connection show --active | awk 'FNR == 2 {print $1}'")
-(deflisten workspace :initial '(box :class "workspaces" :orientation "h" :spacing 10 :valign "center" :space-evenly "true" (button :onclick "hyprctl dispatch workspace 1" "1") (button :class "activeworkspace" :onclick "hyprctl dispatch workspace 2" "2") (button :onclick "hyprctl dispatch workspace 3" "3") (button :onclick "hyprctl dispatch workspace 4" "4") (button :onclick "hyprctl dispatch workspace 5" "5") (button :onclick "hyprctl dispatch workspace 6" "6"))' "python3 ~/.config/eww/scripts/activeworkspace.py")
+(defpoll date :interval "60" "date '+%a, %d %b'")
+(defpoll time :interval "60" "date '+%I:%M %p'")
+(defpoll spercent :interval "5" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/Volume: //;s/0.00/0/;s/0\\.//;s/\\.//;s/$/%/;s/.* //;s/]%/]/'")
+(defpoll mpercent :interval "5" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | sed 's/Volume: //;s/0.00/0/;s/0\\.//;s/\\.//;s/$/%/;s/.* //;s/]%/]/'")
+(defpoll ctitle :interval "5" "hyprctl activewindow | grep title | sed 's/^.title:\ //' | head -c 80")
+(defpoll netip :interval "20" "ip a | grep 'wl' | grep 'inet' | awk '{print $2}' | sed 's/...$//'")
+(defpoll netssid :interval "20" "nmcli connection show --active | awk 'FNR == 2 {print $1}'")
 
 (defwindow bar 
   :monitor 1
@@ -102,6 +101,19 @@
   (button :onclick ""
     time)))
 
+(deflisten workspaces :initial "2" "bash ~/.config/eww/scripts/get-workspaces.sh")
+(deflisten current_workspace :initial "2" "bash ~/.config/eww/scripts/get-active-workspace.sh")
 (defwidget workspaces []
-  (box :valign "center"
-(literal :content workspace)))
+ (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
+  (box :space-evenly true
+   (label :text "${workspaces}${current_workspace}" :visible false)
+   (for workspace in workspaces
+    (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+     (box :class "workspace-entry ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
+      (label :text "${workspace.id}")
+     )
+    )
+   )
+  )
+ )
+ )
