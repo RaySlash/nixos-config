@@ -5,21 +5,34 @@
     extraConfig = builtins.readFile ./hyprland.conf;
   };
 
-  programs.wofi = {
-    enable = true;
-    settings = {
-      show = "drun";
-      width = 750;
-      height = 400;
-      always_parse_args = true;
-      show_all = false;
-      print_command = true;
-      insensitive = true;
-      prompt = "Type application name";
+  programs = {
+    tmux = {
+      enable = true;
+      newSession = true;
+      mouse = true;
+      disableConfirmationPrompt = true;
+      shortcut = "a";
+      keyMode = "vi";
+      shell = "${pkgs.zsh}/bin/zsh";
+      extraConfig = builtins.readFile ./tmux.conf;
     };
-    style = builtins.readFile ./wofi.css;
+
+    wofi = {
+      enable = true;
+      settings = {
+        show = "drun";
+        width = 750;
+        height = 400;
+        always_parse_args = true;
+        show_all = false;
+        print_command = true;
+        insensitive = true;
+        prompt = "Type application name";
+      };
+      style = builtins.readFile ./wofi.css;
+    };
   };
-  
+
   services = {
     cliphist.enable = true;
     dunst = {
@@ -57,12 +70,6 @@
     libsForQt5.qt5.qtgraphicaleffects
     qt6.qmake
     qt6.qtwayland
-  ]; 
+  ];
 
-  programs.eww = {
-    enable = true;
-    package = pkgs.eww-wayland;
-    configDir = ./eww;
-  };
-  
 }

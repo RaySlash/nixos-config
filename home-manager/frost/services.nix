@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, outputs, ... }:  {
+{ config, pkgs, inputs, outputs, ... }: {
 
   programs = {
     obs-studio = {

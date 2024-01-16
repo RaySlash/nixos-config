@@ -12,7 +12,7 @@
 
     nvim = {
       url = "github:rayslash/nvim-config/nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
