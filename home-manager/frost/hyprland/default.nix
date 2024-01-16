@@ -70,6 +70,16 @@
     libsForQt5.qt5.qtgraphicaleffects
     qt6.qmake
     qt6.qtwayland
+    #eww shits
+    jq
+    python3
+    socat
   ];
+
+  programs.eww = {
+    enable = true;
+    package = pkgs.eww-wayland;
+    configDir = ./eww;
+  };
 
 }
