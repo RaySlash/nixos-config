@@ -1,25 +1,24 @@
-{ config, lib, pkgs, inputs, outputs, ... }:{
-  
+{ config
+, lib
+, pkgs
+, inputs
+, outputs
+, ...
+}: {
   nixpkgs = {
-    overlays = [
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-    ];
-    config = {
-      allowUnfree = true;
-    };
+    overlays = [ outputs.overlays.additions outputs.overlays.modifications ];
+    config = { allowUnfree = true; };
   };
 
   nix = {
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    nixPath =
+      lib.mapAttrsToList (key: value: "${key}=${value.to.path}")
+        config.nix.registry;
     settings = {
       experimental-features = "nix-command flakes";
       auto-optimise-store = true;
-      substituters = [
-        "https://nix-community.cachix.org"
-      ];
+      substituters = [ "https://nix-community.cachix.org" ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
@@ -40,9 +39,7 @@
     setLdLibraryPath = true;
   };
 
-  systemd.extraConfig = "
-    DefaultTimeoutStopSec=10s
-    ";
+  systemd.extraConfig = "\n    DefaultTimeoutStopSec=10s\n    ";
 
   time.timeZone = "Australia/Brisbane";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -101,7 +98,7 @@
         gl = "git log";
         gs = "git status";
         gc = "git commit";
-        gc-all = "git add . && git commit -m \"update\"";
+        gc-all = ''git add . && git commit -m "update"'';
         gp = "git push";
         nix-boot = "sudo nixos-rebuild boot --flake";
         nix-switch = "sudo nixos-rebuild switch --flake";
@@ -113,20 +110,12 @@
   environment = {
     variables.EDITOR = "nvim";
     shells = with pkgs; [ zsh ];
-    systemPackages = with pkgs; [
-      eza
-      libclang
-      gcc
-      git
-      zsh
-      gnumake
-    ];
+    systemPackages = with pkgs; [ eza libclang gcc git zsh gnumake ];
   };
 
   system.autoUpgrade = {
     enable = true;
     flake = "github:NixOS/nixpkgs/nixos-23.11";
-    flags = ["--update-input" "nixpkgs" "--commit-lock-file"];
+    flags = [ "--update-input" "nixpkgs" "--commit-lock-file" ];
   };
-
 }

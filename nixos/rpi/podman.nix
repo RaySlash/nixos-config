@@ -17,8 +17,8 @@ virtualisation.podman = {
 
   environment = {
     systemPackages = with pkgs; [
-      unstable.podman-compose
-      unstable.podman-tui
+      podman-compose
+      podman-tui
     ];
   };
 }

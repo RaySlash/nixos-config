@@ -5,7 +5,6 @@
 , pkgs
 , ...
 }: {
-
   imports = [
     outputs.homeManagerModules.hardened-firefox
 
@@ -47,7 +46,7 @@
     gimp-with-plugins
     vesktop
     remmina
-    unstable.luajit
+    luajit
   ];
 
   home.stateVersion = "23.05";

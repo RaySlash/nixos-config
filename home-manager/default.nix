@@ -4,8 +4,6 @@
     overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-
       inputs.nurpkgs.overlay
     ];
     config = {

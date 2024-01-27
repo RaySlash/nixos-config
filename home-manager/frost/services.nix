@@ -3,8 +3,8 @@
   programs = {
     obs-studio = {
       enable = true;
-      package = pkgs.unstable.obs-studio;
-      plugins = with pkgs.unstable.obs-studio-plugins; [
+      package = pkgs.obs-studio;
+      plugins = with pkgs.obs-studio-plugins; [
         wlrobs
         obs-vaapi
         obs-vkcapture
@@ -14,7 +14,7 @@
     };
     rio = {
       enable = true;
-      package = pkgs.unstable.rio;
+      package = pkgs.rio;
       settings = {
         editor = "nvim";
         cursor = "▇";
