@@ -1,7 +1,14 @@
-{ config, pkgs, lib, inputs, outputs, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
+    package = pkgs.hyprland;
     extraConfig = builtins.readFile ./hyprland.conf;
   };
 
@@ -81,5 +88,4 @@
     package = pkgs.eww-wayland;
     configDir = ./eww;
   };
-
 }

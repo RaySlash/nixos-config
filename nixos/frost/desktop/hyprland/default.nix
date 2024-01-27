@@ -1,22 +1,23 @@
-{ config, pkgs, lib, inputs, outputs, ... }: {
-
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}: {
   services = {
     dbus.enable = true;
     gvfs.enable = true;
     tumbler.enable = true;
-    gnome = {
-      gnome-keyring.enable = true;
-    };
-    xserver = {
-      displayManager = {
-        defaultSession ="hyprland";
-      };
-    };
+    gnome = {gnome-keyring.enable = true;};
+    xserver = {displayManager = {defaultSession = "hyprland";};};
   };
-  
+
   programs = {
     hyprland = {
       enable = true;
+      package = pkgs.hyprland;
     };
     nm-applet = {
       enable = true;
@@ -24,8 +25,5 @@
     };
   };
 
-  xdg.portal.extraPortals = with pkgs; [
-    xdg-desktop-portal-gtk
-  ];
-
+  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
 }
