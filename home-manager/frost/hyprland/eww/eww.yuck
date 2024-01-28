@@ -7,18 +7,64 @@
 (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
 (deflisten ctitle :initial "..." "sh ~/.config/eww/scripts/get-window-title")
 
-(defwindow bar 
+(defwindow bar
   :monitor 1
   :geometry (geometry :x "0%"
             :y "5px"
             :width "99.3%"
             :height "30px"
             :anchor "top center")
-  :stacking "overlay"
+  :stacking "bottom"
   :exclusive true
   :focusable false
   :namespace "bar"
 (fullbar))
+
+(defwindow poweroff
+  :monitor 1
+  :geometry (geometry :x "0%"
+            :y "0%"
+            :anchor "center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable true
+  :namespace "poweroff"
+(powerpane))
+
+(defwidget powerpane []
+  (box :orientation "h"
+    :class "powerpane"
+    (powermenu)))
+
+(defwidget powermenu []
+  (box :orientation "h"
+    :class "power-cont"
+    :width 800
+    :height 300
+    :space-evenly true
+    :spacing 20
+    (shutdown)
+    (restart)
+    (logout)))
+
+(defwidget shutdown []
+  (button :class "powerboxes"
+    :width 10
+    :height 10
+    :onclick "systemctl poweroff"
+    "⏻"))
+(defwidget restart []
+  (button :class "powerboxes"
+    :width 10
+    :height 10
+    :onclick "systemctl reboot"
+    "󰜉"))
+(defwidget logout []
+  (button :class "powerboxes"
+    :width 10
+    :height 10
+    :onclick "systemctl suspend"
+    "󰍃"))
 
 (defwidget fullbar []
   (box :orientation "h"
@@ -48,7 +94,7 @@
 
 (defwidget launcher []
   (box :orientation "h"
-    :class "launcher" 
+    :class "launcher"
   (button :onclick "wofi --show drun -I &"
   " ")))
 

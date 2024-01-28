@@ -1,8 +1,9 @@
-$color_nix: rgba(126, 178, 223, 1);
-$color_orange: rgba(254, 128, 25, 1);
-$color_blue: rgba(131, 165, 152, 1);
-$color_green: rgba(184, 187, 38, 1);
-$color_text: rgba(249, 245, 215, 1);
+$color_nix: #7eb2df;
+$color_orange: #fe8019;
+$color_blue: #83a598;
+$color_green: #b8bb26;
+$color_text: #f9f5d7;
+$color_bg: #1d2021;
 
 * {
 	all: unset;
@@ -12,7 +13,9 @@ $color_text: rgba(249, 245, 215, 1);
 	color: $color_text;
 	background-color: rgba(29, 32, 33, 0.8);
 	border-radius: 1rem;
-	font-family: Atkinson Hyperlegible, Hack Nerd Font;
+	font-family:
+		Atkinson Hyperlegible,
+		Hack Nerd Font;
 }
 
 .leftbar,
@@ -43,10 +46,19 @@ $color_text: rgba(249, 245, 215, 1);
 	color: $color_orange;
 }
 
-.net {
-	background-color: $color_green;
+.power-cont {
+	background-color: $color_bg;
+	border-radius: 20px;
 }
 
-.netpop {
-	color: $color_orange;
+.powerpane {
+	background-color: rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+}
+
+.powerboxes {
+	color: $color_text;
+	background-color: $color_bg;
+	font-size: 48px;
+	border-radius: 20px;
 }
