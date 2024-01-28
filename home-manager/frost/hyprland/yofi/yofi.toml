@@ -1,0 +1,31 @@
+width = 600
+height = 400
+force_window = false
+corner_radius = "20"
+font = "Atkinson Hyperlegible"
+font_size = 18
+bg_color = 0x1d2021ee
+bg_border_color = 0x1d2021ee
+bg_border_width = 2.0
+font_color = 0xf8f8f2ff
+term = "rio -e"
+
+[input_text]
+font_color = 0xf9f5d7ff
+bg_color = 0x32302fee
+margin = "5" # equivalent to "5 5 5 5"
+padding = "4" # equivalent to "1.7 -4 1.7 -4"
+corner_radius = "20"
+
+[list_items]
+font_color = 0xf9f5d7ff
+selected_font_color = 0xfe8019ff
+match_color = 0xf9f5d7ee
+margin = "20"
+hide_actions = true
+item_spacing = 5
+icon_spacing = 5
+
+[icon]
+size = 30
+theme = "Papirus-Dark"

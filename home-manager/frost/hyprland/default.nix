@@ -1,11 +1,14 @@
+{ config
+, pkgs
+, lib
+, inputs
+, outputs
+, ...
+}:
+let
+  yofi = pkgs.callPackage ../../../pkgs/yofi;
+in
 {
-  config,
-  pkgs,
-  lib,
-  inputs,
-  outputs,
-  ...
-}: {
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
@@ -24,19 +27,10 @@
       extraConfig = builtins.readFile ./tmux.conf;
     };
 
-    wofi = {
+    eww = {
       enable = true;
-      settings = {
-        show = "drun";
-        width = 750;
-        height = 400;
-        always_parse_args = true;
-        show_all = false;
-        print_command = true;
-        insensitive = true;
-        prompt = "Type application name";
-      };
-      style = builtins.readFile ./wofi.css;
+      package = pkgs.eww-wayland;
+      configDir = ./eww;
     };
   };
 
@@ -60,32 +54,32 @@
     };
   };
 
-  home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+  home = {
+    file = {
+      ".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+      ".config/yofi/yofi.config".source = ./yofi/yofi.toml;
+      ".config/yofi/blacklist".source = ./yofi/blacklist;
+    };
 
-  home.packages = with pkgs; [
-    wl-clipboard
-    wlr-randr
-    wlogout
-    wirelesstools
-    hyprpaper
-    grim
-    slurp
-    libva-utils
-    fuseiso
-    gsettings-desktop-schemas
-    qt5.qtwayland
-    libsForQt5.qt5.qtgraphicaleffects
-    qt6.qmake
-    qt6.qtwayland
-    #eww shits
-    jq
-    python3
-    socat
-  ];
-
-  programs.eww = {
-    enable = true;
-    package = pkgs.eww-wayland;
-    configDir = ./eww;
+    packages = with pkgs; [
+      wl-clipboard
+      wlr-randr
+      wlogout
+      wirelesstools
+      hyprpaper
+      grim
+      slurp
+      libva-utils
+      fuseiso
+      gsettings-desktop-schemas
+      qt5.qtwayland
+      libsForQt5.qt5.qtgraphicaleffects
+      qt6.qmake
+      qt6.qtwayland
+      #below are for eww widgets
+      jq
+      python3
+      socat
+    ];
   };
 }
