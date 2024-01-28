@@ -1,4 +1,11 @@
-{ config, lib, pkgs, inputs, outputs, ... }: {
+{ config
+, lib
+, pkgs
+, inputs
+, outputs
+, ...
+}: {
+  imports = [ inputs.nix-index-database.hmModules.nix-index ];
 
   nixpkgs = {
     overlays = [
@@ -20,6 +27,10 @@
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
+    nix-index = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -40,11 +51,11 @@
     font.name = "Hack Nerd Font";
     font.size = 12;
     theme.name = "Catppuccin-Mocha-Standard-Lavender-Dark";
-    theme.package = (pkgs.catppuccin-gtk.override {
+    theme.package = pkgs.catppuccin-gtk.override {
       accents = [ "lavender" ];
       size = "standard";
       variant = "mocha";
-    });
+    };
   };
 
   home = {
@@ -64,5 +75,4 @@
   };
 
   systemd.user.startServices = "sd-switch";
-
 }
