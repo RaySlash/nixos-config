@@ -4,11 +4,7 @@
 , inputs
 , outputs
 , ...
-}:
-let
-  yofi = pkgs.callPackage ../../../pkgs/yofi;
-in
-{
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
     package = pkgs.hyprland;
@@ -57,6 +53,7 @@ in
   home = {
     file = {
       ".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
+      # Yofi things
       ".config/yofi/yofi.config".source = ./yofi/yofi.toml;
       ".config/yofi/blacklist".source = ./yofi/blacklist;
     };
@@ -66,6 +63,7 @@ in
       wlr-randr
       wlogout
       wirelesstools
+      inputs.yofi.packages.${system}.default
       hyprpaper
       grim
       slurp

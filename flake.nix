@@ -27,6 +27,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nurpkgs.url = "github:nix-community/NUR";
+    yofi.url = "github:rayslash/yofi/update-flake";
   };
 
   outputs = {
