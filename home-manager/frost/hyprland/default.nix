@@ -1,9 +1,10 @@
-{ config
-, pkgs
-, lib
-, inputs
-, outputs
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
 }: {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -64,6 +65,7 @@
       wlogout
       wirelesstools
       inputs.yofi.packages.${system}.default
+      fzf
       hyprpaper
       grim
       slurp
