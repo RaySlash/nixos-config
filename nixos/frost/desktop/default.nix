@@ -1,22 +1,20 @@
-{ config
-, pkgs
-, lib
-, inputs
-, outputs
-, ...
-}:
-let
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}: let
   sddm-chili-theme =
     pkgs.libsForQt5.callPackage
-      (inputs.nixpkgs + "/pkgs/data/themes/chili-sddm/default.nix")
-      { };
-in
-{
-  imports = [ ./hyprland ./xfce ];
+    (inputs.nixpkgs + "/pkgs/data/themes/chili-sddm/default.nix") {};
+in {
+  imports = [./hyprland ./xfce];
 
   services.xserver = {
     enable = true;
-    excludePackages = [ pkgs.xterm ];
+    excludePackages = [pkgs.xterm];
     xkb = {
       layout = "us";
       variant = "";
@@ -24,7 +22,7 @@ in
     displayManager.sddm = {
       enable = true;
       theme = "chili";
-      settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
+      settings = {Theme = {CursorTheme = "macOS-Monterey-White";};};
     };
   };
 
@@ -33,5 +31,5 @@ in
     platformTheme = "qt5ct";
   };
 
-  environment.systemPackages = with pkgs; [ sddm-chili-theme ];
+  environment.systemPackages = with pkgs; [sddm-chili-theme];
 }
