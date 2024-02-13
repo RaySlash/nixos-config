@@ -24,10 +24,10 @@ return {
 		"Wayland Hyprland",
 	},
 	window_padding = {
-		left = "1cell",
-		right = "1cell",
-		top = "0.5cell",
-		bottom = "0.5cell",
+		left = "0px",
+		right = "0px",
+		top = "0px",
+		bottom = "0px",
 	},
 	hyperlink_rules = {
 		-- Matches: a URL in parens: (URL)
