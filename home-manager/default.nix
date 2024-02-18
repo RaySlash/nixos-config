@@ -26,6 +26,7 @@
 
   programs = {
     home-manager.enable = true;
+    neovim.enable = true;
     gpg.enable = true;
     nix-index = {
       enable = true;
@@ -70,7 +71,11 @@
     packages = with pkgs; [
       papirus-icon-theme
       catppuccin-gtk
-      inputs.nvim.packages.${system}.default
+      # Neovim
+      yarn
+      nodejs
+      nodePackages.live-server
+      # inputs.nvim.packages.${system}.default
     ];
   };
 
