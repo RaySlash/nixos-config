@@ -47,6 +47,7 @@
     vesktop
     remmina
     luajit
+    stremio
   ];
 
   home.stateVersion = "23.05";
