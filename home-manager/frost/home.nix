@@ -45,6 +45,7 @@
     vlc
     gimp-with-plugins
     vesktop
+    logseq
     remmina
     luajit
     stremio
