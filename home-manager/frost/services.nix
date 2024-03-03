@@ -5,6 +5,10 @@
   outputs,
   ...
 }: {
+  services = {
+    hardened-firefox.enable = true;
+  };
+
   programs = {
     obs-studio = {
       enable = true;

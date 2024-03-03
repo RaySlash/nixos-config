@@ -24,9 +24,10 @@
   networking = {
     hostName = "frost";
     firewall = {
-      enable = false;
+      enable = true;
     };
   };
+
   boot = {
     kernelPackages = pkgs.linuxPackages_zen;
     initrd.kernelModules = [ "amdgpu" ];
@@ -39,7 +40,7 @@
 
   boot.loader = {
     systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 6;
+    systemd-boot.configurationLimit = 8;
     efi.canTouchEfiVariables = true;
   };
 

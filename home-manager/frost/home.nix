@@ -21,7 +21,6 @@
     };
   };
 
-  services.hardened-firefox.enable = true;
 
   home.packages = with pkgs; [
     htop
@@ -45,10 +44,10 @@
     vlc
     gimp-with-plugins
     vesktop
-    logseq
     remmina
     luajit
     stremio
+    logseq
   ];
 
   home.stateVersion = "23.05";

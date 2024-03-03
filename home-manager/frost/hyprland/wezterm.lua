@@ -67,6 +67,26 @@ return {
 	},
 	keys = {
 		{
+			key = "\\",
+			mods = "ALT",
+			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+		},
+		{
+			key = "Q",
+			mods = "ALT|SHIFT",
+			action = wezterm.action.CloseCurrentPane({ confirm = false }),
+		},
+		{
+			key = "RightArrow",
+			mods = "ALT|SHIFT",
+			action = wezterm.action.ActivatePaneDirection("Right"),
+		},
+		{
+			key = "LeftArrow",
+			mods = "ALT|SHIFT",
+			action = wezterm.action.ActivatePaneDirection("Left"),
+		},
+		{
 			key = "q",
 			mods = "ALT",
 			action = wezterm.action.CloseCurrentTab({ confirm = false }),
