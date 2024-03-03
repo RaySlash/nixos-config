@@ -25,6 +25,14 @@
     hostName = "frost";
     firewall = {
       enable = true;
+      allowedTCPPorts = [
+        8384 #logseq
+        2200 #logseq
+      ];
+      allowedUDPPorts = [
+        22000 #logseq
+        21027 #logseq
+      ];
     };
   };
 
@@ -47,6 +55,12 @@
   services = {
     udev.packages = with pkgs; [ openrgb-with-all-plugins ];
     fstrim.enable = true;
+    syncthing = {
+      enable = true;
+      user = "rayslash";
+      dataDir = "/home/smj/Documents/logseq";
+      configDir = "/home/smj/.local/state/syncthing";
+    };
   };
 
   virtualisation.libvirtd = {
