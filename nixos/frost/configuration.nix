@@ -26,6 +26,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
+        8081 #expo npm
         8384 #logseq
         2200 #logseq
       ];
