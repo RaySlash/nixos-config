@@ -54,14 +54,32 @@
   };
 
   services = {
+    onedrive.enable = true;
     udev.packages = with pkgs; [ openrgb-with-all-plugins ];
     fstrim.enable = true;
-    syncthing = {
-      enable = true;
-      user = "rayslash";
-      dataDir = "/home/smj/Documents/logseq";
-      configDir = "/home/smj/.local/state/syncthing";
-    };
+#     syncthing = {
+#       enable = true;
+#       user = "rayslash";
+#       dataDir = "/home/smj/Documents/logseq";
+#       configDir = "/home/smj/.local/state/syncthing";
+#       settings = {
+#         gui = {
+#           user = "smj";
+#           password = "YR+h46fm$Lknjwz"; # I know pass is exposed in the config
+#         };
+#         devices = {
+#           "pixel6" = { id = "SAYXLU6-6D5S6XU-D7SUQNV-THCNN2R-HDLAWJH-P572QAE-U637SD6-CNIN2A4";
+#           };
+#           folders = {
+#             id = "logseq";
+#             "logseq" = { # Name of folder in Syncthing, also the folder ID
+#               path = "/home/smj/Documents/logseq";    # Which folder to add to Syncthing
+#               devices = [ "pixel6" ];      # Which devices to share the folder with
+#             };
+#           };
+#         };
+#       };
+#     };
   };
 
   virtualisation.libvirtd = {
