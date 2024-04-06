@@ -2,4 +2,6 @@
 # You can build them using 'nix build .#example'
 pkgs: {
 # example = pkgs.callPackage ./example { };
+dioxus_cli = pkgs.callPackage ./dioxus_cli { };
+wezterm-fioncat = pkgs.callPackage ./wezterm-fioncat { };
 }

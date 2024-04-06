@@ -42,7 +42,6 @@
     protontricks
     wineWowPackages.waylandFull
     vlc
-    gimp-with-plugins
     vesktop
     remmina
     luajit

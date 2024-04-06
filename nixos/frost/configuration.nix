@@ -26,6 +26,7 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [
+        8080 #dioxus
         8081 #expo npm
         8384 #logseq
         2200 #logseq
