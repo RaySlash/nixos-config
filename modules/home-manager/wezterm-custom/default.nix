@@ -1,27 +1,15 @@
-{
-  config,
-  pkgs,
-  inputs,
-  outputs,
-  ...
-}: {
-  services = {
-    hardened-firefox.enable = true;
+{ config, lib, pkgs, inputs, ... }:
+let
+  inherit (lib) mkEnableOption mkIf;
+  cfg = config.programs.wezterm-custom;
+in {
+
+  options.programs.wezterm-custom = {
+    enable = mkEnableOption "wezterm-custom";
   };
 
-  programs = {
-    obs-studio = {
-      enable = true;
-      package = pkgs.obs-studio;
-      plugins = with pkgs.obs-studio-plugins; [
-        wlrobs
-        obs-vaapi
-        obs-vkcapture
-        obs-gstreamer
-        obs-pipewire-audio-capture
-      ];
-    };
-    wezterm = {
+  config = mkIf cfg.enable {
+    programs.wezterm = {
       enable = true;
       enableZshIntegration = true;
       colorSchemes = {
@@ -56,7 +44,8 @@
           ];
         };
       };
-      extraConfig = builtins.readFile ./hyprland/wezterm.lua;
+      extraConfig = builtins.readFile ./wezterm.lua;
     };
   };
+
 }

@@ -5,13 +5,19 @@
     config,
     pkgs,
     ...
-}: {
+}: 
+let
+  sddm-chili-theme =
+    pkgs.libsForQt5.callPackage
+    (inputs.nixpkgs + "/pkgs/data/themes/chili-sddm/default.nix") {};
+in
+{
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    outputs.nixosModules.hyprland-custom
 
     ./hardware-configuration.nix
-    ./desktop
   ];
 
   home-manager = {
@@ -23,19 +29,7 @@
 
   networking = {
     hostName = "frost";
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [
-        8080 #dioxus
-        8081 #expo npm
-        8384 #logseq
-        2200 #logseq
-      ];
-      allowedUDPPorts = [
-        22000 #logseq
-        21027 #logseq
-      ];
-    };
+    firewall.enable = true;
   };
 
   boot = {
@@ -49,38 +43,31 @@
   };
 
   boot.loader = {
-    systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 8;
     efi.canTouchEfiVariables = true;
+    systemd-boot = {
+      enable = true;
+      configurationLimit = 8;
+    };
   };
 
   services = {
     onedrive.enable = true;
     udev.packages = with pkgs; [ openrgb-with-all-plugins ];
     fstrim.enable = true;
-#     syncthing = {
-#       enable = true;
-#       user = "rayslash";
-#       dataDir = "/home/smj/Documents/logseq";
-#       configDir = "/home/smj/.local/state/syncthing";
-#       settings = {
-#         gui = {
-#           user = "smj";
-#           password = "YR+h46fm$Lknjwz"; # I know pass is exposed in the config
-#         };
-#         devices = {
-#           "pixel6" = { id = "SAYXLU6-6D5S6XU-D7SUQNV-THCNN2R-HDLAWJH-P572QAE-U637SD6-CNIN2A4";
-#           };
-#           folders = {
-#             id = "logseq";
-#             "logseq" = { # Name of folder in Syncthing, also the folder ID
-#               path = "/home/smj/Documents/logseq";    # Which folder to add to Syncthing
-#               devices = [ "pixel6" ];      # Which devices to share the folder with
-#             };
-#           };
-#         };
-#       };
-#     };
+    xserver = {
+      enable = true;
+      excludePackages = [pkgs.xterm];
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+      desktopManager.xfce.enable = true;
+      displayManager.sddm = {
+        enable = true;
+        theme = "chili";
+        settings = {Theme = {CursorTheme = "macOS-Monterey-White";};};
+      };
+    };
   };
 
   virtualisation.libvirtd = {
@@ -88,28 +75,32 @@
     qemu.swtpm.enable = true;
   };
 
+  qt = {
+    enable = true;
+    platformTheme = "qt5ct";
+  };
+
+  environment.xfce.excludePackages = with pkgs.xfce; [
+    orage
+    ristretto
+    mousepad
+    xfburn
+    parole
+  ];
+
   programs = {
     java.enable = true;
     dconf.enable = true;
+    hyprland-custom.enable = true;
     kdeconnect.enable = true;
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
-    steam = {
-      enable = true;
-      package = pkgs.steam;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-    };
+    steam.enable = true;
+    yazi.enable = true;
   };
 
   environment = {
     systemPackages = with pkgs; [ 
       virt-manager
+      sddm-chili-theme
     ];
   };
 

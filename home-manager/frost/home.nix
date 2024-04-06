@@ -6,21 +6,33 @@
 , ...
 }: {
   imports = [
+    # Modules imported from /modules/home-manager
     outputs.homeManagerModules.hardened-firefox
+    outputs.homeManagerModules.wezterm-custom
+    outputs.homeManagerModules.hyprland-custom
 
-    ./hyprland
-    ./services.nix
     ../default.nix
   ];
 
-  # Virt-manager settings
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = {
-      autoconnect = [ "qemu:///system" ];
-      uris = [ "qemu:///system" ];
-    };
+  services = {
+    hardened-firefox.enable = true;
   };
 
+  programs = {
+    wezterm-custom.enable = true;
+    hyprland-custom.enable = true;
+    obs-studio = {
+      enable = true;
+      package = pkgs.obs-studio;
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-vaapi
+        obs-vkcapture
+        obs-gstreamer
+        obs-pipewire-audio-capture
+      ];
+    };
+  };
 
   home.packages = with pkgs; [
     htop
@@ -46,8 +58,15 @@
     remmina
     luajit
     stremio
-    logseq
   ];
 
+  # Virt-manager settings
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
+    };
+  };
+  
   home.stateVersion = "23.05";
 }
