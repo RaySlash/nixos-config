@@ -5,13 +5,19 @@
   config,
   pkgs,
   ...
-}: {
+}:
+let
+  sddm-chili-theme =
+    pkgs.libsForQt5.callPackage
+    (inputs.nixpkgs + "/pkgs/data/themes/chili-sddm/default.nix") {};
+in
+{
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
+    outputs.nixosModules.hyprland-custom
 
       ./hardware-configuration.nix
-      ./desktop
   ];
 
   home-manager = {
@@ -22,6 +28,8 @@
   };
 
   networking.hostName = "dell";
+  hardware.pulseaudio.enable = false;
+  nixpkgs.config.nvidia.allowLicense = true;
 
   boot = {
     initrd.kernelModules = [ "wl" "nvidia" ];
@@ -55,24 +63,64 @@
   };
 
   services = {
-    openssh = {
+    openssh.enable = true;
+    fstrim.enable = true;
+    kanata = {
+        enable = true;
+        keyboards = {
+            "v1".config = "
+              (defsrc
+                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+                tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+                caps a    s    d    f    g    h    j    k    l    ;    '    ret
+                lsft z    x    c    v    b    n    m    ,    .    /    rsft
+                lctl lmet lalt           spc            ralt rmet rctl
+              )
+              
+              (deflayer colemak
+                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+                tab  q    w    f    p    g    j    l    u    y    ;    [    ]    \
+                esc  a    r    s    t    d    h    n    e    i    o    '    ret
+                lsft z    x    c    v    b    k    m    ,    .    /    rsft
+                lctl lmet lalt           spc            ralt rmet rctl
+              )
+            ";
+          };
+      };
+    xserver = {
       enable = true;
+      excludePackages = [pkgs.xterm];
+      xkb = {
+        layout = "us";
+        variant = "";
+      };
+      displayManager.sddm = {
+        enable = true;
+        theme = "chili";
+        settings = {Theme = {CursorTheme = "macOS-Monterey-White";};};
+      };
     };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "qt5ct";
   };
 
   programs = {
+    java.enable = true;
     dconf.enable = true;
-    thunar = {
-      enable = true;
-      plugins = with pkgs.xfce; [
-        thunar-archive-plugin
-        thunar-volman
-      ];
-    };
+    hyprland-custom.enable = true;
+    kdeconnect.enable = true;
+    steam.enable = true;
+    yazi.enable = true;
   };
 
   environment = {
-    systemPackages = with pkgs; [ ];
+    systemPackages = with pkgs; [ 
+      sddm-chili-theme
+      kanata
+    ];
   };
 
   system.stateVersion = "23.05";

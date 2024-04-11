@@ -5,7 +5,10 @@
 , outputs
 , ...
 }: {
-  imports = [ inputs.nix-index-database.hmModules.nix-index ];
+  imports = [
+    inputs.nix-index-database.hmModules.nix-index # Import nix-index module
+    outputs.homeManagerModules.wezterm-custom
+  ];
 
   nixpkgs = {
     overlays = [
@@ -28,6 +31,7 @@
     home-manager.enable = true;
     neovim.enable = true;
     gpg.enable = true;
+    wezterm-custom.enable = true;
     nix-index = {
       enable = true;
       enableZshIntegration = true;

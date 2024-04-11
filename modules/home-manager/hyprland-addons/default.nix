@@ -1,19 +1,14 @@
 { config, lib, pkgs, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.programs.hyprland-custom;
+  cfg = config.programs.hyprland-addons;
 in {
 
-  options.programs.hyprland-custom = {
-    enable = mkEnableOption "hyprland-custom";
+  options.programs.hyprland-addons = {
+    enable = mkEnableOption "hyprland-addons";
   };
 
   config = mkIf cfg.enable {
-
-    wayland.windowManager.hyprland = {
-      enable = true;
-      extraConfig = builtins.readFile ./hyprland.conf;
-    };
 
     programs = {
       eww = {
@@ -32,7 +27,6 @@ in {
       };
       kdeconnect = {
         enable = true;
-        indicator = true;
       };
       udiskie = {
         enable = true;
@@ -44,7 +38,6 @@ in {
 
     home = {
       file = {
-        ".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
 # Yofi things
         ".config/yofi/yofi.config".source = ./yofi/yofi.toml;
         ".config/yofi/blacklist".source = ./yofi/blacklist;

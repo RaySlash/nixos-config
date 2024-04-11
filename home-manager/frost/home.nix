@@ -8,8 +8,7 @@
   imports = [
     # Modules imported from /modules/home-manager
     outputs.homeManagerModules.hardened-firefox
-    outputs.homeManagerModules.wezterm-custom
-    outputs.homeManagerModules.hyprland-custom
+    outputs.homeManagerModules.hyprland-addons
 
     ../default.nix
   ];
@@ -18,9 +17,13 @@
     hardened-firefox.enable = true;
   };
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = builtins.readFile ./hyprland.conf;
+  };
+
   programs = {
-    wezterm-custom.enable = true;
-    hyprland-custom.enable = true;
+    hyprland-addons.enable = true;
     obs-studio = {
       enable = true;
       package = pkgs.obs-studio;
@@ -34,6 +37,7 @@
     };
   };
 
+  home.file.".config/hypr/hyprpaper.conf".source = ./hyprpaper.conf;
   home.packages = with pkgs; [
     htop
     fd

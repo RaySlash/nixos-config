@@ -9,30 +9,41 @@
 
   imports = [
     outputs.homeManagerModules.hardened-firefox
-    ./services.nix
+    outputs.homeManagerModules.hyprland-addons
+
     ../default.nix
   ];
 
   services.hardened-firefox.enable = true;
 
+  wayland.windowManager.hyprland = {
+    enable = true;
+    extraConfig = builtins.readFile ./hyprland.conf;
+  };
+
+  programs.hyprland-addons.enable = true;
+
   home.packages = with pkgs; [
     htop
-		fd
-		ripgrep
-		lazygit
-		tree-sitter
+    fd
+    ripgrep
+    lazygit
+    tree-sitter
     unzip
     p7zip
-		wget
-		luajit
-    lua-language-server
-		imv
-    helvum
+    wget
+    imv
     pavucontrol
     ungoogled-chromium
-		libreoffice-fresh
-		wineWowPackages.waylandFull
+    libreoffice-fresh
+    protonup-qt
+    protontricks
+    wineWowPackages.waylandFull
     vlc
+    vesktop
+    remmina
+    luajit
+    stremio
   ];
 
   home.stateVersion = "23.05";

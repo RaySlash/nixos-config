@@ -1,6 +1,6 @@
 {
 # my-module = import ./my-module.nix;
   hardened-firefox = import ./hardened-firefox;
-  hyprland-custom = import ./hyprland-custom;
+  hyprland-addons = import ./hyprland-addons;
   wezterm-custom = import ./wezterm-custom;
 }
