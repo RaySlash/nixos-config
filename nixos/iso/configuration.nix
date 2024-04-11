@@ -6,10 +6,13 @@
     };
     xserver = {
       enable = true;
-      layout = "us";
-      xkbVariant = "";
+      xkb= {
+        layout = "us";
+        variant = "";
+      };
       excludePackages = [ pkgs.xterm ];
-      desktopManager.xfce.enable = true;
+      desktopManager.gnome.enable = true;
+      displayManager.gdm.enable = true;
     };
   };
 
@@ -30,20 +33,31 @@
   };
 
   environment = {
-    xfce.excludePackages = with pkgs.xfce; [
-      xfce4-terminal
-      orage
-      ristretto
-      mousepad
-      xfburn
-      parole
-    ];
+    gnome.excludePackages = (with pkgs.gnome; [
+      cheese # webcam tool
+        gnome-music
+        gnome-terminal
+        gedit # text editor
+        epiphany # web browser
+        geary # email reader
+        evince # document viewer
+        gnome-characters
+        totem # video player
+        tali # poker game
+        iagno # go game
+        hitori # sudoku game
+        atomix # puzzle game
+    ]) ++ (with pkgs; [
+      gnome-photos
+      gnome-tour
+    ]);
     systemPackages = with pkgs; [
       pciutils
       lshw
       networkmanager
       nmap
-      alacritty
+      wezterm
+      btrfs-progs
       ungoogled-chromium
     ];
   };

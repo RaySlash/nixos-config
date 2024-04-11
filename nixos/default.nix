@@ -51,7 +51,6 @@
     fontDir.enable = true;
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "Hack" ]; })
-      jetbrains-mono
       atkinson-hyperlegible
     ];
   };
