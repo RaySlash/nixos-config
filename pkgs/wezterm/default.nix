@@ -19,12 +19,6 @@
 , xcbutilwm
 , wayland
 , zlib
-, CoreGraphics
-, Cocoa
-, Foundation
-, System
-, libiconv
-, UserNotifications
 , nixosTests
 , runCommand
 , vulkan-loader
@@ -32,14 +26,14 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "wezterm";
-  version = "master";
+  version = "0184e88e97b6521df613df4ccdb2e896ce8b0ad0";
 
   src = fetchFromGitHub {
     owner = "wez";
     repo = pname;
     rev = version;
     fetchSubmodules = true;
-    hash = "sha256-Az+HlnK/lRJpUSGm5UKyma1l2PaBKNCGFiaYnLECMX8=";
+    hash = "sha256-exVTh69NeBloqNN1YS2B3tsOcSlGhHOMUaWn4/HciQ4=";
   };
 
   postPatch = ''
@@ -61,7 +55,7 @@ rustPlatform.buildRustPackage rec {
     ncurses # tic for terminfo
     pkg-config
     python3
-  ] ++ lib.optional stdenv.isDarwin perl;
+  ];
 
   buildInputs = [
     fontconfig
@@ -76,13 +70,6 @@ rustPlatform.buildRustPackage rec {
     xcbutilimage
     xcbutilkeysyms
     xcbutilwm # contains xcb-ewmh among others
-  ] ++ lib.optionals stdenv.isDarwin [
-    Cocoa
-    CoreGraphics
-    Foundation
-    libiconv
-    System
-    UserNotifications
   ];
 
   buildFeatures = [ "distro-defaults" ];
