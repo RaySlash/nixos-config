@@ -1,15 +1,15 @@
-{
-  inputs,
-    outputs,
-    lib,
-    config,
-    pkgs,
-    ...
-}: 
+{ inputs
+, outputs
+, lib
+, config
+, pkgs
+, ...
+}:
 let
   sddm-chili-theme =
     pkgs.libsForQt5.callPackage
-    (inputs.nixpkgs + "/pkgs/data/themes/chili-sddm/default.nix") {};
+      (inputs.nixpkgs + "/pkgs/data/themes/chili-sddm/default.nix")
+      { };
 in
 {
 
@@ -56,17 +56,17 @@ in
     fstrim.enable = true;
     xserver = {
       enable = true;
-      excludePackages = [pkgs.xterm];
+      excludePackages = [ pkgs.xterm ];
       xkb = {
         layout = "us";
         variant = "";
       };
       desktopManager.xfce.enable = true;
-      displayManager.sddm = {
-        enable = true;
-        theme = "chili";
-        settings = {Theme = {CursorTheme = "macOS-Monterey-White";};};
-      };
+    };
+    displayManager.sddm = {
+      enable = true;
+      theme = "chili";
+      settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
     };
   };
 
@@ -98,7 +98,7 @@ in
   };
 
   environment = {
-    systemPackages = with pkgs; [ 
+    systemPackages = with pkgs; [
       virt-manager
       sddm-chili-theme
     ];

@@ -6,7 +6,7 @@
     };
     xserver = {
       enable = true;
-      xkb= {
+      xkb = {
         layout = "us";
         variant = "";
       };
@@ -37,17 +37,17 @@
   environment = {
     gnome.excludePackages = (with pkgs.gnome; [
       cheese # webcam tool
-        gnome-music
-        gnome-terminal
-        epiphany # web browser
-        geary # email reader
-        evince # document viewer
-        gnome-characters
-        totem # video player
-        tali # poker game
-        iagno # go game
-        hitori # sudoku game
-        atomix # puzzle game
+      gnome-music
+      gnome-terminal
+      epiphany # web browser
+      geary # email reader
+      evince # document viewer
+      gnome-characters
+      totem # video player
+      tali # poker game
+      iagno # go game
+      hitori # sudoku game
+      atomix # puzzle game
     ]) ++ (with pkgs; [
       gnome-photos
       gedit

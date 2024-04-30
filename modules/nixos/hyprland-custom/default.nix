@@ -2,7 +2,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.programs.hyprland-custom;
-in {
+in
+{
 
   options.programs.hyprland-custom = {
     enable = mkEnableOption "hyprland-custom";
@@ -15,7 +16,7 @@ in {
       gvfs.enable = true;
       tumbler.enable = true;
       gnome.gnome-keyring.enable = true;
-      xserver.displayManager.defaultSession = "hyprland";
+      displayManager.defaultSession = "hyprland";
     };
 
     programs = {
@@ -24,7 +25,7 @@ in {
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-    xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-gtk];
+    xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
   };
 
 }
