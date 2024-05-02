@@ -65,6 +65,7 @@ in
     };
     displayManager.sddm = {
       enable = true;
+      wayland.enable = true;
       theme = "chili";
       settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
     };
