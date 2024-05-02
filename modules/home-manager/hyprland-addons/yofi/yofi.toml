@@ -13,14 +13,14 @@ term = "wezterm -e"
 [input_text]
 font_color = 0xf9f5d7ff
 bg_color = 0x32302fee
-margin = "5" # equivalent to "5 5 5 5"
-padding = "4" # equivalent to "1.7 -4 1.7 -4"
+margin = "2"
+padding = "6"
 corner_radius = "20"
 
 [list_items]
 font_color = 0xf9f5d7ff
-selected_font_color = 0xf9f5d7ee
-match_color = 0xfe8019ff
+selected_font_color = 0xfe8019ee
+match_color = 0xead2cbff
 margin = "20"
 hide_actions = true
 item_spacing = 5
