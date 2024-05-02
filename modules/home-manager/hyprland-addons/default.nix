@@ -2,7 +2,8 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.programs.hyprland-addons;
-in {
+in
+{
 
   options.programs.hyprland-addons = {
     enable = mkEnableOption "hyprland-addons";
@@ -10,12 +11,6 @@ in {
 
   config = mkIf cfg.enable {
 
-    programs = {
-      eww = {
-        enable = true;
-        configDir = ./eww;
-      };
-    };
 
     services = {
       cliphist.enable = true;
@@ -38,33 +33,33 @@ in {
 
     home = {
       file = {
-# Yofi things
+        # Yofi things
         ".config/yofi/yofi.config".source = ./yofi/yofi.toml;
         ".config/yofi/blacklist".source = ./yofi/blacklist;
       };
 
       packages = with pkgs; [
         wl-clipboard
-          wlr-randr
-          wlogout
-          wirelesstools
-          inputs.yofi.packages.${system}.default
-          fzf
-          hyprpaper
-          grim
-          slurp
-          libva-utils
-          fuseiso
-          gsettings-desktop-schemas
-          qt5.qtwayland
-          libsForQt5.qt5.qtgraphicaleffects
-          qt6.qmake
-          qt6.qtwayland
-          #below are for eww widgets
-          jq
-          python3
-          socat
-          ];
+        wlr-randr
+        wlogout
+        wirelesstools
+        inputs.yofi.packages.${system}.default
+        fzf
+        hyprpaper
+        grim
+        slurp
+        libva-utils
+        fuseiso
+        gsettings-desktop-schemas
+        qt5.qtwayland
+        libsForQt5.qt5.qtgraphicaleffects
+        qt6.qmake
+        qt6.qtwayland
+        #below are for eww widgets
+        jq
+        python3
+        socat
+      ];
     };
 
   };

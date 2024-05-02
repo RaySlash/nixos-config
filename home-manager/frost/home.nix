@@ -24,6 +24,10 @@
 
   programs = {
     hyprland-addons.enable = true;
+    eww = {
+      enable = true;
+      configDir = ./eww;
+    };
     obs-studio = {
       enable = true;
       package = pkgs.obs-studio;
@@ -71,6 +75,6 @@
       uris = [ "qemu:///system" ];
     };
   };
-  
+
   home.stateVersion = "23.05";
 }

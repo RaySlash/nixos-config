@@ -1,10 +1,9 @@
-{
-  inputs,
-    outputs,
-    lib,
-    config,
-    pkgs,
-    ...
+{ inputs
+, outputs
+, lib
+, config
+, pkgs
+, ...
 }: {
 
   imports = [
@@ -21,7 +20,13 @@
     extraConfig = builtins.readFile ./hyprland.conf;
   };
 
-  programs.hyprland-addons.enable = true;
+  programs = {
+    hyprland-addons.enable = true;
+    eww = {
+      enable = true;
+      configDir = ./eww;
+    };
+  };
 
   home.packages = with pkgs; [
     htop
