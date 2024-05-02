@@ -11,7 +11,6 @@ in
 
   config = mkIf cfg.enable {
 
-
     services = {
       cliphist.enable = true;
       dunst = {
