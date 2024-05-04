@@ -10,6 +10,7 @@ in
   };
 
   config = mkIf cfg.enable {
+
     programs.wezterm = {
       enable = true;
       package = pkgs.wezterm-master;
@@ -23,7 +24,6 @@ in
           cursor_fg = "#1D2021";
           selection_bg = "#D4BE98";
           selection_fg = "#3C3836";
-
           ansi = [
             "#1d2021"
             "#ea6962"
