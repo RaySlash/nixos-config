@@ -48,7 +48,7 @@
 (defwidget launcher []
   (box :orientation "h"
     :class "launcher"
-  (button :onclick "wofi --show drun -I &"
+  (button :onclick "yofi"
   " ")))
 
 (defwidget title []

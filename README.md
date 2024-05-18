@@ -49,20 +49,6 @@ sudo cp /etc/nixos/hardware-configuration.nix nixos/host/
 sudo nixos-rebuild boot --flake .#host
 ```
 
-## To-Do
-
-### frost
-
-- Change the colorscheme and theming of wofi
-- Switch from catppuccin colors to gruvbox colors
-- implement eww completely and add in hm/hyprland
-- find an alternative for wlogout (eww probably)
-- fix eww bar
-
-### dell
-
-- Map `<ESC>` to `<Caps-Lock>`key due to non-operational `<ESC>` key
-
 ## Reference
 
 [github:Misterio77/nix-starter-config](https://github.com/Misterio77/nix-starter-configs)
