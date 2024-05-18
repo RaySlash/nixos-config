@@ -16,7 +16,7 @@ in
       gvfs.enable = true;
       tumbler.enable = true;
       gnome.gnome-keyring.enable = true;
-      displayManager.defaultSession = "hyprland";
+      xserver.displayManager.defaultSession = "hyprland";
     };
 
     programs = {

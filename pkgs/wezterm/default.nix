@@ -22,18 +22,19 @@
 , nixosTests
 , runCommand
 , vulkan-loader
+, pkgs
 }:
 
 rustPlatform.buildRustPackage rec {
   pname = "wezterm";
-  version = "0184e88e97b6521df613df4ccdb2e896ce8b0ad0";
+  version = "396c8d9a886d06c4f839a24d3942f8612b6b84d0";
 
   src = fetchFromGitHub {
     owner = "wez";
     repo = pname;
     rev = version;
     fetchSubmodules = true;
-    hash = "sha256-exVTh69NeBloqNN1YS2B3tsOcSlGhHOMUaWn4/HciQ4=";
+    hash = "sha256-NCM9IU1aqgMtmazrjDVlhOk6eS718cZnMI4/CE3oA7U=";
   };
 
   postPatch = ''
@@ -46,7 +47,8 @@ rustPlatform.buildRustPackage rec {
   cargoLock = {
     lockFile = ./Cargo.lock;
     outputHashes = {
-      "xcb-imdkit-0.3.0" = "sha256-fTpJ6uNhjmCWv7dZqVgYuS2Uic36XNYTbqlaly5QBjI=";
+      "xcb-imdkit-0.3.0" = "sha256-77KaJO+QJWy3tJ9AF1TXKaQHpoVOfGIRqteyqpQaSWo=";
+      "sqlite-cache-0.1.3" = "sha256-sBAC8MsQZgH+dcWpoxzq9iw5078vwzCijgyQnMOWIkk=";
     };
   };
 

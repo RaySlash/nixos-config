@@ -52,6 +52,7 @@ in
         gsettings-desktop-schemas
         qt5.qtwayland
         libsForQt5.qt5.qtgraphicaleffects
+        libsForQt5.polkit-kde-agent
         qt6.qmake
         qt6.qtwayland
         #below are for eww widgets

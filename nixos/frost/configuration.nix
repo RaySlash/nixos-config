@@ -29,7 +29,6 @@ in
 
   networking = {
     hostName = "frost";
-    firewall.enable = true;
   };
 
   boot = {
@@ -42,6 +41,12 @@ in
     ];
   };
 
+  security = {
+    polkit = {
+      enable = true;
+    };
+  };
+
   boot.loader = {
     efi.canTouchEfiVariables = true;
     systemd-boot = {
@@ -49,6 +54,11 @@ in
       configurationLimit = 8;
     };
   };
+  # hacky way to create our directory structure and index page... don't actually use this
+  systemd.tmpfiles.rules = [
+    "d /var/www/example.org"
+    "f /var/www/example.org/index.php - - - - <?php phpinfo();"
+  ];
 
   services = {
     onedrive.enable = true;
@@ -62,12 +72,12 @@ in
         variant = "";
       };
       desktopManager.xfce.enable = true;
-    };
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "chili";
-      settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
+      displayManager.sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = "chili";
+        settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
+      };
     };
   };
 
