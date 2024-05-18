@@ -31,19 +31,13 @@ in
     };
 
     home = {
-      file = {
-        # Yofi things
-        ".config/yofi/yofi.config".source = ./yofi/yofi.toml;
-        ".config/yofi/blacklist".source = ./yofi/blacklist;
-      };
-
       packages = with pkgs; [
         wl-clipboard
         wlr-randr
         wlogout
         wirelesstools
-        inputs.yofi.packages.${system}.default
         fzf
+        unstable.fuzzel
         hyprpaper
         grim
         slurp
