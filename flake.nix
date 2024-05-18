@@ -20,6 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nurpkgs.url = "github:nix-community/NUR";
     yofi.url = "github:l4l/yofi";

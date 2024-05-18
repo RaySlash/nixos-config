@@ -14,7 +14,9 @@
     overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
+      outputs.overlays.unstable-packages
       inputs.nurpkgs.overlay
+      inputs.neovim-nightly-overlay.overlay
     ];
     config = {
       allowUnfree = true;
@@ -28,7 +30,10 @@
 
   programs = {
     home-manager.enable = true;
-    neovim.enable = true;
+    neovim = {
+      enable = true;
+      package = pkgs.neovim-nightly;
+    };
     gpg.enable = true;
     wezterm-custom.enable = true;
     nix-index = {

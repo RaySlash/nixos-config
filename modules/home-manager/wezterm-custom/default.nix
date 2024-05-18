@@ -13,7 +13,7 @@ in
 
     programs.wezterm = {
       enable = true;
-      package = pkgs.wezterm;
+      package = pkgs.unstable.wezterm;
       enableZshIntegration = true;
       colorSchemes = {
         gruvbox_material_dark_hard = {

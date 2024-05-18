@@ -26,6 +26,7 @@
     hyprland-addons.enable = true;
     eww = {
       enable = true;
+      package = pkgs.unstable.eww;
       configDir = ./eww;
     };
     obs-studio = {

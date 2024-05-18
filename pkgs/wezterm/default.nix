@@ -22,7 +22,6 @@
 , nixosTests
 , runCommand
 , vulkan-loader
-, pkgs
 }:
 
 rustPlatform.buildRustPackage rec {
