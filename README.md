@@ -3,6 +3,7 @@
 This repository consists of my personal NixOS configuration files. This is a flake repository. You know what to do!
 
 ![Hyprland setup Screenshot](./ss_grim.png)
+![Hyprland Fuzzel](./ss_fuzzel_grim.png)
 
 ## Hostnames
 
