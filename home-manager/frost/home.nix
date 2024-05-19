@@ -56,7 +56,7 @@
     helvum
     pavucontrol
     openrgb-with-all-plugins
-    ungoogled-chromium
+    chromium
     oversteer
     libreoffice-fresh
     protonup-qt
