@@ -113,7 +113,6 @@ in
     dconf.enable = true;
     hyprland-custom.enable = true;
     kdeconnect.enable = true;
-    steam.enable = true;
     yazi.enable = true;
   };
 

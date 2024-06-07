@@ -14,6 +14,7 @@ return {
 	enable_tab_bar = false,
 	webgpu_power_preference = "HighPerformance",
 	check_for_updates = false,
+	enable_wayland = false,
 	max_fps = 165,
 	anti_alias_custom_block_glyphs = true,
 	default_cursor_style = "SteadyBlock",

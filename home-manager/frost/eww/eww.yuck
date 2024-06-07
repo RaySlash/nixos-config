@@ -20,52 +20,6 @@
   :namespace "bar"
 (fullbar))
 
-(defwindow poweroff
-  :monitor 1
-  :geometry (geometry :x "0%"
-            :y "0%"
-            :anchor "center")
-  :stacking "overlay"
-  :exclusive false
-  :focusable true
-  :namespace "poweroff"
-(powerpane))
-
-(defwidget powerpane []
-  (box :orientation "h"
-    :class "powerpane"
-    (powermenu)))
-
-(defwidget powermenu []
-  (box :orientation "h"
-    :class "power-cont"
-    :width 800
-    :height 300
-    :space-evenly true
-    :spacing 20
-    (shutdown)
-    (restart)
-    (logout)))
-
-(defwidget shutdown []
-  (button :class "powerboxes"
-    :width 10
-    :height 10
-    :onclick "systemctl poweroff"
-    "⏻"))
-(defwidget restart []
-  (button :class "powerboxes"
-    :width 10
-    :height 10
-    :onclick "systemctl reboot"
-    "󰜉"))
-(defwidget logout []
-  (button :class "powerboxes"
-    :width 10
-    :height 10
-    :onclick "systemctl suspend"
-    "󰍃"))
-
 (defwidget fullbar []
   (box :orientation "h"
     :class "container"

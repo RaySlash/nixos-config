@@ -32,7 +32,6 @@ in
   };
 
   boot = {
-    initrd.kernelModules = [ "amdgpu" ];
     blacklistedKernelModules = [ "hid-thrustmaster" ];
     kernelModules = [ "i2c-dev" "hid-tmff2" ];
     extraModulePackages = with config.boot.kernelPackages; [
@@ -40,11 +39,7 @@ in
     ];
   };
 
-  security = {
-    polkit = {
-      enable = true;
-    };
-  };
+  security.polkit.enable = true;
 
   boot.loader = {
     efi.canTouchEfiVariables = true;
@@ -53,16 +48,21 @@ in
       configurationLimit = 8;
     };
   };
-  # hacky way to create our directory structure and index page... don't actually use this
-  systemd.tmpfiles.rules = [
-    "d /var/www/example.org"
-    "f /var/www/example.org/index.php - - - - <?php phpinfo();"
-  ];
 
   services = {
     onedrive.enable = true;
     udev.packages = with pkgs; [ openrgb-with-all-plugins ];
     fstrim.enable = true;
+    btrfs.autoScrub = {
+      enable = true;
+      interval = "monthly";
+    };
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
+      theme = "chili";
+      settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
+    };
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
@@ -70,19 +70,20 @@ in
         layout = "us";
         variant = "";
       };
-      desktopManager.xfce.enable = true;
-      displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-        theme = "chili";
-        settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
-      };
     };
   };
 
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.swtpm.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      dockerSocket.enable = true;
+      autoPrune.enable = true;
+    };
+    libvirtd = {
+      enable = true;
+      qemu.swtpm.enable = true;
+    };
   };
 
   qt = {
@@ -90,20 +91,11 @@ in
     platformTheme = "qt5ct";
   };
 
-  environment.xfce.excludePackages = with pkgs.xfce; [
-    orage
-    ristretto
-    mousepad
-    xfburn
-    parole
-  ];
-
   programs = {
     java.enable = true;
     dconf.enable = true;
     hyprland-custom.enable = true;
     kdeconnect.enable = true;
-    steam.enable = true;
     yazi.enable = true;
   };
 

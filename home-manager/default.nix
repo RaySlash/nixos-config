@@ -16,7 +16,7 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
       inputs.nurpkgs.overlay
-      inputs.neovim-nightly-overlay.overlay
+      inputs.neovim-nightly-overlay.overlays.default
     ];
     config = {
       allowUnfree = true;
@@ -30,12 +30,12 @@
 
   programs = {
     home-manager.enable = true;
-    neovim = {
-      enable = true;
-      package = pkgs.neovim-nightly;
-    };
     gpg.enable = true;
     wezterm-custom.enable = true;
+    neovim = {
+      enable = true;
+      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    };
     nix-index = {
       enable = true;
       enableZshIntegration = true;
@@ -52,7 +52,6 @@
     };
   };
 
-  # Theme
   gtk = {
     enable = true;
     iconTheme.name = "Papirus-Dark";
@@ -79,11 +78,8 @@
     packages = with pkgs; [
       papirus-icon-theme
       catppuccin-gtk
-      # Neovim
-      yarn
       nodejs
       nodePackages.live-server
-      # inputs.nvim.packages.${system}.default
     ];
   };
 

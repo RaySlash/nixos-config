@@ -11,8 +11,8 @@
         variant = "";
       };
       excludePackages = [ pkgs.xterm ];
-      desktopManager.gnome.enable = true;
       displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
     };
   };
 
@@ -60,7 +60,7 @@
       nmap
       wezterm
       btrfs-progs
-      ungoogled-chromium
+      chromium
     ];
   };
 
