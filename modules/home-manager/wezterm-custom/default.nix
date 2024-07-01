@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, outputs, ... }:
+{ config, lib, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.programs.wezterm-custom;
@@ -13,7 +13,7 @@ in
 
     programs.wezterm = {
       enable = true;
-      package = pkgs.unstable.wezterm;
+      package = inputs.wezterm.packages.x86_64-linux.default;
       enableZshIntegration = true;
       colorSchemes = {
         gruvbox_material_dark_hard = {
