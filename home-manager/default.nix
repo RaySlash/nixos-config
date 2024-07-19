@@ -16,7 +16,8 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
       inputs.nurpkgs.overlay
-      inputs.mynvim.overlays.default
+      # inputs.mynvim.overlays.default
+      inputs.neovim-nightly-overlay.overlays.default
     ];
     config = {
       allowUnfree = true;
@@ -32,6 +33,11 @@
     home-manager.enable = true;
     gpg.enable = true;
     wezterm-custom.enable = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+    };
     nix-index = {
       enable = true;
       enableZshIntegration = true;
@@ -76,7 +82,7 @@
       catppuccin-gtk
       nodejs
       nodePackages.live-server
-      nvim-pkg
+      # nvim-pkg
     ];
   };
 

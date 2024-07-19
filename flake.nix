@@ -25,7 +25,8 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
 
-    mynvim.url = "github:RaySlash/nvim";
+    # mynvim.url = "github:RaySlash/nvim";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nurpkgs.url = "github:nix-community/NUR";
   };

@@ -32,6 +32,7 @@ in
   };
 
   boot = {
+    kernelPackages = pkgs.linuxPackages_xanmod;
     blacklistedKernelModules = [ "hid-thrustmaster" ];
     kernelModules = [ "i2c-dev" "hid-tmff2" ];
     extraModulePackages = with config.boot.kernelPackages; [
