@@ -49,7 +49,8 @@ in
         libsForQt5.polkit-kde-agent
         qt6.qmake
         qt6.qtwayland
-        #below are for eww widgets
+        
+        #eww dependencies
         jq
         python3
         socat

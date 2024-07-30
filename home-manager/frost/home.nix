@@ -1,12 +1,8 @@
-{ inputs
-, outputs
-, lib
-, config
+{ outputs
 , pkgs
 , ...
 }: {
   imports = [
-    # Modules imported from /modules/home-manager
     outputs.homeManagerModules.hardened-firefox
     outputs.homeManagerModules.hyprland-addons
 
@@ -48,7 +44,6 @@
     fd
     ripgrep
     lazygit
-    tree-sitter
     unzip
     p7zip
     wget
@@ -57,16 +52,11 @@
     pavucontrol
     openrgb-with-all-plugins
     chromium
-    oversteer
     libreoffice-fresh
-    protonup-qt
-    protontricks
+    stremio
     wineWowPackages.waylandFull
     vlc
     vesktop
-    remmina
-    luajit
-    stremio
   ];
 
   # Virt-manager settings
