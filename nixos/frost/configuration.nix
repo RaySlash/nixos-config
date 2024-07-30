@@ -51,7 +51,6 @@ in
   };
 
   services = {
-    onedrive.enable = true;
     udev.packages = with pkgs; [ openrgb-with-all-plugins ];
     fstrim.enable = true;
     btrfs.autoScrub = {
