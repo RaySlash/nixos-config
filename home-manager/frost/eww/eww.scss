@@ -1,47 +1,95 @@
+$color_bg: #232931;
+$color_bg-secondary: #393E46;
+$color_fg: #EEEEEE;
+$color_fg-secondary: #8E05C2;
+$color_primary: #4ECCA3;
 $color_nix: #7eb2df;
-$color_orange: #fe8019;
-$color_blue: #83a598;
-$color_green: #b8bb26;
-$color_text: #f9f5d7;
-$color_bg: #1d2021;
 
 * {
   all: unset;
 }
 
 .bar {
-  color: $color_text;
-  background-color: rgba(29, 32, 33, 0.8);
+  color: $color_fg;
+  background-color: $color_bg;
   border-radius: 1rem;
   font-family:
     Atkinson Hyperlegible,
     Hack Nerd Font;
 }
+.launcher {
+  color: $color_nix;
+  font-size: 1.2rem;
+}
 
 .leftbar,
 .rightbar {
-  background-color: rgba(29, 32, 33, 1);
   border-radius: 1rem;
   padding: 0 1rem;
 }
 
-.internet {
-  color: $color_green;
+.tray {
+  padding: 0 1rem;
 }
 
-.clock {
-  color: $color_blue;
-  font-weight: 600;
+.systray {
+  padding: 0 .5rem;
+  background-color: $color_bg-secondary
 }
 
-.launcher {
-  color: $color_nix;
+.tooltip {
+  padding: 0 .5rem;
 }
 
-.volume {
-  color: $color_orange;
+.workspace-e:hover {
+  color: $color_primary
+}
+
+tooltip {
+  background-color: $color_bg;
+  border-radius: 1rem;
+}
+
+.calendar {
+  padding: .3rem;
+}
+
+.tray-item {
+  padding: .2rem;
+}
+
+.tray-item:hover {
+  color: $color_primary;
 }
 
 .current {
-  color: $color_orange;
+  color: $color_primary;
+}
+
+.customicons > * {
+  border-radius: 1rem;
+}
+
+.powercontainer {
+  background-color: $color_bg;
+  color: $color_fg;
+  padding:  1rem;
+  border-radius: 1rem;
+}
+
+.colorbtn {
+  background-color: $color_bg-secondary;
+  color: $color_fg;
+}
+
+.powerbar {
+  background-color: $color_bg-secondary;
+}
+
+.statusbar {
+  margin-bottom: 1rem;
+}
+
+.powerbar-item {
+  margin: 1rem;
 }

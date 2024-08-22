@@ -1,4 +1,5 @@
 (defpoll spercent :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/Volume: //;s/0.00/0/;s/0\\.//;s/\\.//;s/$/%/;s/.* //;s/]%/]/'")
+(defpoll getinitialvolume :interval "0" `wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -oP '\\d+%' | tr -d '%'`)
 (defpoll mpercent :interval "2s" "wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | sed 's/Volume: //;s/0.00/0/;s/0\\.//;s/\\.//;s/$/%/;s/.* //;s/]%/]/'")
 (defpoll NETWORK :interval "2s" `nmcli c | head -n2 | tail -n +2 | awk -F'  +' '{printf "{\\"name\\": \\"%s\\", \\"type\\": \\"%s\\", \\"interface\\": \\"%s\\"}", $1, $3, $4}'`)
 (defpoll IP :interval "20s" `ip addr show \$(nmcli c | head -n2 | tail -n +2 | awk -F'  +' '{print $4}') | grep -oP '(?<=inet\\s)\\d+(\\.\\d+){3}'`)
@@ -6,19 +7,65 @@
 (deflisten workspaces :initial "[]" "bash ~/.config/eww/scripts/get-workspaces")
 (deflisten current_workspace :initial "1" "bash ~/.config/eww/scripts/get-active-workspace")
 (deflisten ctitle :initial "..." "sh ~/.config/eww/scripts/get-window-title")
+; (deflisten primary_color :initial "#ffffff" "echo $EWW_PRIMARY_COLOR")
 
 (defwindow bar
   :monitor 1
   :geometry (geometry :x "0%"
-            :y "5px"
+            :y "0.5%"
             :width "99.3%"
-            :height "30px"
+            :height "3%"
             :anchor "top center")
   :stacking "bottom"
   :exclusive true
   :focusable false
   :namespace "bar"
 (fullbar))
+
+(defwindow menu
+  :monitor 1
+  :geometry (geometry :x "85%"
+                      :y "0.5%")
+  :stacking "ov"
+  :exclusive true
+  :focusable true
+  :namespace "menu"
+  (menu))
+
+(defwidget menu []
+  (box :orientation "v"
+       :class "powercontainer"
+       :space-evenly false
+       (statusbar)
+       (powerbar)))
+
+(defwidget statusbar []
+  (box :class "statusbar"
+       :orientation "h"
+       :space-evenly true
+    (button :class "closebtn"
+            :onclick "eww close menu" " ")
+    (box)
+    (color-button :class "colorbtn"
+                  " ")))
+
+
+(defwidget powerbar []
+  (box :class "powerbar" 
+       :orientation "v"
+       :space-evenly false
+    (eventbox :class "powerbar-item"
+              :onclick "systemctl poweroff"
+              "󰐥 Shutdown")
+    (eventbox :class "powerbar-item"
+              :onclick "systemctl reboot"
+              "󰜉 Restart")
+    (eventbox :class "powerbar-item"
+              :onclick "systemctl soft-reboot"
+              "󰍃 LogOut")
+    (eventbox :class "powerbar-item"
+              :onclick "systemctl suspend"
+              "󰒲 Sleep")))
 
 (defwidget fullbar []
   (box :orientation "h"
@@ -42,14 +89,13 @@
     :class "rightbar"
     :space-evenly false
     :spacing 20
-    (network)
-    (volume)
-    (clock)))
+    (tray)
+    (datetime)))
 
 (defwidget launcher []
   (box :orientation "h"
     :class "launcher"
-  (button :onclick 'fuzzel --icon-theme="Papirus-Dark" -f="AtkinsonHyperlegible" --background-color="1d2021ee" --text-color="f9f5d7ff" --selection-color="9d0006ee" --selection-text-color="f9f5d7ff" --selection-match-color="000000ee" --border-color="cc241dee" --border-radius="15px" -x 20 -y 20 -P 30 --line-height="30" --show-actions'
+  (button :onclick 'fuzzel --icon-theme="Papirus-Dark" -f="AtkinsonHyperlegible" --background-color="1d2021ee" --text-color="f9f5d7ff" --selection-color="9d0006ee" --selection-text-color="f9f5d7ff" --selection-match-color="000000ee" --border-color="cc241dee" --border-radius="15px" -x 20 -y 20 -P 30 --line-height="30" --show-actions &'
   " ")))
 
 (defwidget title []
@@ -62,7 +108,6 @@
        :space-evenly false
        :halign "start"
        :visible {NETWORK.type=="loopback" ? false : true}
-       :spacing 5
     (label :class "icon"
            :text {NETWORK.type=="wifi" ?
       WIFI_QUALITY>75 ? "󰤨 " :
@@ -73,35 +118,39 @@
     (box :orientation "v"
          :space-evenly false
          :valign "center"
-      (label :halign "start" :text {NETWORK.name}))))
+      )))
 
-(defwidget volume []
-  (box :orientation "h"
-    :class "volume"
-    :spacing 10
-    :space-evenly false
-    (box :spacing 10 :space-evenly false "" {spercent})
-    (box :spacing 5 :space-evenly false "󰍬" {mpercent})))
+(defwidget customtray []
+  (box :class "customicons"
+       :orientation "h"
+       :space-evenly false 
+    (tooltip :class "tooltip" "  ${spercent} |  ${mpercent}" (eventbox :class "tray-item" " " ))
+    (tooltip :class "tooltip" "  ${round(EWW_RAM.used_mem_perc, 0)}%" (eventbox :class "tray-item" " " ))
+    (tooltip :class "tooltip" "  ${round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}%" (eventbox :class "tray-item" " "))
+    (button :class "tray-item" :onclick "eww open menu" "")))
 
-(defwidget clock []
+(defwidget tray []
+(box :class "sidestuff" :orientation "h" :space-evenly false :spacing  20
+    (systray :class "systray" :orientation "h" :spacing 10)
+    (customtray)))
+
+(defwidget datetime []
   (box :orientation "h"
-    :class "clock"
+    :class "datetime"
     :space-evenly false
     :spacing 10
-    (label :class "date" :text {formattime(EWW_TIME, "%a, %d %b")})
+    (tooltip :class "tooltip" (calendar :class "calendar" :day {formattime(EWW_TIME, "%d")}) (label :class "date" :text {formattime(EWW_TIME, "%a, %d %b")}))
     (label :class "time" :text {formattime(EWW_TIME, "%I:%M %p")})))
 
 (defwidget workspaces []
-  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" :class "workspaces-widget"
-    (box :space-evenly true :spacing 5
-      (label :text "${workspaces}${current_workspace}" :visible false)
+  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" 
+            :class "workspaces-widget"
+    (box :space-evenly true 
+         :spacing 5
+      (label :text "${workspaces}${current_workspace}" 
+             :visible false)
       (for workspace in workspaces
-        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (eventbox :class "workspace-e" 
+                  :onclick "hyprctl dispatch workspace ${workspace.id}"
           (box :class "workspace ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
-            (label :text "${workspace.id}")
-            )
-          )
-        )
-      )
-    )
-  )
+            (label :text "${workspace.id}")))))))
