@@ -33,7 +33,6 @@
     };
   };
 
-  home.file.".config/hypr/swww.sh".source = ./swww_randomize_multi.sh;
   home.packages = with pkgs; [
     htop
     fd
