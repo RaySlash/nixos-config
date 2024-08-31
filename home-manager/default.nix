@@ -1,8 +1,4 @@
-{ pkgs
-, inputs
-, outputs
-, ...
-}: {
+{ pkgs, inputs, outputs, ... }: {
   imports = [
     inputs.nix-index-database.hmModules.nix-index # Import nix-index module
     outputs.homeManagerModules.wezterm-custom
@@ -16,9 +12,7 @@
       inputs.nurpkgs.overlay
       inputs.mynvim.overlays.default
     ];
-    config = {
-      allowUnfree = true;
-    };
+    config = { allowUnfree = true; };
   };
 
   home = {
@@ -50,7 +44,7 @@
     enable = true;
     iconTheme.name = "Papirus-Dark";
     iconTheme.package = pkgs.papirus-icon-theme;
-    font.name = "Hack Nerd Font";
+    font.name = "IosevkaTerm Nerd Font";
     font.size = 12;
     theme.name = "Catppuccin-Mocha-Standard-Lavender-Dark";
     theme.package = pkgs.catppuccin-gtk.override {
@@ -69,11 +63,7 @@
       size = 32;
     };
 
-    packages = with pkgs; [
-      papirus-icon-theme
-      catppuccin-gtk
-      nvim-pkg
-    ];
+    packages = with pkgs; [ papirus-icon-theme catppuccin-gtk nvim-pkg ];
   };
 
   systemd.user.startServices = "sd-switch";

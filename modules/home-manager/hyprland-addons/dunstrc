@@ -23,7 +23,7 @@
     separator_color = frame
     sort = yes
     idle_threshold = 120
-    font = Hack Nerd Font, 12
+    font = IosevkaTerm Nerd Font, 12
     line_height = 0
     markup = full
     format = "%s %p\n%b"

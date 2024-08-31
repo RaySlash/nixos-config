@@ -1,39 +1,34 @@
-{ config
-, lib
-, pkgs
-, inputs
-, outputs
-, ...
-}: {
+{ config, lib, pkgs, inputs, outputs, ... }: {
   nixpkgs = {
-    overlays = [ outputs.overlays.additions outputs.overlays.modifications outputs.overlays.unstable-packages ];
+    overlays = [
+      outputs.overlays.additions
+      outputs.overlays.modifications
+      outputs.overlays.unstable-packages
+    ];
     config = { allowUnfree = true; };
   };
 
-  nix =
-    let
-      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-    in
-    {
-      settings = {
-        experimental-features = "nix-command flakes";
-        flake-registry = "";
-        nix-path = config.nix.nixPath;
-        auto-optimise-store = true;
-        substituters = [ "https://nix-community.cachix.org" ];
-        trusted-public-keys = [
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
-      };
-      channel.enable = false;
-      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      };
+  nix = let flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      experimental-features = "nix-command flakes";
+      flake-registry = "";
+      nix-path = config.nix.nixPath;
+      auto-optimise-store = true;
+      substituters = [ "https://nix-community.cachix.org" ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
     };
+    channel.enable = false;
+    registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
 
   networking.networkmanager.enable = true;
 
@@ -55,7 +50,7 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "Hack" ]; })
+      (nerdfonts.override { fonts = [ "IosevkaTerm" ]; })
       atkinson-hyperlegible
     ];
   };
@@ -63,7 +58,8 @@
   users.users = {
     smj = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "podman" "docker" "audio" "video" "networkmanager" ];
+      extraGroups =
+        [ "wheel" "podman" "docker" "audio" "video" "networkmanager" ];
       shell = pkgs.zsh;
     };
   };

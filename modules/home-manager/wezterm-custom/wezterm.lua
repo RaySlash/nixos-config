@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 return {
 	font = wezterm.font_with_fallback({
-		"Hack Nerd Font",
+		"IosevkaTerm Nerd Font",
 		"Atkinson Hyperlegible",
 	}),
 	color_scheme = "gruvbox_material_dark_hard",
