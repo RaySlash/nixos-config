@@ -8,36 +8,27 @@
     config = { allowUnfree = true; };
   };
 
-  nix = let flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      experimental-features = "nix-command flakes";
-      flake-registry = "";
-      nix-path = config.nix.nixPath;
-      auto-optimise-store = true;
-      substituters = [ "https://nix-community.cachix.org" ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
+  nix =
+    let flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        experimental-features = "nix-command flakes";
+        flake-registry = "";
+        nix-path = config.nix.nixPath;
+        auto-optimise-store = true;
+        substituters = [ "https://nix-community.cachix.org" "https://hyprland.cachix.org" ];
+        trusted-public-keys = [
+          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+          "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+        ];
+      };
+      channel.enable = false;
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
-    channel.enable = false;
-    registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-  };
 
   networking.networkmanager.enable = true;
-
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-    setLdLibraryPath = true;
-  };
 
   systemd.extraConfig = "\n    DefaultTimeoutStopSec=10s\n    ";
 
@@ -65,8 +56,13 @@
   };
 
   services = {
+    # emacs = {
+    #   enable = true;
+    #   defaultEditor = true;
+    # };
     pipewire = {
       enable = true;
+      package = pkgs.unstable.pipewire;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
@@ -76,6 +72,12 @@
   programs = {
     git.enable = true;
     nix-ld.enable = true;
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "/home/smj/dotfiles";
+    };
     direnv = {
       enable = true;
       nix-direnv.enable = true;
@@ -94,14 +96,14 @@
       shellAliases = {
         ls = "eza --icons";
         ll = "eza --icons -l";
-        vim = "nix run gitlab:rayslash/nvim --refresh";
+        vim = "nvim";
         gl = "git log";
         gs = "git status";
         gc = "git commit";
-        gc-all = ''git add . && git commit -m "update"'';
+        gca = ''git add . && git commit -m "update"'';
         gp = "git push";
-        nix-boot = "sudo nixos-rebuild boot --flake";
-        nix-switch = "sudo nixos-rebuild switch --flake";
+        nix-boot = "nh os boot";
+        nix-switch = "nh os switch";
         nix-shell = "nix-shell --run zsh";
       };
     };

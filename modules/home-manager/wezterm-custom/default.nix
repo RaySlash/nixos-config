@@ -11,39 +11,39 @@ in
 
   config = mkIf cfg.enable {
 
+    home.file."/home/smj/.config/wezterm/sessionizer.lua".source = ./sessionizer.lua;
+
     programs.wezterm = {
       enable = true;
       package = inputs.wezterm.packages.x86_64-linux.default;
       enableZshIntegration = true;
       colorSchemes = {
-        gruvbox_material_dark_hard = {
-          foreground = "#D4BE98";
-          background = "#000000";
-          cursor_bg = "#D4BE98";
-          cursor_border = "#D4BE98";
-          cursor_fg = "#1D2021";
-          selection_bg = "#D4BE98";
-          selection_fg = "#3C3836";
+        kanagawa_custom = {
           ansi = [
-            "#1d2021"
-            "#ea6962"
-            "#a9b665"
-            "#d8a657"
-            "#7daea3"
-            "#d3869b"
-            "#89b482"
-            "#d4be98"
+            "#090618"
+            "#c34043"
+            "#76946a"
+            "#c0a36e"
+            "#7e9cd8"
+            "#957fb8"
+            "#6a9589"
+            "#dcd7ba"
           ];
           brights = [
-            "#eddeb5"
-            "#cc241d"
-            "#98971a"
-            "#d79921"
-            "#458588"
-            "#b16286"
-            "#689d6a"
-            "#a89984"
+            "#727169"
+            "#e82424"
+            "#98bb6c"
+            "#e6c384"
+            "#7fb4ca"
+            "#938aa9"
+            "#7aa89f"
+            "#c8c093"
           ];
+          cursor_bg = "#dcd7ba";
+          cursor_border = "#dcd7ba";
+          cursor_fg = "#1f1f28";
+          foreground = "#dcd7ba";
+          background = "#000000";
         };
       };
       extraConfig = builtins.readFile ./wezterm.lua;

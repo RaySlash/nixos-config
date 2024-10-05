@@ -1,11 +1,13 @@
 local wezterm = require("wezterm")
+local sessionizer = require("sessionizer")
 
 return {
 	font = wezterm.font_with_fallback({
 		"IosevkaTerm Nerd Font",
 		"Atkinson Hyperlegible",
 	}),
-	color_scheme = "gruvbox_material_dark_hard",
+	font_size = 14.0,
+	color_scheme = "kanagawa_custom",
 	use_ime = true,
 	enable_kitty_keyboard = true,
 	window_background_opacity = 0.7,
@@ -110,5 +112,8 @@ return {
 			mods = "ALT",
 			action = wezterm.action.ShowTabNavigator,
 		},
+		-- Sessionizer Bindings
+		{ key = "f", mods = "ALT", action = wezterm.action_callback(sessionizer.toggle) },
+		-- { key = "F", mods = "ALT", action = wezterm.action_callback(sessionizer.resetCacheAndToggle) },
 	},
 }

@@ -1,18 +1,5 @@
-{ inputs
-, outputs
-, lib
-, config
-, pkgs
-, ...
-}:
-let
-  sddm-chili-theme =
-    pkgs.libsForQt5.callPackage
-      (inputs.nixpkgs + "/pkgs/data/themes/chili-sddm/default.nix")
-      { };
-in
+{ inputs, outputs, config, pkgs, ... }:
 {
-
   imports = [
     inputs.home-manager.nixosModules.home-manager
     outputs.nixosModules.hyprland-custom
@@ -22,22 +9,16 @@ in
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
-    users = {
-      smj = import ../../home-manager/frost/home.nix;
-    };
+    users = { smj = import ../../home-manager/frost/home.nix; };
   };
 
-  networking = {
-    hostName = "frost";
-  };
+  networking.hostName = "frost";
 
   boot = {
     kernelPackages = pkgs.linuxPackages_xanmod;
     kernelModules = [ "i2c-dev" "hid-tmff2" ];
     blacklistedKernelModules = [ "hid-thrustmaster" ];
-    extraModulePackages = with config.boot.kernelPackages; [
-      hid-tmff2
-    ];
+    extraModulePackages = with config.boot.kernelPackages; [ hid-tmff2 ];
   };
 
   security.polkit.enable = true;
@@ -56,12 +37,6 @@ in
     btrfs.autoScrub = {
       enable = true;
       interval = "monthly";
-    };
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "chili";
-      settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
     };
     xserver = {
       enable = true;
@@ -100,10 +75,7 @@ in
   };
 
   environment = {
-    systemPackages = with pkgs; [
-      virt-manager
-      sddm-chili-theme
-    ];
+    systemPackages = with pkgs; [ virt-manager ];
   };
 
   system.stateVersion = "23.05";

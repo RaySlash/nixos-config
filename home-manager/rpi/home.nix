@@ -1,32 +1,18 @@
-{
-  inputs,
-    outputs,
-    lib,
-    config,
-    pkgs,
-    ...
-}: {
+{ pkgs, ... }: {
 
-  imports = [
-    outputs.homeManagerModules.hardened-firefox
-    ./services.nix
-    ../default.nix
-  ];
-
-  services.hardened-firefox.enable = true;
-
+  imports = [ ./services.nix ../default.nix ];
   home.packages = with pkgs; [
     htop
-		fd
-		ripgrep
-		lazygit
-		tree-sitter
+    fd
+    ripgrep
+    lazygit
+    tree-sitter
     unzip
     p7zip
-		wget
-		luajit
+    wget
+    luajit
     lua-language-server
-		imv
+    imv
   ];
 
   home.stateVersion = "23.05";

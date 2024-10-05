@@ -25,16 +25,18 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     swww.url = "github:LGFae/swww";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     mynvim.url = "gitlab:RaySlash/nvim";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nurpkgs.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, ... }@inputs:
     let
       inherit (self) outputs;
       forAllSystems = nixpkgs.lib.genAttrs (import inputs.systems);
-    in {
+    in
+    {
       packages =
         forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
       formatter =

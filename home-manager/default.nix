@@ -63,7 +63,9 @@
       size = 32;
     };
 
-    packages = with pkgs; [ papirus-icon-theme catppuccin-gtk nvim-pkg ];
+    packages = with pkgs;
+      [ papirus-icon-theme catppuccin-gtk nvim-pkg ];
+    # ++ [ inputs.neovim-nightly-overlay.packages.${pkgs.system}.default ];
   };
 
   systemd.user.startServices = "sd-switch";

@@ -1,19 +1,10 @@
-{ inputs
-, outputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{ outputs, pkgs, ... }: {
 
   imports = [
-    outputs.homeManagerModules.hardened-firefox
     outputs.homeManagerModules.hyprland-addons
 
     ../default.nix
   ];
-
-  services.hardened-firefox.enable = true;
 
   wayland.windowManager.hyprland = {
     enable = true;

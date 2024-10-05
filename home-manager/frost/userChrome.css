@@ -1,0 +1,20 @@
+#TabsToolbar{ visibility: collapse !important }
+#titlebar {
+  visibility: collapse;
+}
+#sidebar-header {
+  visibility: collapse !important;
+} 
+/* URL Bar Centered Text */
+#urlbar .urlbar-input-box {
+  text-align: center !important;
+}
+
+#urlbar-input-container {
+  background-color: var(--sfsecondary) !important;
+  border: 1px solid rgb(30, 30, 46) !important;
+}
+
+#urlbar-container {
+  margin-left: 0 !important;
+}
