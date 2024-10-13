@@ -25,7 +25,7 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     swww.url = "github:LGFae/swww";
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.url = "github:hyprwm/Hyprland/1822707c7e7394ce8c7572f2fe890763a307f499?submodules=1";
     mynvim.url = "gitlab:RaySlash/nvim";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nurpkgs.url = "github:nix-community/NUR";
