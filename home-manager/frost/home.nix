@@ -12,6 +12,26 @@
     extraConfig = builtins.readFile ./hyprland.conf;
   };
 
+  home.packages = with pkgs; [
+    htop
+    fd
+    ripgrep
+    lazygit
+    unzip
+    p7zip
+    wget
+    imv
+    helvum
+    pavucontrol
+    openrgb-with-all-plugins
+    chromium
+    libreoffice-fresh
+    stremio
+    wineWowPackages.waylandFull
+    vlc
+    vesktop
+  ];
+
   programs = {
     hyprland-addons.enable = true;
     eww = {
@@ -90,9 +110,6 @@
           "browser.newtabpage.directory.source" = "data:text/plain,{}";
           "plugins.update.notifyUser" = true;
           "content.notify.interval" = 100000;
-          "gfx.canvas.accelerated.cache-items" = 4096;
-          "gfx.canvas.accelerated.cache-size" = 512;
-          "gfx.content.skia-font-cache-size" = 20;
           "browser.cache.jsbc_compression_level" = 3;
           "media.memory_cache_max_size" = 65536;
           "media.cache_readahead_limit" = 7200;
@@ -214,7 +231,6 @@
           "browser.urlbar.suggest.calculator" = true;
           "browser.urlbar.unitConversion.enabled" = true;
           "browser.urlbar.trending.featureGate" = false;
-          "dom.text_fragments.enabled" = true;
           "browser.newtabpage.activity-stream.feeds.topsites" = false;
           "browser.newtabpage.activity-stream.showWeather" = false;
           "browser.newtabpage.activity-stream.feeds.section.topstories" = false;
@@ -237,26 +253,6 @@
       };
     };
   };
-
-  home.packages = with pkgs; [
-    htop
-    fd
-    ripgrep
-    lazygit
-    unzip
-    p7zip
-    wget
-    imv
-    helvum
-    pavucontrol
-    openrgb-with-all-plugins
-    chromium
-    libreoffice-fresh
-    stremio
-    wineWowPackages.waylandFull
-    vlc
-    vesktop
-  ];
 
   dconf.settings = {
     "org/virt-manager/virt-manager/connections" = {

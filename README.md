@@ -1,5 +1,7 @@
 # NixOS + Home-Manager dotfiles
 
+> TODO: Fix the neovim module (lazynvim).  The ccls and other lsps do not work as expected.
+
 This repository consists of my personal NixOS configuration files. This is a flake repository. You know what to do!
 
 ![Hyprland setup Screenshot](./ss_grim.png)

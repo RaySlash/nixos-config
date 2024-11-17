@@ -2,6 +2,7 @@
   imports = [
     inputs.nix-index-database.hmModules.nix-index # Import nix-index module
     outputs.homeManagerModules.wezterm-custom
+    outputs.homeManagerModules.lazynvim
   ];
 
   nixpkgs = {
@@ -10,7 +11,6 @@
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
       inputs.nurpkgs.overlay
-      inputs.mynvim.overlays.default
     ];
     config = { allowUnfree = true; };
   };
@@ -24,6 +24,7 @@
     home-manager.enable = true;
     gpg.enable = true;
     wezterm-custom.enable = true;
+    lazynvim.enable = true;
     nix-index = {
       enable = true;
       enableZshIntegration = true;
@@ -63,9 +64,7 @@
       size = 32;
     };
 
-    packages = with pkgs;
-      [ papirus-icon-theme catppuccin-gtk nvim-pkg ];
-    # ++ [ inputs.neovim-nightly-overlay.packages.${pkgs.system}.default ];
+    packages = with pkgs; [ papirus-icon-theme catppuccin-gtk ];
   };
 
   systemd.user.startServices = "sd-switch";

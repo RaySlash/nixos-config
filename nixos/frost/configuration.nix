@@ -1,5 +1,4 @@
-{ inputs, outputs, config, pkgs, ... }:
-{
+{ inputs, outputs, pkgs, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     outputs.nixosModules.hyprland-custom
@@ -16,11 +15,9 @@
 
   boot = {
     kernelPackages = pkgs.linuxPackages_xanmod;
-    kernelModules = [ "i2c-dev" "hid-tmff2" ];
-    blacklistedKernelModules = [ "hid-thrustmaster" ];
-    extraModulePackages = with config.boot.kernelPackages; [ hid-tmff2 ];
+    kernelModules = [ "i2c-dev" ];
   };
-
+  documentation.dev.enable = true;
   security.polkit.enable = true;
 
   boot.loader = {
@@ -29,6 +26,12 @@
       enable = true;
       configurationLimit = 8;
     };
+  };
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
   };
 
   services = {
@@ -41,6 +44,7 @@
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
+      displayManager.lightdm.enable = false;
       xkb = {
         layout = "us";
         variant = "";
@@ -69,14 +73,16 @@
   programs = {
     java.enable = true;
     dconf.enable = true;
+    firefox = {
+      enable = true;
+      preferences = { "widget.use-xdg-desktop-portal.file-picker" = 1; };
+    };
     hyprland-custom.enable = true;
     kdeconnect.enable = true;
     yazi.enable = true;
   };
 
-  environment = {
-    systemPackages = with pkgs; [ virt-manager ];
-  };
+  environment = { systemPackages = with pkgs; [ virt-manager man-pages man-pages-posix ]; };
 
   system.stateVersion = "23.05";
 }

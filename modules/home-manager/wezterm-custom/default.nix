@@ -2,8 +2,7 @@
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.programs.wezterm-custom;
-in
-{
+in {
 
   options.programs.wezterm-custom = {
     enable = mkEnableOption "wezterm-custom";
@@ -11,7 +10,8 @@ in
 
   config = mkIf cfg.enable {
 
-    home.file."/home/smj/.config/wezterm/sessionizer.lua".source = ./sessionizer.lua;
+    home.file."/home/smj/.config/wezterm/sessionizer.lua".source =
+      ./sessionizer.lua;
 
     programs.wezterm = {
       enable = true;
