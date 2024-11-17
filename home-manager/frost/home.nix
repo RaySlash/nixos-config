@@ -1,4 +1,6 @@
-{ outputs, pkgs, ... }: {
+{ inputs, outputs, pkgs, ... }:
+let nvimCat = import ../../modules/home-manager/nvimcat { inherit inputs; };
+in {
   imports = [
     outputs.homeManagerModules.hyprland-addons
     outputs.homeManagerModules.firefox-hardened
@@ -6,25 +8,26 @@
     ../default.nix
   ];
 
-  home.packages = with pkgs; [
-    htop
-    fd
-    ripgrep
-    lazygit
-    unzip
-    p7zip
-    wget
-    imv
-    helvum
-    pavucontrol
-    openrgb-with-all-plugins
-    chromium
-    libreoffice-fresh
-    stremio
-    wineWowPackages.waylandFull
-    vlc
-    vesktop
-  ];
+  home.packages = with pkgs;
+    [
+      htop
+      fd
+      ripgrep
+      lazygit
+      unzip
+      p7zip
+      wget
+      imv
+      helvum
+      pavucontrol
+      openrgb-with-all-plugins
+      chromium
+      libreoffice-fresh
+      stremio
+      wineWowPackages.waylandFull
+      vlc
+      veskton
+    ] ++ [ nvimCat.packages.${pkgs.stdenv.hostPlatform.system}.nvimCat ];
 
   programs = {
     hyprland-addons.enable = true;
