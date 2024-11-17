@@ -26,8 +26,8 @@ in {
       stremio
       wineWowPackages.waylandFull
       vlc
-      veskton
-    ] ++ [ nvimCat.packages.${pkgs.stdenv.hostPlatform.system}.nvimCat ];
+      vesktop
+    ] ++ [ nvimCat.packages.${pkgs.system}.nvimcat ];
 
   programs = {
     hyprland-addons.enable = true;
@@ -43,14 +43,12 @@ in {
         obs-pipewire-audio-capture
       ];
     };
-
-    dconf.settings = {
-      "org/virt-manager/virt-manager/connections" = {
-        autoconnect = [ "qemu:///system" ];
-        uris = [ "qemu:///system" ];
-      };
-    };
-
-    home.stateVersion = "23.05";
   };
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = {
+      autoconnect = [ "qemu:///system" ];
+      uris = [ "qemu:///system" ];
+    };
+  };
+  home.stateVersion = "23.05";
 }

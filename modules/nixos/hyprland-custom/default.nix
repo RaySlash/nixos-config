@@ -1,10 +1,10 @@
 { config, lib, pkgs, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  hyprland-nixpkgs = inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+  hyprland-nixpkgs =
+    inputs.hyprland.inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
   cfg = config.programs.hyprland-custom;
-in
-{
+in {
 
   options.programs.hyprland-custom = {
     enable = mkEnableOption "hyprland-custom";
@@ -31,8 +31,10 @@ in
 
     programs.hyprland = {
       enable = true;
-      package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-      portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+      package =
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      portalPackage =
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
     };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";

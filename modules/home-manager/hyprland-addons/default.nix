@@ -1,21 +1,21 @@
 { config, lib, pkgs, inputs, ... }:
 let
-  inherit (lib) mkenableoption mkif;
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.programs.hyprland-addons;
 in {
 
   options.programs.hyprland-addons = {
-    enable = mkenableoption "hyprland-addons";
+    enable = mkEnableOption "hyprland-addons";
   };
 
-  config = mkif cfg.enable {
+  config = mkIf cfg.enable {
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-    package =
-      inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-    extraConfig = builtins.readFile ./hyprland.conf;
-  };
+    wayland.windowManager.hyprland = {
+      enable = true;
+      package =
+        inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+      extraConfig = builtins.readFile ./hyprland.conf;
+    };
 
     services = {
       cliphist.enable = true;
