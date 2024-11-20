@@ -2,7 +2,6 @@
   imports = [
     inputs.nix-index-database.hmModules.nix-index # Import nix-index module
     outputs.homeManagerModules.wezterm-custom
-    outputs.homeManagerModules.lazynvim
   ];
 
   nixpkgs = {
@@ -24,7 +23,6 @@
     home-manager.enable = true;
     gpg.enable = true;
     wezterm-custom.enable = true;
-    lazynvim.enable = true;
     nix-index = {
       enable = true;
       enableZshIntegration = true;
