@@ -20,15 +20,6 @@ in {
       displayManager.defaultSession = "hyprland";
     };
 
-    hardware.opengl = {
-      enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
-      setLdLibraryPath = true;
-      package = hyprland-nixpkgs.mesa.drivers;
-      package32 = hyprland-nixpkgs.pkgsi686Linux.mesa.drivers;
-    };
-
     programs.hyprland = {
       enable = true;
       package =

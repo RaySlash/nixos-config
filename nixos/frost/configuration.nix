@@ -28,12 +28,6 @@
     };
   };
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
-
   services = {
     udev.packages = with pkgs; [ openrgb-with-all-plugins ];
     fstrim.enable = true;

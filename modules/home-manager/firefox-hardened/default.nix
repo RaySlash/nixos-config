@@ -205,7 +205,6 @@ in {
           ublock-origin
           bitwarden
           darkreader
-          enhancer-for-youtube
           sponsorblock
           sidebery
         ];
