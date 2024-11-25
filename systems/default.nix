@@ -6,13 +6,10 @@ let
       # moduleSet is a function that takes inputs as args and return a
       # set that has all custom osModules, homeModules, pkgs.
       # Modules are imported for all systems by default.
-      moduleSet = (import ../profiles/programs { inherit inputs; });
-      # TODO: Refactor to accomodate more users
-      username = "smj";
+      moduleSet = (import ../modules { inherit inputs; });
     in inputs.nixpkgs.lib.nixosSystem (args // {
       specialArgs = { inherit inputs; };
       modules = args.modules or [ ] ++ [
-        ../profiles/users/${username}.nix
         ./common/os.nix
         inputs.home-manager.nixosModules.home-manager
         {

@@ -1,4 +1,6 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, osConfig, ... }:
+let users = (builtins.attrValues (import ../default.nix { inherit inputs; }));
+in {
   home = {
     username = "smj";
     homeDirectory = "/home/smj";
@@ -21,9 +23,10 @@
   };
 
   custom = {
+    firefox.enable = true;
     wezterm.enable = true;
-    nix-addons.enable = true;
     hyprland-addons.enable = true;
+    nix-addons.enable = true;
   };
 
   systemd.user.startServices = "sd-switch";

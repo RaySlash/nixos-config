@@ -7,6 +7,7 @@ in {
     nix-essentials = import ./nix/module.nix;
     theme-custom = import ./themes/module.nix;
     zsh-custom = import ./zsh/module.nix;
+    users = import ./users/module.nix;
   };
 
   homeModules = {
@@ -17,6 +18,7 @@ in {
     nix-addons = import ./nix/home.nix;
     theme-addons = import ./themes/home;
     wezterm-addons = import ./wezterm/home;
+    users = import ./users/home;
   };
 
   pkgs = { nvimcat = nvimcat.packages; };

@@ -19,6 +19,7 @@
     zsh.enable = true;
     nix.enable = true;
     themes.enable = true;
+    users.smj.enable = true;
   };
 
   boot.tmp.cleanOnBoot = true;

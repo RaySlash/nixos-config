@@ -20,10 +20,7 @@
     vesktop
   ];
 
-  custom = {
-    hyprland-addons.enable = true;
-    # firefox.enable = true;
-  };
+  custom = { hyprland-addons.enable = true; };
 
   programs = {
     obs-studio = {
