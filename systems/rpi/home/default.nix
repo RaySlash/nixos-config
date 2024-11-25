@@ -1,6 +1,6 @@
 { pkgs, ... }: {
 
-  imports = [ ./services.nix ../default.nix ];
+  imports = [ ];
   home.packages = with pkgs; [
     htop
     fd

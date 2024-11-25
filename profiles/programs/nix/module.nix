@@ -1,12 +1,10 @@
 { config, lib, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.programs.nix-essentials;
+  cfg = config.custom.nix;
 in {
 
-  options.programs.nix-essentials = {
-    enable = mkEnableOption "nix-essentials";
-  };
+  options.custom.nix = { enable = mkEnableOption "nix"; };
 
   config = mkIf cfg.enable {
     nix = let flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;

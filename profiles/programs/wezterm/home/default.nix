@@ -1,12 +1,10 @@
 { config, lib, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.programs.wezterm-custom;
+  cfg = config.custom.wezterm;
 in {
 
-  options.programs.wezterm-custom = {
-    enable = mkEnableOption "wezterm-custom";
-  };
+  options.custom.wezterm = { enable = mkEnableOption "wezterm"; };
 
   config = mkIf cfg.enable {
 

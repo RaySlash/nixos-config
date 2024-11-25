@@ -1,15 +1,9 @@
 { inputs, ... }: {
-  imports = [
-    inputs.self.homeManagerModules.wezterm-custom
-  ];
+  # imports = [ ] ++ (builtins.attrValues
+  #   (import ../../profiles/programs { inherit inputs; }).homeModules);
 
   nixpkgs = {
-    overlays = [
-      inputs.self.overlays.additions
-      inputs.self.overlays.modifications
-      inputs.self.overlays.unstable-packages
-      inputs.nurpkgs.overlay
-    ];
+    overlays = [ inputs.self.overlays.unstable inputs.nurpkgs.overlay ];
     config = { allowUnfree = true; };
   };
 
@@ -21,7 +15,6 @@
   programs = {
     home-manager.enable = true;
     gpg.enable = true;
-    wezterm-custom.enable = true;
     git = {
       enable = true;
       userEmail = "45141270+RaySlash@users.noreply.github.com";
@@ -29,6 +22,10 @@
     };
   };
 
+  # custom = {
+  #   wezterm.enable = true;
+  #   hyprland-addons.enable = true;
+  # };
 
   systemd.user.startServices = "sd-switch";
 }

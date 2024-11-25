@@ -1,11 +1,13 @@
 { pkgs, inputs, ... }: {
-  imports = [ ../../profiles/users/smj.nix ../../profiles/programs ];
+  imports =
+    [ ../../profiles/users/smj.nix inputs.home-manager.nixosModules.default ];
 
   nixpkgs = {
     overlays = [ inputs.self.overlays.unstable ];
     config = { allowUnfree = true; };
   };
 
+  home-manager.users = { smj = import ./hm.nix; };
   networking.networkmanager.enable = true;
   systemd.extraConfig = "\n    DefaultTimeoutStopSec=10s\n    ";
   time.timeZone = "Australia/Brisbane";
@@ -14,16 +16,19 @@
   services = {
     pipewire = {
       enable = true;
-      package = pkgs.unstable.pipewire;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
     };
   };
 
-  programs = {
-    git.enable = true;
-    zsh-custom.enable = true;
+  programs = { git.enable = true; };
+
+  custom = {
+    zsh.enable = true;
+    homemanager.enable = true;
+    nix.enable = true;
+    themes.enable = true;
   };
 
   boot.tmp.cleanOnBoot = true;

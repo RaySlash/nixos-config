@@ -1,10 +1,10 @@
 { config, lib, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.programs.nix-addons;
+  cfg = config.custom.nix-addons;
 in {
 
-  options.programs.nix-addons = { enable = mkEnableOption "nix-addons"; };
+  options.custom.nix-addons = { enable = mkEnableOption "nix-addons"; };
 
   config = mkIf cfg.enable {
     imports = [ inputs.nix-index-database.hmModules.nix-index ];

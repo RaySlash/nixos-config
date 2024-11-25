@@ -1,12 +1,10 @@
 { config, lib, pkgs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.programs.firefox-hardened;
+  cfg = config.custom.firefox;
 in {
 
-  options.programs.firefox-hardened = {
-    enable = mkEnableOption "firefox-hardened";
-  };
+  options.custom.firefox = { enable = mkEnableOption "firefox"; };
 
   config = mkIf cfg.enable {
     programs.firefox = {

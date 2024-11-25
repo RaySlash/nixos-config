@@ -1,9 +1,7 @@
 { config, lib, pkgs, ... }: {
 
   services = {
-    openssh = {
-      enable = true;
-    };
+    openssh = { enable = true; };
     xserver = {
       enable = true;
       xkb = {
@@ -19,9 +17,7 @@
   boot = {
     initrd.kernelModules = [ "wl" ];
     kernelModules = [ "wl" ];
-    extraModulePackages = with config.boot.kernelPackages; [
-      broadcom_sta
-    ];
+    extraModulePackages = with config.boot.kernelPackages; [ broadcom_sta ];
   };
 
   networking = {
@@ -48,11 +44,7 @@
       iagno # go game
       hitori # sudoku game
       atomix # puzzle game
-    ]) ++ (with pkgs; [
-      gnome-photos
-      gedit
-      gnome-tour
-    ]);
+    ]) ++ (with pkgs; [ gnome-photos gedit gnome-tour ]);
     systemPackages = with pkgs; [
       pciutils
       lshw

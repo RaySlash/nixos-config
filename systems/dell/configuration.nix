@@ -1,31 +1,15 @@
-{ inputs
-, outputs
-, lib
-, config
-, pkgs
-, ...
-}:
-let
-  sddm-chili-theme =
-    pkgs.libsForQt5.callPackage
-      (inputs.nixpkgs + "/pkgs/data/themes/chili-sddm/default.nix")
-      { };
-in
-{
+{ inputs, config, pkgs, ... }: {
 
   imports = [
-    inputs.home-manager.nixosModules.home-manager
-    outputs.nixosModules.hyprland-custom
-
-    ./hardware-configuration.nix
+    # inputs.home-manager.nixosModules.home-manager
+    # inputs.self.nixosModules.hyprland-custom
+    # ./hardware-configuration.nix
   ];
 
-  home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
-    users = {
-      smj = import ./home;
-    };
-  };
+  # home-manager = {
+  #   extraSpecialArgs = { inherit inputs; };
+  #   users = { smj = import ./home; };
+  # };
 
   networking.hostName = "dell";
   hardware.pulseaudio.enable = false;
@@ -34,11 +18,14 @@ in
   boot = {
     initrd.kernelModules = [ "wl" ];
     kernelModules = [ "wl" ];
-    extraModulePackages = with config.boot.kernelPackages; [
-      broadcom_sta
-      # nvidia_x11_legacy470
-    ];
+    extraModulePackages = with config.boot.kernelPackages;
+      [
+        broadcom_sta
+        # nvidia_x11_legacy470
+      ];
   };
+
+  hardware.graphics.enable32Bit = true;
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -68,31 +55,16 @@ in
     kanata = {
       enable = true;
       keyboards = {
-        "v1".config = "
-              (defsrc
-                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-                tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-                caps a    s    d    f    g    h    j    k    l    ;    '    ret
-                lsft z    x    c    v    b    n    m    ,    .    /    rsft
-                lctl lmet lalt           spc            ralt rmet rctl
-              )
-              
-              (deflayer colemak
-                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-                tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-                esc  a    s    d    f    g    h    j    k    l    ;    '    ret
-                lsft z    x    c    v    b    n    m    ,    .    /    rsft
-                lctl lmet lalt           spc            ralt rmet rctl
-              )
-            ";
+        "v1".config =
+          "\n              (defsrc\n                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc\n                tab  q    w    e    r    t    y    u    i    o    p    [    ]    \n                caps a    s    d    f    g    h    j    k    l    ;    '    ret\n                lsft z    x    c    v    b    n    m    ,    .    /    rsft\n                lctl lmet lalt           spc            ralt rmet rctl\n              )\n              \n              (deflayer colemak\n                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc\n                tab  q    w    e    r    t    y    u    i    o    p    [    ]    \n                esc  a    s    d    f    g    h    j    k    l    ;    '    ret\n                lsft z    x    c    v    b    n    m    ,    .    /    rsft\n                lctl lmet lalt           spc            ralt rmet rctl\n              )\n            ";
       };
     };
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-      theme = "chili";
-      settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
-    };
+    # displayManager.sddm = {
+    #   enable = true;
+    #   wayland.enable = true;
+    #   theme = "chili";
+    #   settings = { Theme = { CursorTheme = "macOS-Monterey-White"; }; };
+    # };
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
@@ -116,12 +88,7 @@ in
     yazi.enable = true;
   };
 
-  environment = {
-    systemPackages = with pkgs; [
-      sddm-chili-theme
-      kanata
-    ];
-  };
+  environment = { systemPackages = with pkgs; [ kanata ]; };
 
   system.stateVersion = "23.05";
 }

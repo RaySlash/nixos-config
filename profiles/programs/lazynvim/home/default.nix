@@ -1,9 +1,9 @@
 { config, lib, pkgs, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.programs.lazynvim;
+  cfg = config.custom.lazynvim;
 in {
-  options.programs.lazynvim = { enable = mkEnableOption "lazynvim"; };
+  options.custom.lazynvim = { enable = mkEnableOption "lazynvim"; };
 
   config = mkIf cfg.enable {
     programs.neovim = {

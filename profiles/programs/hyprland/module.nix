@@ -1,12 +1,10 @@
 { config, lib, pkgs, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.programs.hyprland-custom;
+  cfg = config.custom.hyprland;
 in {
 
-  options.programs.hyprland-custom = {
-    enable = mkEnableOption "hyprland-custom";
-  };
+  options.custom.hyprland = { enable = mkEnableOption "hyprland"; };
 
   config = mkIf cfg.enable {
 
@@ -18,10 +16,7 @@ in {
       displayManager.defaultSession = "hyprland";
     };
 
-    hardware.graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
+    hardware.graphics.enable = true;
 
     programs = {
       hyprlock.enable = true;

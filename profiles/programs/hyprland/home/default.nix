@@ -1,10 +1,10 @@
 { config, lib, pkgs, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.programs.hyprland-addons;
+  cfg = config.custom.hyprland-addons;
 in {
 
-  options.programs.hyprland-addons = {
+  options.custom.hyprland-addons = {
     enable = mkEnableOption "hyprland-addons";
   };
 

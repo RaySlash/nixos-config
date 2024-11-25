@@ -156,7 +156,7 @@ in forEachSystem (system:
       inherit defaultPackageName dependencyOverlays luaPath categoryDefinitions
         packageDefinitions extra_pkg_config nixpkgs;
     };
-    homeModule = utils.mkHomeModules {
+    homeModules.default = utils.mkHomeModules {
       inherit defaultPackageName dependencyOverlays luaPath categoryDefinitions
         packageDefinitions extra_pkg_config nixpkgs;
     };

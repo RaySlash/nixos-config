@@ -1,10 +1,10 @@
 { config, lib, pkgs, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.services.themes;
+  cfg = config.custom.themes;
 in {
 
-  options.services.themes = { enable = mkEnableOption "themes"; };
+  options.custom.themes = { enable = mkEnableOption "themes"; };
 
   config = mkIf cfg.enable {
     console = {

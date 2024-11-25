@@ -1,24 +1,15 @@
-{
-  inputs,
-    outputs,
-    lib,
-    config,
-    pkgs,
-    ...
-}: {
+{ inputs, outputs, pkgs, ... }: {
 
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
 
-      ./hardware-configuration.nix
+    ./hardware-configuration.nix
   ];
 
   home-manager = {
     extraSpecialArgs = { inherit inputs outputs; };
-    users = {
-      smj = import ./home;
-    };
+    users = { smj = import ./home; };
   };
 
   networking.hostName = "rpi";
@@ -35,29 +26,23 @@
       apply-overlays-dtmerge.enable = true;
     };
   };
-  
+
   networking.firewall.enable = false;
-virtualisation.podman = {
-  enable = true;
-  dockerCompat = true;
-  dockerSocket.enable = true;
-  defaultNetwork.settings = {
-    dns_enabled = true;
-  };
-  autoPrune = {
+  virtualisation.podman = {
     enable = true;
-    dates = "weekly";
-    flags = [ "--all" ];
+    dockerCompat = true;
+    dockerSocket.enable = true;
+    defaultNetwork.settings = { dns_enabled = true; };
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+      flags = [ "--all" ];
+    };
   };
-};
 
   services = {
-    openssh = {
-      enable = true;
-    };
-    xserver = {
-      enable = true;
-    };
+    openssh = { enable = true; };
+    xserver = { enable = true; };
   };
 
   environment = {

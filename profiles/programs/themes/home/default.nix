@@ -1,10 +1,10 @@
 { config, lib, pkgs, inputs, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.programs.themes-addons;
+  cfg = config.custom.themes-addons;
 in {
 
-  options.programs.themes-addons = { enable = mkEnableOption "themes-addons"; };
+  options.custom.themes-addons = { enable = mkEnableOption "themes-addons"; };
 
   config = mkIf cfg.enable {
     gtk = {

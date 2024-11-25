@@ -1,38 +1,37 @@
-{ inputs, pkgs, ... }:
-let nvimCat = import ../../../profiles/programs/nvimcat { inherit inputs; };
-in {
+{ inputs, pkgs, ... }: {
   imports = [
-    # inputs.self.homeManagerModules.hyprland-addons
-    inputs.self.homeManagerModules.firefox-addons
+    # inputs.self.homeModules.hyprland-addons
+    # inputs.self.homeModules.firefox-addons
   ];
 
-  home.packages = with pkgs;
-    [
-      htop
-      fd
-      ripgrep
-      lazygit
-      unzip
-      p7zip
-      wget
-      imv
-      helvum
-      pavucontrol
-      openrgb-with-all-plugins
-      chromium
-      libreoffice-fresh
-      stremio
-      wineWowPackages.waylandFull
-      vlc
-      vesktop
-    ] ++ [ nvimCat.packages.${pkgs.system}.nvimcat ];
+  home.packages = with pkgs; [
+    htop
+    fd
+    ripgrep
+    lazygit
+    unzip
+    p7zip
+    wget
+    imv
+    helvum
+    pavucontrol
+    openrgb-with-all-plugins
+    chromium
+    libreoffice-fresh
+    stremio
+    wineWowPackages.waylandFull
+    vlc
+    vesktop
+  ];
+
+  # custom = {
+  #   hyprland.enable = true;
+  #   firefox.enable = true;
+  # };
 
   programs = {
-    # hyprland-addons.enable = true;
-    # firefox-hardened.enable = true;
     obs-studio = {
       enable = true;
-      package = pkgs.obs-studio;
       plugins = with pkgs.obs-studio-plugins; [
         wlrobs
         obs-vaapi

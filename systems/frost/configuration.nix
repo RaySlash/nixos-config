@@ -1,16 +1,7 @@
-{ inputs, outputs, pkgs, ... }: {
-  imports = [
-    inputs.home-manager.nixosModules.home-manager
-    # inputs.self.nixosModules.hyprland-custom
+{ pkgs, ... }: {
+  imports = [ ./hardware-configuration.nix ];
 
-    ./hardware-configuration.nix
-  ];
-
-  home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
-    users = { smj = import ./home; };
-  };
-
+  home-manager.users = { smj = import ./home; };
   networking.hostName = "frost";
 
   boot = {
@@ -27,6 +18,8 @@
       configurationLimit = 8;
     };
   };
+
+  hardware.graphics.enable32Bit = true;
 
   services = {
     udev.packages = with pkgs; [ openrgb-with-all-plugins ];

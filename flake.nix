@@ -5,6 +5,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nurpkgs.url = "github:nix-community/NUR";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,7 +22,7 @@
     # Applications
     wezterm.url =
       "github:wez/wezterm?dir=nix"; # (nixpkgs)wezterm does not support Wayland
-    ## Neovim
+
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     plugins-noice = {
@@ -42,6 +43,7 @@
           config.allowUnfree = true;
         };
       });
+      packages-overlay = (final: _prev: import ./packages final.pkgs);
     in (flake-parts.lib.mkFlake { inherit inputs; }) {
       imports = [ inputs.flake-parts.flakeModules.flakeModules ];
 
@@ -50,18 +52,18 @@
 
       perSystem = { system, inputs', ... }: {
         formatter = inputs'.nixpkgs.legacyPackages.alejandra;
-        packages =
-          (import ./profiles/programs { inherit inputs; }).pkgs.nvim.${system};
+        packages = (import ./profiles/programs {
+          inherit inputs;
+        }).pkgs.nvimcat.${system};
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
-          overlays = [ unstable-overlay ];
+          overlays = [ unstable-overlay packages-overlay ];
         };
       };
 
       flake = { self, ... }: {
         overlays = {
-          default = [ self.overlays.unstable self.overlays.packages ];
-          packages = (final: _prev: import ./packages final.pkgs);
+          default = [ self.overlays.unstable packages-overlay ];
           unstable = unstable-overlay;
         };
 
