@@ -4,76 +4,67 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    nurpkgs.url = "github:nix-community/NUR";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    systems = {
-      url = "github:nix-systems/default-linux";
-      flake = false;
-    };
-
+    # Flake Add-ons
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    sops-nix.url = "github:Mic92/sops-nix";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    wezterm.url = "github:wez/wezterm?dir=nix";
-    swww.url = "github:LGFae/swww";
-    hyprland.url =
-      "github:hyprwm/Hyprland/bb160cfe377da2d2b2e4431a3399fa60114f3911?submodules=1";
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nurpkgs.url = "github:nix-community/NUR";
-
-    # Neovim
+    # Applications
+    wezterm.url =
+      "github:wez/wezterm?dir=nix"; # (nixpkgs)wezterm does not support Wayland
+    ## Neovim
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    plugins-noice = {
+      url = "github:folke/noice.nvim";
+      flake = false;
+    };
     plugins-neogit = {
       url = "github:NeogitOrg/neogit";
       flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, flake-parts, ... }@inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = import inputs.systems;
-      flake = { system, ... }:
-        let inherit (self) outputs;
-        in {
-          packages = import ./pkgs system;
-          formatter = system.alejandra;
-          overlays = import ./overlays { inherit inputs; };
-          nixosModules = import ./modules/nixos;
-          homeManagerModules = import ./modules/home-manager;
-          nixosConfigurations = {
-            frost = nixpkgs.lib.nixosSystem {
-              specialArgs = { inherit inputs outputs; };
-              modules = [ ./nixos ./nixos/frost/configuration.nix ];
-            };
-
-            rpi = nixpkgs.lib.nixosSystem {
-              specialArgs = { inherit inputs outputs; };
-              modules = [ ./nixos ./nixos/rpi/configuration.nix ];
-            };
-
-            dell = nixpkgs.lib.nixosSystem {
-              specialArgs = { inherit inputs outputs; };
-              modules = [ ./nixos ./nixos/dell/configuration.nix ];
-            };
-
-            live = nixpkgs.lib.nixosSystem {
-              specialArgs = { inherit inputs outputs; };
-              system = "x86_64-linux";
-              modules = [
-                (nixpkgs
-                  + "/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix")
-                ./nixos
-                ./nixos/iso/configuration.nix
-              ];
-            };
-          };
+  outputs = { flake-parts, ... }@inputs:
+    let
+      unstable-overlay = (final: _prev: {
+        unstable = import inputs.nixpkgs-unstable {
+          system = final.system;
+          config.allowUnfree = true;
         };
+      });
+    in (flake-parts.lib.mkFlake { inherit inputs; }) {
+      imports = [ inputs.flake-parts.flakeModules.flakeModules ];
+
+      systems = inputs.nixpkgs.lib.systems.flakeExposed;
+      debug = true;
+
+      perSystem = { system, inputs', inputs, ... }: {
+        formatter = inputs'.nixpkgs.legacyPackages.alejandra;
+        # packages = import ./packages { inherit system; };
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [ unstable-overlay ];
+        };
+      };
+
+      flake = { self, ... }: {
+        overlays = {
+          default = [ self.overlays.unstable self.overlays.packages ];
+          packages = (final: _prev: import ./packages final.pkgs);
+          unstable = unstable-overlay;
+        };
+
+        nixosConfigurations = import ./systems { inherit inputs; };
+      };
     };
 }
