@@ -1,20 +1,9 @@
-{ pkgs, inputs, osConfig, ... }:
-let users = (builtins.attrValues (import ../default.nix { inherit inputs; }));
-in {
-  home = {
-    username = "smj";
-    homeDirectory = "/home/smj";
-  };
-
+{ pkgs, ... }: {
   imports = [ ../frost/home ];
 
   programs = {
     gpg.enable = true;
-    git = {
-      enable = true;
-      userEmail = "45141270+RaySlash@users.noreply.github.com";
-      userName = "RaySlash";
-    };
+    git.enable = true;
   };
 
   nvimcat = {
@@ -27,6 +16,7 @@ in {
     wezterm.enable = true;
     hyprland-addons.enable = true;
     nix-addons.enable = true;
+    users.smj.enable = true;
   };
 
   systemd.user.startServices = "sd-switch";

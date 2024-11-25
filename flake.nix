@@ -52,9 +52,8 @@
 
       perSystem = { system, inputs', ... }: {
         formatter = inputs'.nixpkgs.legacyPackages.alejandra;
-        packages = (import ./profiles/programs {
-          inherit inputs;
-        }).pkgs.nvimcat.${system};
+        packages =
+          (import ./modules { inherit inputs; }).pkgs.nvimcat.${system};
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [ unstable-overlay packages-overlay ];
