@@ -48,9 +48,10 @@
       systems = inputs.nixpkgs.lib.systems.flakeExposed;
       debug = true;
 
-      perSystem = { system, inputs', inputs, ... }: {
+      perSystem = { system, inputs', ... }: {
         formatter = inputs'.nixpkgs.legacyPackages.alejandra;
-        # packages = import ./packages { inherit system; };
+        packages =
+          (import ./profiles/programs { inherit inputs; }).pkgs.nvim.${system};
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = [ unstable-overlay ];
