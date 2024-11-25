@@ -1,19 +1,12 @@
-{ inputs, ... }: {
-  # imports = [ ] ++ (builtins.attrValues
-  #   (import ../../profiles/programs { inherit inputs; }).homeModules);
-
-  nixpkgs = {
-    overlays = [ inputs.self.overlays.unstable inputs.nurpkgs.overlay ];
-    config = { allowUnfree = true; };
-  };
-
+{ pkgs, inputs, ... }: {
   home = {
     username = "smj";
     homeDirectory = "/home/smj";
   };
 
+  imports = [ ../frost/home ];
+
   programs = {
-    home-manager.enable = true;
     gpg.enable = true;
     git = {
       enable = true;
@@ -22,10 +15,16 @@
     };
   };
 
-  # custom = {
-  #   wezterm.enable = true;
-  #   hyprland-addons.enable = true;
-  # };
+  nvimcat = {
+    enable = true;
+    packageNames = [ "nvimcat" ];
+  };
+
+  custom = {
+    wezterm.enable = true;
+    nix-addons.enable = true;
+    hyprland-addons.enable = true;
+  };
 
   systemd.user.startServices = "sd-switch";
 }

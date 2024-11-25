@@ -1,14 +1,37 @@
 { inputs, ... }:
 let
   mkNixos = args:
-    inputs.nixpkgs.lib.nixosSystem (args // {
+    let
+      inherit (builtins) attrValues;
+      # moduleSet is a function that takes inputs as args and return a
+      # set that has all custom osModules, homeModules, pkgs.
+      # Modules are imported for all systems by default.
+      moduleSet = (import ../profiles/programs { inherit inputs; });
+      # TODO: Refactor to accomodate more users
+      username = "smj";
+    in inputs.nixpkgs.lib.nixosSystem (args // {
       specialArgs = { inherit inputs; };
-      modules = args.modules or [ ] ++ [ ./common/os.nix ] ++
-        # This following is a function that takes inputs and return
-        # set that has all custom NixOS modules. This gets imported for all
-        # systems by default.
-        (builtins.attrValues
-          (import ../profiles/programs { inherit inputs; }).osModules);
+      modules = args.modules or [ ] ++ [
+        ../profiles/users/${username}.nix
+        ./common/os.nix
+        inputs.home-manager.nixosModules.home-manager
+        {
+          config.nixpkgs = {
+            overlays = [ inputs.self.overlays.unstable inputs.nurpkgs.overlay ];
+            config = { allowUnfree = true; };
+          };
+        }
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit inputs; };
+            users.smj = import ./common/hm.nix;
+            sharedModules = [ inputs.nix-index-database.hmModules.nix-index ]
+              ++ attrValues moduleSet.homeModules;
+          };
+        }
+      ] ++ attrValues moduleSet.osModules;
     });
 in {
   frost = mkNixos { modules = [ ./frost/configuration.nix ]; };

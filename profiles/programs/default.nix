@@ -3,7 +3,6 @@ let nvimcat = import ./nvimcat { inherit inputs; };
 in {
   osModules = {
     hyprland-custom = import ./hyprland/module.nix;
-    homemanager = import ./home-manager/module.nix;
     nixcats = nvimcat.nixosModules.default;
     nix-essentials = import ./nix/module.nix;
     theme-custom = import ./themes/module.nix;

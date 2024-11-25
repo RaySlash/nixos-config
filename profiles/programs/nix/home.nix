@@ -7,7 +7,6 @@ in {
   options.custom.nix-addons = { enable = mkEnableOption "nix-addons"; };
 
   config = mkIf cfg.enable {
-    imports = [ inputs.nix-index-database.hmModules.nix-index ];
 
     programs = {
       nix-index = {

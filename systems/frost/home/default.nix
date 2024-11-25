@@ -1,8 +1,4 @@
-{ inputs, pkgs, ... }: {
-  imports = [
-    # inputs.self.homeModules.hyprland-addons
-    # inputs.self.homeModules.firefox-addons
-  ];
+{ pkgs, ... }: {
 
   home.packages = with pkgs; [
     htop
@@ -24,10 +20,10 @@
     vesktop
   ];
 
-  # custom = {
-  #   hyprland.enable = true;
-  #   firefox.enable = true;
-  # };
+  custom = {
+    hyprland-addons.enable = true;
+    # firefox.enable = true;
+  };
 
   programs = {
     obs-studio = {

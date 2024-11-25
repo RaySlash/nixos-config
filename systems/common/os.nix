@@ -1,13 +1,4 @@
-{ pkgs, inputs, ... }: {
-  imports =
-    [ ../../profiles/users/smj.nix inputs.home-manager.nixosModules.default ];
-
-  nixpkgs = {
-    overlays = [ inputs.self.overlays.unstable ];
-    config = { allowUnfree = true; };
-  };
-
-  home-manager.users = { smj = import ./hm.nix; };
+{ pkgs, ... }: {
   networking.networkmanager.enable = true;
   systemd.extraConfig = "\n    DefaultTimeoutStopSec=10s\n    ";
   time.timeZone = "Australia/Brisbane";
@@ -26,7 +17,6 @@
 
   custom = {
     zsh.enable = true;
-    homemanager.enable = true;
     nix.enable = true;
     themes.enable = true;
   };

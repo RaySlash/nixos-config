@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [ ./hardware-configuration.nix ];
 
-  home-manager.users = { smj = import ./home; };
   networking.hostName = "frost";
 
   boot = {
