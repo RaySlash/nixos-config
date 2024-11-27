@@ -1,11 +1,10 @@
-{ pkgs, ... }: {
-  imports = [ ../frost/home ];
-
+{ config, pkgs, ... }: {
   programs = {
     gpg.enable = true;
     git.enable = true;
   };
 
+  # Nixcat hmModule
   nvimcat = {
     enable = true;
     packageNames = [ "nvimcat" ];
