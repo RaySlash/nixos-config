@@ -13,7 +13,6 @@ in {
     wayland.windowManager.hyprland = {
       enable = true;
       extraConfig = builtins.readFile ./hyprland.conf;
-      systemd.enable = false;
     };
 
     services = {
@@ -24,7 +23,7 @@ in {
         iconTheme.name = "Papirus-Dark";
         iconTheme.package = pkgs.papirus-icon-theme;
       };
-      kdeconnect = { enable = true; };
+      kdeconnect.enable = true;
       udiskie = {
         enable = true;
         notify = true;
@@ -69,6 +68,7 @@ in {
 
     home = {
       packages = with pkgs; [
+        swww
         wl-clipboard
         wlr-randr
         wlogout

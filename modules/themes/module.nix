@@ -16,6 +16,7 @@ in {
       packages = with pkgs; [
         (nerdfonts.override { fonts = [ "IosevkaTerm" ]; })
         atkinson-hyperlegible
+        jetbrains-mono
       ];
     };
   };
