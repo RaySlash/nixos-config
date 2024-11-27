@@ -13,7 +13,9 @@
     };
   };
 
-  programs = { git.enable = true; };
+  boot.tmp.cleanOnBoot = true;
+  security.polkit.enable = true;
+  programs.git.enable = true;
 
   custom = {
     zsh.enable = true;
@@ -22,10 +24,12 @@
     users.smj.enable = true;
   };
 
-  boot.tmp.cleanOnBoot = true;
-  documentation.man = {
-    enable = true;
-    generateCaches = true;
+  documentation = {
+    dev.enable = true;
+    man = {
+      enable = true;
+      generateCaches = true;
+    };
   };
 
   environment = { systemPackages = with pkgs; [ eza libclang gcc gnumake ]; };

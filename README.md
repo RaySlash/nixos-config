@@ -19,6 +19,12 @@ iso: x86_64
 
 ## Usage
 
+### Nvim Configuration
+To use the configuration of nvim using `nixCats` can be used by
+```shell
+nix run github:rayslash/nixos-config#nvimcat
+```
+
 ### ISO
 
 To build the ISO image corresponding to `nixos/iso` configuration use:

@@ -27,57 +27,61 @@ let
       lspsAndRuntimeDeps = { general = with pkgs; [ nil nixd stylua ]; };
 
       startupPlugins = {
-        general = with pkgs.vimPlugins; [
-          autoclose-nvim
+        git = with pkgs.vimPlugins;[
+          diffview-nvim
+          gitsigns-nvim
+          vim-fugitive
+          (mkNvimPlugin inputs.plugins-neogit "neogit")
+        ];
+        lsp = with pkgs.vimPlugins;[
           markdown-preview-nvim
-          kanagawa-nvim
-          nvim-colorizer-lua
-          nui-nvim
-          nvim-notify
-          yuck-vim
-          rustaceanvim
-          nvim-tree-lua
-          nvim-treesitter.withAllGrammars
           luasnip
           nvim-cmp
           cmp_luasnip
           lspkind-nvim
           cmp-nvim-lsp
-          cmp-nvim-lsp-signature-help # https://github.com/hrsh7th/cmp-nvim-lsp-signature-help/
+          cmp-nvim-lsp-signature-help
           cmp-buffer
           cmp-path
           cmp-nvim-lua
           cmp-cmdline
           cmp-cmdline-history
-          # git integration plugins
-          diffview-nvim
-          gitsigns-nvim
-          vim-fugitive
-          # telescope and extensions
-          telescope-nvim
-          telescope-fzy-native-nvim
-          # UI
+          rustaceanvim
+        ];
+        ui = with pkgs.vimPlugins; [
+          kanagawa-nvim
           lualine-nvim
           nvim-navic
           statuscol-nvim
           nvim-treesitter-context
-          # navigation/editing enhancement plugins
+          nvim-colorizer-lua
+          nui-nvim
+          nvim-notify
+          neo-tree-nvim
+          noice-nvim
+        ];
+        deps = with pkgs.vimPlugins;[
+          sqlite-lua
+          plenary-nvim
+          nvim-web-devicons
+          vim-repeat
+        ];
+        langs = with pkgs.vimPlugins; [
+          nvim-treesitter.withAllGrammars
+          yuck-vim
+        ];
+        general = with pkgs.vimPlugins; [
+          autoclose-nvim
+          telescope-nvim
+          telescope-fzy-native-nvim
           vim-unimpaired
           eyeliner-nvim
           nvim-surround
           nvim-treesitter-textobjects
           nvim-ts-context-commentstring
-          # Useful utilities
           nvim-unception
           which-key-nvim
           # libraries that other plugins depend on
-          sqlite-lua
-          plenary-nvim
-          nvim-web-devicons
-          vim-repeat
-          # bleeding-edge plugins from flake inputs
-          (mkNvimPlugin inputs.plugins-neogit "neogit")
-          (mkNvimPlugin inputs.plugins-noice "noice")
         ];
       };
 
@@ -88,7 +92,7 @@ let
 
       sharedLibraries = { general = with pkgs; [ libgit2 ]; };
 
-      environmentVariables = { test = { CATTESTVAR = "It worked!"; }; };
+      environmentVariables = { general = { EDITOR = "nvim";}; };
 
       extraWrapperArgs = {
         # https://github.com/NixOS/nixpkgs/blob/master/pkgs/build-support/setup-hooks/make-wrapper.sh
@@ -105,22 +109,17 @@ let
       # see :help nixCats.flake.outputs.settings
       settings = {
         wrapRc = true;
-        aliases = [ "vim" "nvim" ];
+        aliases = [ "vi" "vim" "nvim" ];
         neovim-unwrapped =
-          inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+          inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       };
       categories = {
         general = true;
-        test = true;
-        example = {
-          youCan = "add more than just booleans";
-          toThisSet = [
-            "and the contents of this categories set"
-            "will be accessible to your lua with"
-            "nixCats('path.to.value')"
-            "see :help nixCats"
-          ];
-        };
+        git = true;
+        ui = true;
+        lsp = true;
+        deps = true;
+        langs = true;
       };
       extra = { };
     };

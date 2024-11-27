@@ -25,10 +25,6 @@
 
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    plugins-noice = {
-      url = "github:folke/noice.nvim";
-      flake = false;
-    };
     plugins-neogit = {
       url = "github:NeogitOrg/neogit";
       flake = false;

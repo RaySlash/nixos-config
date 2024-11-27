@@ -7,9 +7,6 @@
     kernelPackages = pkgs.linuxPackages_xanmod;
     kernelModules = [ "i2c-dev" ];
   };
-  documentation.dev.enable = true;
-  security.polkit.enable = true;
-
   boot.loader = {
     efi.canTouchEfiVariables = true;
     systemd-boot = {
@@ -63,7 +60,6 @@
       enable = true;
       preferences = { "widget.use-xdg-desktop-portal.file-picker" = 1; };
     };
-    # hyprland-custom.enable = true;
     kdeconnect.enable = true;
     yazi.enable = true;
     nix-ld.enable = true;
