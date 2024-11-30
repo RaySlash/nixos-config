@@ -71,7 +71,6 @@
         cmp-nvim-lua
         cmp-cmdline
         cmp-cmdline-history
-        rustaceanvim
       ];
       ui = with pkgs.vimPlugins; [
         kanagawa-nvim
@@ -82,10 +81,8 @@
         neo-tree-nvim
       ];
       deps = with pkgs.vimPlugins; [
-        sqlite-lua
         plenary-nvim
         nvim-web-devicons
-        vim-repeat
       ];
       langs = with pkgs.vimPlugins; [
         nvim-treesitter.withAllGrammars
@@ -93,11 +90,8 @@
       ];
       general = with pkgs.vimPlugins; [
         autoclose-nvim
-        flash-nvim
         telescope-nvim
         telescope-fzy-native-nvim
-        vim-unimpaired
-        eyeliner-nvim
         nvim-surround
         nvim-treesitter-textobjects
         nvim-ts-context-commentstring
