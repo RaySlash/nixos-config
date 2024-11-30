@@ -1,63 +1,39 @@
 # NixOS + Home-Manager dotfiles
 
-> TODO: Fix the neovim module (lazynvim). The ccls and other lsps do not work as expected.
-
 This repository consists of my personal NixOS configuration files. This is a flake repository. You know what to do!
-
-![Hyprland setup Screenshot](./ss_grim.png)
-![Hyprland Fuzzel](./ss_fuzzel_grim.png)
-
-## Hostnames
-
-frost: x86_64
-
-dell: x86_64
-
-rpi: aarch64
-
-iso: x86_64
 
 ## Usage
 
-### Nvim Configuration
+### Neovim Configuration
 
-To use the configuration of nvim using `nixCats` can be used by
+To use the configuration of nvim at `modules/nvimcat` run this in a nix enabled system:
 
 ```shell
 nix run github:rayslash/nixos-config#nvimcat
 ```
 
-### ISO
+### Build Live-boot image
 
-To build the ISO image corresponding to `nixos/iso` configuration use:
+To build the ISO image corresponding to `iso` host use:
 
 ```shell
 nix build .#nixosConfigurations.live.config.system.build.isoImage
 ```
 
-### New System Configuration
+### System Configuration
 
-Partition and mount root, nix, boot and home using `fdisk` and `mount`. For each hostname, replace `host` with desired hostname:
+> **NOTE:** Replace `<host>` with accurate hostname.
+
+**Clean Install:** Partition and mount root, nix, boot and home using `fdisk` and `mount`.
 
 ```shell
 sudo fdisk /dev/sdX                 #Recommended /, /boot and /nix partitions. Optionally, /home
 sudo mount /dev/sdXX                #Mount all filesystems to /mnt
 git clone https://github.com/RaySlash/nixos-config && cd nixos-config
-rm */host/hardware-configuration.nix
+rm systems/<host>/hardware-configuration.nix
 sudo nixos-generate-config --root /mnt
-sudo cp /etc/nixos/hardware-configuration.nix nixos/host/
-sudo nixos-install --flake .#host
-```
-
-### Existing System Configuration
-
-For each hostname, replace `host` with desired hostname:
-
-```shell
-git clone https://github.com/RaySlash/nixos-config && cd nixos-config
-rm */host/hardware-configuration.nix
-sudo cp /etc/nixos/hardware-configuration.nix nixos/host/
-sudo nixos-rebuild boot --flake .#host
+sudo cp /etc/nixos/hardware-configuration.nix nixos/<host>/
+sudo nixos-install --flake .#<host>
 ```
 
 ## Reference
@@ -71,3 +47,8 @@ sudo nixos-rebuild boot --flake .#host
 [NixOS and Flakes book](https://nixos-and-flakes.thiscute.world/nixos-with-flakes/introduction-to-flakes)
 
 [Hyprland Wiki](https://wiki.hyprland.org/)
+
+## Images
+
+![Hyprland setup Screenshot](./ss_grim.png)
+![Hyprland Fuzzel](./ss_fuzzel_grim.png)
