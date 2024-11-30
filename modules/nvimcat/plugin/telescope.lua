@@ -54,18 +54,11 @@ local function grep_string_current_file_type()
   grep_current_file_type(builtin.grep_string)
 end
 
---- Like live_grep, but fuzzy (and slower)
-local function fuzzy_grep(opts)
-  opts = vim.tbl_extend('error', opts or {}, { search = '', prompt_title = 'Fuzzy grep' })
-  builtin.grep_string(opts)
-end
-
 vim.keymap.set('n', '<leader>ff', function()
   builtin.find_files()
 end, { desc = '[t]elescope find files - ctrl[p] style' })
 vim.keymap.set('n', '<leader>fo', builtin.oldfiles, { desc = '[telescope] old files' })
-vim.keymap.set('n', '<leader>ffg', builtin.live_grep, { desc = '[telescope] live grep' })
-vim.keymap.set('n', '<leader>fg', fuzzy_grep, { desc = '[t]elescope [f]uzzy grep' })
+vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[telescope] live grep' })
 vim.keymap.set(
   'n',
   '<leader>t*',
@@ -134,7 +127,15 @@ telescope.setup {
       '--line-number',
       '--column',
       '--smart-case',
+      '--hidden',
+      '--glob',
+      '!**/.git/**',
     },
+  },
+  pickers = {
+    find_files = {
+      find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+    }
   },
   extensions = {
     fzy_native = {

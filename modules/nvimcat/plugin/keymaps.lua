@@ -8,21 +8,25 @@ local fn = vim.fn
 local keymap = vim.keymap
 local diagnostic = vim.diagnostic
 
+-- STOP USING ARROW KEYS
+-- keymap.set('n', '<Up>', '')
+-- keymap.set('n', '<Down>', '')
+-- keymap.set('n', '<Left>', '')
+-- keymap.set('n', '<Right>', '')
+
 -- Better navigation
-keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-keymap.set({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { desc = "Down", expr = true, silent = true })
-keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
-keymap.set({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr = true, silent = true })
+keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
+keymap.set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = true, silent = true })
 
 -- General
 keymap.set('n', '<C-q>', '<cmd>q!<cr>', { desc = 'Quit' })
 keymap.set('n', '<C-s>', '<cmd>w<cr>', { desc = 'Quit' })
-keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
+keymap.set({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', { desc = 'Escape and Clear hlsearch' })
 keymap.set(
-  "n",
-  "<leader>ur",
-  "<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
-  { desc = "Redraw / Clear hlsearch / Diff Update" }
+  'n',
+  '<leader>ur',
+  '<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>',
+  { desc = 'Redraw / Clear hlsearch / Diff Update' }
 )
 
 -- Yank from current position till end of current line
@@ -198,10 +202,10 @@ end
 
 keymap.set('n', '<leader>S', toggle_spell_check, { noremap = true, silent = true, desc = 'toggle [S]pell' })
 
-keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'move [d]own half-page and center' })
-keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'move [u]p half-page and center' })
-keymap.set('n', '<C-f>', '<C-f>zz', { desc = 'move DOWN [f]ull-page and center' })
-keymap.set('n', '<C-b>', '<C-b>zz', { desc = 'move UP full-page and center' })
+keymap.set('n', '<C-n>', '<C-n>zz', { noremap = true, desc = 'move [d]own half-page and center' })
+keymap.set('n', '<C-p>', '<C-p>zz', { noremap = true, desc = 'move [u]p half-page and center' })
+-- keymap.set('n', '<C-N>', '<C-f>zz', { noremap = true, desc = 'move DOWN [f]ull-page and center' })
+-- keymap.set('n', '<C-P>', '<C-b>zz', { noremap = true, desc = 'move UP full-page and center' })
 
 --- Disabled keymaps [enable at your own risk]
 

@@ -3,9 +3,9 @@
 
 { inputs, ... }@attrs:
 let
-  inherit (inputs) nixpkgs-unstable;
+  inherit (inputs) nixpkgs;
   inherit (inputs.nixCats) utils;
-  nixpkgs = nixpkgs-unstable;
+  # nixpkgs = nixpkgs-unstable;
   luaPath = "${./.}";
   forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
   extra_pkg_config = {
@@ -24,21 +24,20 @@ let
   categoryDefinitions =
     { pkgs, settings, categories, extra, name, mkNvimPlugin, ... }@packageDef: {
 
-      lspsAndRuntimeDeps = { general = with pkgs; [ nil nixd stylua ]; };
+      lspsAndRuntimeDeps = { general = with pkgs; [ nil nixd stylua lua-language-server elmPackages.elm-language-server nodePackages.typescript-language-server ]; };
 
       startupPlugins = {
-        git = with pkgs.vimPlugins;[
-          diffview-nvim
-          gitsigns-nvim
-          vim-fugitive
+        git = [
           (mkNvimPlugin inputs.plugins-neogit "neogit")
         ];
         lsp = with pkgs.vimPlugins;[
           markdown-preview-nvim
+          formatter-nvim
           luasnip
           nvim-cmp
           cmp_luasnip
           lspkind-nvim
+          nvim-ts-autotag
           cmp-nvim-lsp
           cmp-nvim-lsp-signature-help
           cmp-buffer
@@ -51,14 +50,10 @@ let
         ui = with pkgs.vimPlugins; [
           kanagawa-nvim
           lualine-nvim
-          nvim-navic
           statuscol-nvim
           nvim-treesitter-context
           nvim-colorizer-lua
-          nui-nvim
-          nvim-notify
           neo-tree-nvim
-          noice-nvim
         ];
         deps = with pkgs.vimPlugins;[
           sqlite-lua
@@ -72,6 +67,7 @@ let
         ];
         general = with pkgs.vimPlugins; [
           autoclose-nvim
+          flash-nvim
           telescope-nvim
           telescope-fzy-native-nvim
           vim-unimpaired
@@ -81,7 +77,6 @@ let
           nvim-ts-context-commentstring
           nvim-unception
           which-key-nvim
-          # libraries that other plugins depend on
         ];
       };
 

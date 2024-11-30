@@ -8,18 +8,15 @@ g.maplocalleader = ' '
 g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
-opt.compatible = false
-
 if fn.has('termguicolors') then
   opt.termguicolors = true
 end
 
--- Search down into subfolders
 opt.path = vim.o.path .. '**'
 
 opt.number = true
-opt.background = "dark"
-opt.clipboard = "unnamedplus"
+opt.background = 'dark'
+opt.clipboard = 'unnamedplus'
 opt.relativenumber = true
 opt.cursorline = true
 opt.showmatch = true -- Highlight matching parentheses, etc
@@ -98,6 +95,3 @@ vim.opt.colorcolumn = '100'
 -- Native plugins
 cmd.filetype('plugin', 'indent', 'on')
 cmd.packadd('cfilter') -- Allows filtering the quickfix list with :cfdo
-
--- let sqlite.lua (which some plugins depend on) know where to find sqlite
-vim.g.sqlite_clib_path = require('luv').os_getenv('LIBSQLITE')

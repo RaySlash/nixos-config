@@ -20,7 +20,6 @@ neogit.setup {
     },
   },
 }
-
 vim.keymap.set('n', '<leader>gg', neogit.open, { noremap = true, silent = true, desc = 'neo[g]it open' })
 vim.keymap.set('n', '<leader>gs', function()
   neogit.open { kind = 'auto' }
