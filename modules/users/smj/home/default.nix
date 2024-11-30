@@ -1,10 +1,14 @@
-{ config, lib, pkgs, inputs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.custom.users.smj;
 in {
-
-  options.custom.users.smj = { enable = mkEnableOption "users.smj"; };
+  options.custom.users.smj = {enable = mkEnableOption "users.smj";};
 
   config = mkIf cfg.enable {
     home = {

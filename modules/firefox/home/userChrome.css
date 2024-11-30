@@ -1,10 +1,12 @@
-#TabsToolbar{ visibility: collapse !important }
+#TabsToolbar {
+  visibility: collapse !important;
+}
 #titlebar {
   visibility: collapse;
 }
 #sidebar-header {
   visibility: collapse !important;
-} 
+}
 /* URL Bar Centered Text */
 #urlbar .urlbar-input-box {
   text-align: center !important;

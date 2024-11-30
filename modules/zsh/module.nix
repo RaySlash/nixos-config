@@ -1,13 +1,15 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.custom.zsh;
 in {
-
-  options.custom.zsh = { enable = mkEnableOption "zsh"; };
+  options.custom.zsh = {enable = mkEnableOption "zsh";};
 
   config = mkIf cfg.enable {
-
     programs = {
       zsh = {
         enable = true;
@@ -36,7 +38,6 @@ in {
       };
     };
 
-    environment.shells = [ pkgs.zsh ];
+    environment.shells = [pkgs.zsh];
   };
-
 }

@@ -1,11 +1,11 @@
-{ pkgs, ... }: {
-  imports = [ ./hardware-configuration.nix ];
+{pkgs, ...}: {
+  imports = [./hardware-configuration.nix];
 
   networking.hostName = "frost";
 
   boot = {
     kernelPackages = pkgs.linuxPackages_xanmod;
-    kernelModules = [ "i2c-dev" ];
+    kernelModules = ["i2c-dev"];
   };
   boot.loader = {
     efi.canTouchEfiVariables = true;
@@ -18,7 +18,7 @@
   hardware.graphics.enable32Bit = true;
 
   services = {
-    udev.packages = with pkgs; [ openrgb-with-all-plugins ];
+    udev.packages = with pkgs; [openrgb-with-all-plugins];
     fstrim.enable = true;
     btrfs.autoScrub = {
       enable = true;
@@ -26,7 +26,7 @@
     };
     xserver = {
       enable = true;
-      excludePackages = [ pkgs.xterm ];
+      excludePackages = [pkgs.xterm];
       displayManager.lightdm.enable = false;
       xkb = {
         layout = "us";
@@ -58,7 +58,7 @@
     dconf.enable = true;
     firefox = {
       enable = true;
-      preferences = { "widget.use-xdg-desktop-portal.file-picker" = 1; };
+      preferences = {"widget.use-xdg-desktop-portal.file-picker" = 1;};
     };
     kdeconnect.enable = true;
     yazi.enable = true;
@@ -66,7 +66,7 @@
   };
 
   environment = {
-    systemPackages = with pkgs; [ virt-manager man-pages man-pages-posix ];
+    systemPackages = with pkgs; [virt-manager man-pages man-pages-posix];
   };
 
   system.stateVersion = "23.05";

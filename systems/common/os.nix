@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   networking.networkmanager.enable = true;
   systemd.extraConfig = "\n    DefaultTimeoutStopSec=10s\n    ";
   time.timeZone = "Australia/Brisbane";
@@ -32,6 +32,5 @@
     };
   };
 
-  environment = { systemPackages = with pkgs; [ eza libclang gcc gnumake ]; };
-
+  environment = {systemPackages = with pkgs; [eza libclang gcc gnumake];};
 }

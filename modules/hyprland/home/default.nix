@@ -1,15 +1,18 @@
-{ config, lib, pkgs, inputs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.custom.hyprland-addons;
 in {
-
   options.custom.hyprland-addons = {
     enable = mkEnableOption "hyprland-addons";
   };
 
   config = mkIf cfg.enable {
-
     wayland.windowManager.hyprland = {
       enable = true;
       extraConfig = builtins.readFile ./hyprland.conf;
@@ -92,7 +95,5 @@ in {
         socat
       ];
     };
-
   };
-
 }

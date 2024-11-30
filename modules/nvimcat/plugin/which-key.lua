@@ -1,3 +1,3 @@
-require('which-key').setup {
-  preset = 'helix'
-}
+require("which-key").setup({
+	preset = "helix",
+})

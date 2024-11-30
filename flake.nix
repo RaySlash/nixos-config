@@ -20,8 +20,7 @@
     };
 
     # Applications
-    wezterm.url =
-      "github:wez/wezterm?dir=nix"; # (nixpkgs)wezterm does not support Wayland
+    wezterm.url = "github:wez/wezterm?dir=nix"; # (nixpkgs)wezterm does not support Wayland
 
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
@@ -31,38 +30,42 @@
     };
   };
 
-  outputs = { flake-parts, ... }@inputs:
-    let
-      unstable-overlay = (final: _prev: {
-        unstable = import inputs.nixpkgs-unstable {
-          system = final.system;
-          config.allowUnfree = true;
-        };
-      });
-      packages-overlay = (final: _prev: import ./packages final.pkgs);
-    in (flake-parts.lib.mkFlake { inherit inputs; }) {
-      imports = [ inputs.flake-parts.flakeModules.flakeModules ];
+  outputs = {flake-parts, ...} @ inputs: let
+    unstable-overlay = final: _prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = final.system;
+        config.allowUnfree = true;
+      };
+    };
+    packages-overlay = final: _prev: import ./packages final.pkgs;
+  in
+    (flake-parts.lib.mkFlake {inherit inputs;}) {
+      imports = [inputs.flake-parts.flakeModules.flakeModules];
 
       systems = inputs.nixpkgs.lib.systems.flakeExposed;
       debug = true;
 
-      perSystem = { system, inputs', ... }: {
+      perSystem = {
+        system,
+        inputs',
+        ...
+      }: {
         formatter = inputs'.nixpkgs.legacyPackages.alejandra;
         packages =
-          (import ./modules { inherit inputs; }).pkgs.nvimcat.${system};
+          (import ./modules {inherit inputs;}).pkgs.nvimcat.${system};
         _module.args.pkgs = import inputs.nixpkgs {
           inherit system;
-          overlays = [ unstable-overlay packages-overlay ];
+          overlays = [unstable-overlay packages-overlay];
         };
       };
 
-      flake = { self, ... }: {
+      flake = {self, ...}: {
         overlays = {
-          default = [ self.overlays.unstable packages-overlay ];
+          default = [self.overlays.unstable packages-overlay];
           unstable = unstable-overlay;
         };
 
-        nixosConfigurations = import ./systems { inherit inputs; };
+        nixosConfigurations = import ./systems {inherit inputs;};
       };
     };
 }

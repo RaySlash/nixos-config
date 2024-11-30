@@ -1,5 +1,8 @@
-{ outputs, pkgs, ... }: {
-
+{
+  outputs,
+  pkgs,
+  ...
+}: {
   imports = [
     outputs.homeManagerModules.hyprland-addons
 

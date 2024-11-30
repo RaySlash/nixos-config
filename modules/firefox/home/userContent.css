@@ -1,3 +1,7 @@
 /*Small scrollbar */
-:root{ scrollbar-color: rgb(221, 182, 242) rgb(30, 30, 46) }
-*{ scrollbar-width: thin }
+:root {
+  scrollbar-color: rgb(221, 182, 242) rgb(30, 30, 46);
+}
+* {
+  scrollbar-width: thin;
+}

@@ -1,6 +1,6 @@
 # NixOS + Home-Manager dotfiles
 
-> TODO: Fix the neovim module (lazynvim).  The ccls and other lsps do not work as expected.
+> TODO: Fix the neovim module (lazynvim). The ccls and other lsps do not work as expected.
 
 This repository consists of my personal NixOS configuration files. This is a flake repository. You know what to do!
 
@@ -20,7 +20,9 @@ iso: x86_64
 ## Usage
 
 ### Nvim Configuration
+
 To use the configuration of nvim using `nixCats` can be used by
+
 ```shell
 nix run github:rayslash/nixos-config#nvimcat
 ```

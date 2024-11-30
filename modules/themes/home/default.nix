@@ -1,10 +1,14 @@
-{ config, lib, pkgs, inputs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.custom.themes-addons;
 in {
-
-  options.custom.themes-addons = { enable = mkEnableOption "themes-addons"; };
+  options.custom.themes-addons = {enable = mkEnableOption "themes-addons";};
 
   config = mkIf cfg.enable {
     gtk = {
@@ -15,7 +19,7 @@ in {
       font.size = 12;
       theme.name = "Catppuccin-Mocha-Standard-Lavender-Dark";
       theme.package = pkgs.catppuccin-gtk.override {
-        accents = [ "lavender" ];
+        accents = ["lavender"];
         size = "standard";
         variant = "mocha";
       };
@@ -30,8 +34,7 @@ in {
         size = 32;
       };
 
-      packages = with pkgs; [ papirus-icon-theme catppuccin-gtk ];
+      packages = with pkgs; [papirus-icon-theme catppuccin-gtk];
     };
   };
-
 }

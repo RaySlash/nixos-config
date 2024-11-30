@@ -1,9 +1,14 @@
-{ config, lib, pkgs, inputs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.custom.lazynvim;
 in {
-  options.custom.lazynvim = { enable = mkEnableOption "lazynvim"; };
+  options.custom.lazynvim = {enable = mkEnableOption "lazynvim";};
 
   config = mkIf cfg.enable {
     programs.neovim = {
@@ -27,7 +32,7 @@ in {
         zls
       ];
 
-      plugins = with pkgs.unstable.vimPlugins; [ lazy-nvim ];
+      plugins = with pkgs.unstable.vimPlugins; [lazy-nvim];
 
       extraLuaConfig = let
         plugins = with pkgs.unstable.vimPlugins; [
@@ -111,11 +116,12 @@ in {
           }
         ];
         mkEntryFromDrv = drv:
-          if lib.isDerivation drv then {
+          if lib.isDerivation drv
+          then {
             name = "${lib.getName drv}";
             path = drv;
-          } else
-            drv;
+          }
+          else drv;
         lazyPath =
           pkgs.linkFarm "lazy-plugins" (builtins.map mkEntryFromDrv plugins);
       in ''
@@ -151,7 +157,7 @@ in {
     xdg.configFile."nvim/parser".source = let
       parsers = pkgs.symlinkJoin {
         name = "treesitter-parsers";
-        paths = (pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars);
+        paths = pkgs.unstable.vimPlugins.nvim-treesitter.withAllGrammars;
       };
     in "${parsers}/parser";
 

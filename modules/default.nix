@@ -1,5 +1,5 @@
-{ inputs, ... }:
-let nvimcat = import ./nvimcat { inherit inputs; };
+{inputs, ...}: let
+  nvimcat = import ./nvimcat {inherit inputs;};
 in {
   osModules = {
     hyprland-custom = import ./hyprland/module.nix;
@@ -21,5 +21,5 @@ in {
     smj = import ./users/smj/home;
   };
 
-  pkgs = { nvimcat = nvimcat.packages; };
+  pkgs = {nvimcat = nvimcat.packages;};
 }

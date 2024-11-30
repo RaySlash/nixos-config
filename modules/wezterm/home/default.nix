@@ -1,13 +1,15 @@
-{ config, lib, inputs, ... }:
-let
+{
+  config,
+  lib,
+  inputs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.custom.wezterm;
 in {
-
-  options.custom.wezterm = { enable = mkEnableOption "wezterm"; };
+  options.custom.wezterm = {enable = mkEnableOption "wezterm";};
 
   config = mkIf cfg.enable {
-
     home.file."/home/smj/.config/wezterm/sessionizer.lua".source =
       ./sessionizer.lua;
 
@@ -47,5 +49,4 @@ in {
       extraConfig = builtins.readFile ./wezterm.lua;
     };
   };
-
 }

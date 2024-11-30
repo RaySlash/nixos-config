@@ -1,5 +1,9 @@
-{ inputs, config, pkgs, ... }: {
-
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     # inputs.home-manager.nixosModules.home-manager
     # inputs.self.nixosModules.hyprland-custom
@@ -16,13 +20,12 @@
   # nixpkgs.config.nvidia.acceptLicense = true;
 
   boot = {
-    initrd.kernelModules = [ "wl" ];
-    kernelModules = [ "wl" ];
-    extraModulePackages = with config.boot.kernelPackages;
-      [
-        broadcom_sta
-        # nvidia_x11_legacy470
-      ];
+    initrd.kernelModules = ["wl"];
+    kernelModules = ["wl"];
+    extraModulePackages = with config.boot.kernelPackages; [
+      broadcom_sta
+      # nvidia_x11_legacy470
+    ];
   };
 
   hardware.graphics.enable32Bit = true;
@@ -55,8 +58,7 @@
     kanata = {
       enable = true;
       keyboards = {
-        "v1".config =
-          "\n              (defsrc\n                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc\n                tab  q    w    e    r    t    y    u    i    o    p    [    ]    \n                caps a    s    d    f    g    h    j    k    l    ;    '    ret\n                lsft z    x    c    v    b    n    m    ,    .    /    rsft\n                lctl lmet lalt           spc            ralt rmet rctl\n              )\n              \n              (deflayer colemak\n                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc\n                tab  q    w    e    r    t    y    u    i    o    p    [    ]    \n                esc  a    s    d    f    g    h    j    k    l    ;    '    ret\n                lsft z    x    c    v    b    n    m    ,    .    /    rsft\n                lctl lmet lalt           spc            ralt rmet rctl\n              )\n            ";
+        "v1".config = "\n              (defsrc\n                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc\n                tab  q    w    e    r    t    y    u    i    o    p    [    ]    \n                caps a    s    d    f    g    h    j    k    l    ;    '    ret\n                lsft z    x    c    v    b    n    m    ,    .    /    rsft\n                lctl lmet lalt           spc            ralt rmet rctl\n              )\n              \n              (deflayer colemak\n                grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc\n                tab  q    w    e    r    t    y    u    i    o    p    [    ]    \n                esc  a    s    d    f    g    h    j    k    l    ;    '    ret\n                lsft z    x    c    v    b    n    m    ,    .    /    rsft\n                lctl lmet lalt           spc            ralt rmet rctl\n              )\n            ";
       };
     };
     # displayManager.sddm = {
@@ -67,7 +69,7 @@
     # };
     xserver = {
       enable = true;
-      excludePackages = [ pkgs.xterm ];
+      excludePackages = [pkgs.xterm];
       xkb = {
         layout = "us";
         variant = "";
@@ -88,7 +90,7 @@
     yazi.enable = true;
   };
 
-  environment = { systemPackages = with pkgs; [ kanata ]; };
+  environment = {systemPackages = with pkgs; [kanata];};
 
   system.stateVersion = "23.05";
 }

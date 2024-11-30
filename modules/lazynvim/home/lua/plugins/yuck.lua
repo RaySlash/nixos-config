@@ -1,6 +1,6 @@
 return {
-  "elkowar/yuck.vim",
-  vim.filetype.add({
-    pattern = { [".*/*/.*%.yuck"] = "yuck" },
-  }),
+	"elkowar/yuck.vim",
+	vim.filetype.add({
+		pattern = { [".*/*/.*%.yuck"] = "yuck" },
+	}),
 }

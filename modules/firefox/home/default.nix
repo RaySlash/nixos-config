@@ -1,10 +1,13 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.custom.firefox;
 in {
-
-  options.custom.firefox = { enable = mkEnableOption "firefox"; };
+  options.custom.firefox = {enable = mkEnableOption "firefox";};
 
   config = mkIf cfg.enable {
     programs.firefox = {
@@ -14,7 +17,7 @@ in {
         isDefault = true;
         search = {
           default = "DuckDuckGo";
-          order = [ "DuckDuckGo" ];
+          order = ["DuckDuckGo"];
           force = true;
         };
         userChrome = builtins.readFile ./userChrome.css;
@@ -85,10 +88,8 @@ in {
           "network.predictor.enable-prefetch" = false;
           "dom.enable_web_task_scheduling" = true;
           "browser.contentblocking.category" = "strict";
-          "urlclassifier.trackingSkipURLs" =
-            "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com";
-          "urlclassifier.features.socialtracking.skipURLs" =
-            "*.instagram.com, *.twitter.com, *.twimg.com";
+          "urlclassifier.trackingSkipURLs" = "*.reddit.com, *.twitter.com, *.twimg.com, *.tiktok.com";
+          "urlclassifier.features.socialtracking.skipURLs" = "*.instagram.com, *.twitter.com, *.twimg.com";
           "network.cookie.sameSite.noneRequiresSecure" = true;
           "browser.download.start_downloads_in_tmp_dir" = true;
           "browser.helperApps.deleteTempFileOnExit" = true;

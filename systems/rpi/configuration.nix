@@ -1,5 +1,9 @@
-{ inputs, outputs, pkgs, ... }: {
-
+{
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
@@ -8,8 +12,8 @@
   ];
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs outputs; };
-    users = { smj = import ./home; };
+    extraSpecialArgs = {inherit inputs outputs;};
+    users = {smj = import ./home;};
   };
 
   networking.hostName = "rpi";
@@ -32,17 +36,17 @@
     enable = true;
     dockerCompat = true;
     dockerSocket.enable = true;
-    defaultNetwork.settings = { dns_enabled = true; };
+    defaultNetwork.settings = {dns_enabled = true;};
     autoPrune = {
       enable = true;
       dates = "weekly";
-      flags = [ "--all" ];
+      flags = ["--all"];
     };
   };
 
   services = {
-    openssh = { enable = true; };
-    xserver = { enable = true; };
+    openssh = {enable = true;};
+    xserver = {enable = true;};
   };
 
   environment = {

@@ -1,24 +1,24 @@
-local purescript_language_server_cmd = 'purescript-language-server'
+local purescript_language_server_cmd = "purescript-language-server"
 
 if vim.fn.executable(purescript_language_server_cmd) ~= 1 then
-  return
+	return
 end
 
 local root_files = {
-  'spago.dhall',
-  'packages.dhal',
-  '.git',
+	"spago.dhall",
+	"packages.dhal",
+	".git",
 }
 
-vim.lsp.start {
-  name = 'purescript-language-server',
-  cmd = { purescript_language_server_cmd, '--stdio' },
-  root_dir = vim.fs.dirname(vim.fs.find(root_files, { upward = true })[1]),
-  capabilities = require('user.lsp').make_client_capabilities(),
-  settings = {
-    documentFormatting = false,
-    completions = {
-      completeFunctionCalls = true,
-    },
-  },
-}
+vim.lsp.start({
+	name = "purescript-language-server",
+	cmd = { purescript_language_server_cmd, "--stdio" },
+	root_dir = vim.fs.dirname(vim.fs.find(root_files, { upward = true })[1]),
+	capabilities = require("user.lsp").make_client_capabilities(),
+	settings = {
+		documentFormatting = false,
+		completions = {
+			completeFunctionCalls = true,
+		},
+	},
+})

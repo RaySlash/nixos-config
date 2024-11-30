@@ -1,36 +1,39 @@
-{ config, lib, pkgs, modulesPath, ... }:
-
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  ...
+}: {
+  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
 
-  boot.initrd.availableKernelModules =
-    [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/nvme0n1p2";
     fsType = "btrfs";
-    options = [ "compress=zstd" "subvol=root" ];
+    options = ["compress=zstd" "subvol=root"];
   };
 
   fileSystems."/nix" = {
     device = "/dev/nvme0n1p2";
     fsType = "btrfs";
-    options = [ "compress=zstd" "noatime" "subvol=nix" ];
+    options = ["compress=zstd" "noatime" "subvol=nix"];
   };
 
   fileSystems."/home" = {
     device = "/dev/nvme0n1p2";
     fsType = "btrfs";
-    options = [ "compress=zstd" "subvol=home" ];
+    options = ["compress=zstd" "subvol=home"];
   };
 
   fileSystems."/swap" = {
     device = "/dev/nvme0n1p2";
     fsType = "btrfs";
-    options = [ "compress=zstd" "subvol=swap" ];
+    options = ["compress=zstd" "subvol=swap"];
   };
 
   fileSystems."/boot" = {
@@ -38,7 +41,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [{ device = "/swap/swapfile"; }];
+  swapDevices = [{device = "/swap/swapfile";}];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
