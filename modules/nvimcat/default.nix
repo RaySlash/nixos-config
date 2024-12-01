@@ -41,9 +41,11 @@
         shfmt
         sql-formatter
         taplo
+
         # Lsp
         nil
         nixd
+        ccls
         rust-analyzer
         lua-language-server
         elmPackages.elm-language-server

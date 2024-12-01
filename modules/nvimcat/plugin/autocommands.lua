@@ -119,7 +119,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 })
 
 -- Formatter.nvim
-api.nvim_create_autocmd("BufWritePre", {
+api.nvim_create_autocmd("BufWritePost", {
 	group = api.nvim_create_augroup("__formatter__", { clear = true }),
 	callback = function()
 		vim.cmd("FormatWrite")
