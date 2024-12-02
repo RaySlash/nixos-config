@@ -49,6 +49,7 @@
         ccls
         rust-analyzer
         lua-language-server
+        tailwindcss-language-server
         elmPackages.elm-language-server
         nodePackages.typescript-language-server
         zls
@@ -86,9 +87,9 @@
         nvim-treesitter-context
         nvim-colorizer-lua
         neo-tree-nvim
-        image-nvim
       ];
       deps = with pkgs.vimPlugins; [
+        image-nvim
         plenary-nvim
         nvim-web-devicons
       ];
