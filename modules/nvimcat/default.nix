@@ -35,6 +35,7 @@
         # Formatters
         alejandra
         clang-tools
+        elmPackages.elm-format
         prettierd
         stylua
         rustfmt
@@ -51,6 +52,10 @@
         elmPackages.elm-language-server
         nodePackages.typescript-language-server
         zls
+
+        # Image Previews
+        imagemagick
+        curl
       ];
     };
 
@@ -81,6 +86,7 @@
         nvim-treesitter-context
         nvim-colorizer-lua
         neo-tree-nvim
+        image-nvim
       ];
       deps = with pkgs.vimPlugins; [
         plenary-nvim

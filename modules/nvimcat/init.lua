@@ -1,5 +1,4 @@
 local cmd = vim.cmd
-local fn = vim.fn
 local opt = vim.o
 local g = vim.g
 
@@ -17,12 +16,14 @@ opt.background = "dark"
 opt.clipboard = "unnamedplus"
 opt.relativenumber = true
 opt.cursorline = true
-opt.showmatch = true -- Highlight matching parentheses, etc
+opt.showmatch = true
 opt.incsearch = true
 opt.hlsearch = true
 
-opt.spell = true
+opt.spell = false
 opt.spelllang = "en"
+opt.autoread = true
+opt.buftype = "acwrite"
 
 opt.expandtab = true
 opt.tabstop = 2
@@ -37,8 +38,6 @@ opt.splitbelow = true
 opt.cmdheight = 0
 
 opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-
--- Configure Neovim diagnostic messages
 
 local function prefix_diagnostic(prefix, diagnostic)
 	return string.format(prefix .. " %s", diagnostic.message)

@@ -118,11 +118,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- Formats file, loads the changes and aply edit to buffer
 -- Formatter.nvim
 api.nvim_create_autocmd("BufWritePost", {
 	group = api.nvim_create_augroup("__formatter__", { clear = true }),
 	callback = function()
-		vim.cmd("FormatWrite")
+		vim.cmd("Format")
+		vim.cmd("e!")
+	end,
+})
+
+-- Check and reload any externally changed files
+api.nvim_create_autocmd({ "BufWritePost", "FocusGained", "BufEnter", "CursorHold" }, {
+	callback = function()
+		vim.cmd("checktime")
 	end,
 })
 

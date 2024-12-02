@@ -20,7 +20,7 @@ keymap.set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { desc = "Up", expr =
 
 -- General
 keymap.set("n", "<C-q>", "<cmd>q!<cr>", { desc = "Quit" })
-keymap.set("n", "<C-s>", "<cmd>w<cr>", { desc = "Quit" })
+keymap.set("n", "<C-s>", "<cmd>w!<cr>", { desc = "Save" })
 keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and Clear hlsearch" })
 keymap.set(
 	"n",
@@ -154,7 +154,7 @@ keymap.set("n", "<space>tq", vim.cmd.tabclose, { desc = "[t]ab: [q]uit/close" })
 
 local severity = diagnostic.severity
 
-keymap.set("n", "<space>e", function()
+keymap.set("n", "<space>d", function()
 	local _, winid = diagnostic.open_float(nil, { scope = "line" })
 	if not winid then
 		vim.notify("no diagnostics found", vim.log.levels.INFO)
@@ -201,9 +201,8 @@ local function toggle_spell_check()
 end
 
 keymap.set("n", "<leader>S", toggle_spell_check, { noremap = true, silent = true, desc = "toggle [S]pell" })
-
-keymap.set("n", "<C-n>", "<C-n>zz", { noremap = true, desc = "move [d]own half-page and center" })
-keymap.set("n", "<C-p>", "<C-p>zz", { noremap = true, desc = "move [u]p half-page and center" })
+-- keymap.set("n", "<C-n>", "<C-n>zz", { noremap = true, desc = "move [d]own half-page and center" })
+-- keymap.set("n", "<C-p>", "<C-p>zz", { noremap = true, desc = "move [u]p half-page and center" })
 -- keymap.set('n', '<C-N>', '<C-f>zz', { noremap = true, desc = 'move DOWN [f]ull-page and center' })
 -- keymap.set('n', '<C-P>', '<C-b>zz', { noremap = true, desc = 'move UP full-page and center' })
 

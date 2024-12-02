@@ -3,8 +3,19 @@ if vim.g.did_load_neotree_plugin then
 end
 vim.g.did_load_neotree_plugin = true
 
-local neotree = require("neo-tree")
+-- To enable image file previews
+local image = require("image")
+image.setup({
+	processor = "magick_cli",
+})
 
-neotree.setup({})
+local neotree = require("neo-tree")
+neotree.setup({
+	window = {
+		mappings = {
+			["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
+		},
+	},
+})
 
 vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", { noremap = true, silent = true, desc = "neo[g]it open" })
