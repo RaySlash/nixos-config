@@ -8,9 +8,7 @@ g.loaded_netrw = 1
 g.loaded_netrwPlugin = 1
 
 opt.termguicolors = true
-
 opt.path = vim.o.path .. "**"
-
 opt.number = true
 opt.background = "dark"
 opt.clipboard = "unnamedplus"
@@ -19,12 +17,9 @@ opt.cursorline = true
 opt.showmatch = true
 opt.incsearch = true
 opt.hlsearch = true
-
 opt.spell = false
 opt.spelllang = "en"
 opt.autoread = true
-opt.buftype = "acwrite"
-
 opt.expandtab = true
 opt.tabstop = 2
 opt.softtabstop = 2
@@ -36,7 +31,6 @@ opt.undofile = true
 opt.splitright = true
 opt.splitbelow = true
 opt.cmdheight = 0
-
 opt.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 
 local function prefix_diagnostic(prefix, diagnostic)
@@ -91,4 +85,4 @@ vim.opt.colorcolumn = "100"
 
 -- Native plugins
 cmd.filetype("plugin", "indent", "on")
-cmd.packadd("cfilter") -- Allows filtering the quickfix list with :cfdo
+cmd.packadd("cfilter")

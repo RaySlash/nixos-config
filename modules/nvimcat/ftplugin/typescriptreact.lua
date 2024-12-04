@@ -9,14 +9,17 @@ local root_files = {
 }
 
 local tailwind_root_files = {
-  "tailwindcss.config.ts",
+	"tailwindcss.config.ts",
 	".git",
 }
+
+local lspconfig = require("lspconfig")
+lspconfig.ts_ls.setup({})
 
 vim.lsp.start({
 	name = "tailwindcss-language-server",
 	cmd = { "tailwindcss-language-server" },
-	root_dir = vim.fs.dirname(vim.fs.find(tailwind_root_files, {upward = true})[1]),
+	root_dir = vim.fs.dirname(vim.fs.find(tailwind_root_files, { upward = true })[1]),
 	capabilities = require("user.lsp").make_client_capabilities(),
 })
 
@@ -25,10 +28,4 @@ vim.lsp.start({
 	cmd = { typescript_language_server_cmd, "--stdio" },
 	root_dir = vim.fs.dirname(vim.fs.find(root_files, { upward = true })[1]),
 	capabilities = require("user.lsp").make_client_capabilities(),
-	settings = {
-		documentFormatting = false,
-		completions = {
-			completeFunctionCalls = true,
-		},
-	},
 })

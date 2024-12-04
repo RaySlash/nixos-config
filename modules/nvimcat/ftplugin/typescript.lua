@@ -8,6 +8,9 @@ local root_files = {
 	".git",
 }
 
+local lspconfig = require("lspconfig")
+lspconfig.ts_ls.setup({})
+
 vim.lsp.start({
 	name = "typescript-language-server",
 	cmd = { typescript_language_server_cmd, "--stdio" },

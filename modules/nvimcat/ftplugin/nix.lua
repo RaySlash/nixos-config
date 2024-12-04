@@ -10,6 +10,10 @@ local root_files = {
 	".git",
 }
 
+local lspconfig = require("lspconfig")
+lspconfig.nil_ls.setup({})
+lspconfig.nixd.setup({})
+
 vim.lsp.start({
 	name = "nixd",
 	cmd = { "nixd" },

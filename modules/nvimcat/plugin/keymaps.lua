@@ -149,12 +149,12 @@ keymap.set("c", "%%", function()
 	end
 end, { expr = true, desc = "expand to current buffer's directory" })
 
-keymap.set("n", "<space>tn", vim.cmd.tabnew, { desc = "[t]ab: [n]ew" })
-keymap.set("n", "<space>tq", vim.cmd.tabclose, { desc = "[t]ab: [q]uit/close" })
+keymap.set("n", "<leader>tn", vim.cmd.tabnew, { desc = "[t]ab: [n]ew" })
+keymap.set("n", "<leader>tq", vim.cmd.tabclose, { desc = "[t]ab: [q]uit/close" })
 
 local severity = diagnostic.severity
 
-keymap.set("n", "<space>d", function()
+keymap.set("n", "<leader>sd", function()
 	local _, winid = diagnostic.open_float(nil, { scope = "line" })
 	if not winid then
 		vim.notify("no diagnostics found", vim.log.levels.INFO)
@@ -212,9 +212,9 @@ keymap.set("n", "<leader>S", toggle_spell_check, { noremap = true, silent = true
 -- XXX: This is not so nice if you use j/k for navigation
 -- (you should be using <C-d>/<C-u> and relative line numbers instead ;)
 --
--- local auto_hlsearch_namespace = vim.api.nvim_create_namespace('auto_hlsearch')
+-- local auto_hlsearch_nameleader = vim.api.nvim_create_nameleader('auto_hlsearch')
 -- vim.on_key(function(char)
 --   if vim.fn.mode() == 'n' then
 --     vim.opt.hlsearch = vim.tbl_contains({ '<CR>', 'n', 'N', '*', '#', '?', '/' }, vim.fn.keytrans(char))
 --   end
--- end, auto_hlsearch_namespace)
+-- end, auto_hlsearch_nameleader)

@@ -39,6 +39,7 @@
         prettierd
         stylua
         rustfmt
+        leptosfmt
         shfmt
         sql-formatter
         taplo
@@ -65,7 +66,9 @@
         (mkNvimPlugin inputs.plugins-neogit "neogit")
       ];
       lsp = with pkgs.vimPlugins; [
+        nvim-lspconfig
         markdown-preview-nvim
+        trouble-nvim
         formatter-nvim
         luasnip
         nvim-cmp
@@ -81,6 +84,9 @@
         cmp-cmdline-history
       ];
       ui = with pkgs.vimPlugins; [
+        noice-nvim
+        nui-nvim
+        nvim-notify
         kanagawa-nvim
         lualine-nvim
         statuscol-nvim
@@ -133,8 +139,8 @@
       settings = {
         wrapRc = true;
         aliases = ["vi" "vim" "nvim"];
-        neovim-unwrapped =
-          inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+        # neovim-unwrapped =
+        #   inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       };
       categories = {
         general = true;

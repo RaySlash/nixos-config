@@ -18,6 +18,9 @@ local root_files = {
 	".git",
 }
 
+local lspconfig = require("lspconfig")
+lspconfig.lua_ls.setup({})
+
 vim.lsp.start({
 	name = "luals",
 	cmd = { lua_ls_cmd },

@@ -146,4 +146,6 @@ telescope.setup({
 })
 
 telescope.load_extension("fzy_native")
+telescope.load_extension("noice")
+telescope.load_extension("notify")
 -- telescope.load_extension('smart_history')

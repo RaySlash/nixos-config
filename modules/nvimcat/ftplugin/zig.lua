@@ -7,6 +7,9 @@ local root_files = {
 	"build.zig",
 }
 
+local lspconfig = require("lspconfig")
+lspconfig.zls.setup({})
+
 vim.lsp.start({
 	name = "zls",
 	cmd = { "zls" },

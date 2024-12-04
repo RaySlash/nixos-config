@@ -6,6 +6,7 @@ local root_files = {
 	"elm.json",
 	".git",
 }
+require("lspconfig").elmls.setup({})
 
 vim.lsp.start({
 	name = "elm-language-server",

@@ -13,6 +13,9 @@ local tailwind_root_files = {
 	".git",
 }
 
+local lspconfig = require("lspconfig")
+lspconfig.ts_ls.setup({})
+
 vim.lsp.start({
 	name = "tailwindcss-language-server",
 	cmd = { "tailwindcss-language-server" },

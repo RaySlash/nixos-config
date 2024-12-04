@@ -13,7 +13,7 @@
 
     # Flake Add-ons
     flake-parts.url = "github:hercules-ci/flake-parts";
-    sops-nix.url = "github:Mic92/sops-nix";
+    # sops-nix.url = "github:Mic92/sops-nix";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

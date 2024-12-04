@@ -10,6 +10,9 @@ local root_files = {
 	".git",
 }
 
+local lspconfig = require("lspconfig")
+lspconfig.purescriptls.setup({})
+
 vim.lsp.start({
 	name = "purescript-language-server",
 	cmd = { purescript_language_server_cmd, "--stdio" },

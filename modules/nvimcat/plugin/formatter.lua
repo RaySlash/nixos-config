@@ -24,7 +24,6 @@ require("formatter").setup({
 		},
 		elm = {
 			function()
-				vim.cmd("checktime")
 				return {
 					exe = "elm-format",
 					args = {
@@ -59,6 +58,19 @@ require("formatter").setup({
 		},
 		rust = {
 			require("formatter.filetypes.rust").rustfmt,
+			function()
+				local project_root = vim.fn.getcwd()
+				local leptosfmt_config = project_root .. "/leptosfmt.toml"
+
+				if vim.fn.filereadable(leptosfmt_config) == 1 then
+					return {
+						exe = "leptosfmt",
+						args = { "--stdin" },
+						stdin = true,
+						cwd = project_root,
+					}
+				end
+			end,
 		},
 		sh = {
 			require("formatter.filetypes.sh").shfmt,

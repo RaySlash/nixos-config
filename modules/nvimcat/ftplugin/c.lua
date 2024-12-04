@@ -6,6 +6,7 @@ end
 local root_files = {
 	"main.c",
 }
+require("lspconfig").ccls.setup({})
 
 vim.lsp.start({
 	name = "ccls",
