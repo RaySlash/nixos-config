@@ -69,6 +69,7 @@
         nvim-lspconfig
         markdown-preview-nvim
         trouble-nvim
+        lazydev-nvim
         formatter-nvim
         luasnip
         nvim-cmp
@@ -84,9 +85,10 @@
         cmp-cmdline-history
       ];
       ui = with pkgs.vimPlugins; [
+        dressing-nvim
         noice-nvim
         nui-nvim
-        nvim-notify
+        nvim-highlight-colors
         kanagawa-nvim
         lualine-nvim
         statuscol-nvim
@@ -95,6 +97,7 @@
         neo-tree-nvim
       ];
       deps = with pkgs.vimPlugins; [
+        repeat
         image-nvim
         plenary-nvim
         nvim-web-devicons
@@ -104,10 +107,14 @@
         yuck-vim
       ];
       general = with pkgs.vimPlugins; [
-        autoclose-nvim
+        nvim-autopairs
+        mini-surround
+        leap-nvim
         telescope-nvim
         telescope-fzy-native-nvim
-        nvim-surround
+        telescope-frecency-nvim
+        undotree
+        telescope-undo-nvim
         nvim-treesitter-textobjects
         nvim-ts-context-commentstring
         nvim-unception
@@ -134,13 +141,13 @@
   };
 
   packageDefinitions = {
+    # see :help nixCats.flake.outputs.settings
     nvimcat = {pkgs, ...}: {
-      # see :help nixCats.flake.outputs.settings
       settings = {
         wrapRc = true;
         aliases = ["vi" "vim" "nvim"];
-        # neovim-unwrapped =
-        #   inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+        neovim-unwrapped =
+          inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       };
       categories = {
         general = true;
@@ -151,6 +158,18 @@
         langs = true;
       };
       extra = {};
+    };
+    minimal = {pkgs, ...}: {
+      settings = {
+        wrapRc = true;
+        aliases = ["vim" "nvim"];
+        neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
+      };
+      categories = {
+        general = true;
+        deps = true;
+        langs = true;
+      };
     };
   };
   defaultPackageName = "nvimcat";

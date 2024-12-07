@@ -71,6 +71,7 @@ in {
 
     home = {
       packages = with pkgs; [
+        hyprcursor
         swww
         wl-clipboard
         wlr-randr
@@ -88,6 +89,7 @@ in {
         libsForQt5.polkit-kde-agent
         qt6.qmake
         qt6.qtwayland
+        pavucontrol
 
         #eww dependencies
         jq

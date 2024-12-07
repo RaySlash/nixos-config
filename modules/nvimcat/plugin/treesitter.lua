@@ -3,6 +3,9 @@ if vim.g.did_load_treesitter_plugin then
 end
 vim.g.did_load_treesitter_plugin = true
 
+local npairs = require("nvim-autopairs")
+local Rule = require("nvim-autopairs.rule")
+
 local configs = require("nvim-treesitter.configs")
 vim.g.skip_ts_context_comment_string_module = true
 
@@ -90,6 +93,21 @@ require("treesitter-context").setup({
 })
 
 require("ts_context_commentstring").setup()
+
+-- Nvim-autopairs
+npairs.setup({
+	check_ts = true,
+	ts_config = {
+		lua = { "string" }, -- it will not add a pair on that treesitter node
+		javascript = { "template_string" },
+	},
+})
+
+-- Use following to press % => %% only while inside a comment or string
+-- local ts_conds = require("nvim-autopairs.ts-conds")
+-- npairs.add_rules({
+-- 	Rule("%", "%", "lua"):with_pair(ts_conds.is_ts_node({ "string", "comment" })),
+-- })
 
 -- Tree-sitter based folding
 -- vim.opt.foldmethod = 'expr'

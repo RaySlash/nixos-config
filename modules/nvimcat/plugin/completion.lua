@@ -30,22 +30,30 @@ cmp.setup({
 		-- autocomplete = false,
 	},
 	formatting = {
-		format = lspkind.cmp_format({
-			mode = "symbol_text",
-			with_text = true,
-			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-			ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+		format = function(entry, item)
+			local color_item = require("nvim-highlight-colors").format(entry, { kind = item.kind })
+			item = require("lspkind").cmp_format({
+				mode = "symbol_text",
+				with_text = true,
+				maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+				ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
 
-			menu = {
-				buffer = "[BUF]",
-				nvim_lsp = "[LSP]",
-				nvim_lsp_signature_help = "[LSP]",
-				nvim_lsp_document_symbol = "[LSP]",
-				nvim_lua = "[API]",
-				path = "[PATH]",
-				luasnip = "[SNIP]",
-			},
-		}),
+				menu = {
+					buffer = "[BUF]",
+					nvim_lsp = "[LSP]",
+					nvim_lsp_signature_help = "[LSP]",
+					nvim_lsp_document_symbol = "[LSP]",
+					nvim_lua = "[API]",
+					path = "[PATH]",
+					luasnip = "[SNIP]",
+				},
+			})(entry, item)
+			if color_item.abbr_hl_group then
+				item.kind_hl_group = color_item.abbr_hl_group
+				item.kind = color_item.abbr
+			end
+			return item
+		end,
 	},
 	snippet = {
 		expand = function(args)

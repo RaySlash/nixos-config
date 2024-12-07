@@ -21,6 +21,10 @@
 
     # Applications
     wezterm.url = "github:wez/wezterm?dir=nix"; # (nixpkgs)wezterm does not support Wayland
+    hyprcursor-macos-theme = {
+      url = "github:driedpampas/macOS-hyprcursor";
+      flake = false;
+    };
 
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";

@@ -34,7 +34,7 @@ in {
         size = 32;
       };
 
-      packages = with pkgs; [papirus-icon-theme catppuccin-gtk];
+      packages = with pkgs; [papirus-icon-theme catppuccin-gtk apple-cursor];
     };
   };
 }

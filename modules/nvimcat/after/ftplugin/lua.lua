@@ -18,6 +18,14 @@ local root_files = {
 	".git",
 }
 
+require("lazydev").setup({
+	enabled = function(root_dir)
+		return not vim.uv.fs_stat(root_dir .. "/.luarc.json")
+	end,
+	-- Only load luvit types when the `vim.uv` word is found
+	{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+})
+
 local lspconfig = require("lspconfig")
 lspconfig.lua_ls.setup({})
 

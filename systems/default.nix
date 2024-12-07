@@ -15,7 +15,7 @@
           inputs.home-manager.nixosModules.home-manager
           {
             config.nixpkgs = {
-              overlays = [inputs.self.overlays.unstable inputs.nurpkgs.overlay];
+              overlays = [inputs.self.overlays.unstable inputs.nurpkgs.overlays.default];
               config = {allowUnfree = true;};
             };
           }

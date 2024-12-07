@@ -1,7 +1,7 @@
-if vim.g.did_load_kanagawa_plugin then
+if vim.g.did_load_theme_plugin then
 	return
 end
-vim.g.did_load_kanagawa_plugin = true
+vim.g.did_load_theme_plugin = true
 
 require("kanagawa").setup({
 	transparent = true,
@@ -46,3 +46,25 @@ require("kanagawa").setup({
 })
 
 vim.cmd("colorscheme kanagawa")
+
+require("lualine").setup({
+	globalstatus = true,
+	options = {
+		theme = "auto",
+	},
+	extensions = { "fugitive", "fzf", "toggleterm", "quickfix" },
+})
+
+local builtin = require("statuscol.builtin")
+require("statuscol").setup({
+	setopt = true,
+	relculright = true,
+	segments = {
+		{ text = { "%s" }, click = "v:lua.ScSa" },
+		{
+			text = { builtin.lnumfunc, " " },
+			condition = { true, builtin.not_empty },
+			click = "v:lua.ScLa",
+		},
+	},
+})

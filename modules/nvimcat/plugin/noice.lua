@@ -3,8 +3,6 @@ if vim.g.did_load_noice_plugin then
 end
 vim.g.did_load_noice_plugin = true
 
-vim.notify = require("notify")
-
 require("noice").setup({
 	lsp = {
 		override = {
