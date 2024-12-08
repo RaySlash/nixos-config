@@ -17,7 +17,6 @@
   custom = {
     firefox.enable = true;
     wezterm.enable = true;
-    hyprland-addons.enable = true;
     nix-addons.enable = true;
     themes-addons.enable = true;
     users.smj.enable = true;

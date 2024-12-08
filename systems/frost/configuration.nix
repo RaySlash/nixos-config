@@ -65,6 +65,8 @@
     nix-ld.enable = true;
   };
 
+  custom.hyprland.enable = true;
+
   environment = {
     systemPackages = with pkgs; [virt-manager man-pages man-pages-posix];
   };
