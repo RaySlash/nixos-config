@@ -7,7 +7,6 @@ local api = vim.api
 local fn = vim.fn
 local keymap = vim.keymap
 local diagnostic = vim.diagnostic
-local leap = require("leap")
 
 -- STOP USING ARROW KEYS
 -- keymap.set('n', '<Up>', '')
@@ -29,7 +28,6 @@ keymap.set(
 	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal! <C-L><CR>",
 	{ desc = "Redraw / Clear hlsearch / Diff Update" }
 )
-keymap.set("n", "<leader>fu", "<cmd>Telescope undo<cr>")
 keymap.set("n", "<leader>ut", "<cmd>UndotreeToggle<cr>")
 
 -- Yank from current position till end of current line

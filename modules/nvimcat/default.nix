@@ -109,7 +109,6 @@
       general = with pkgs.vimPlugins; [
         nvim-autopairs
         mini-surround
-        leap-nvim
         telescope-nvim
         telescope-fzy-native-nvim
         telescope-frecency-nvim
@@ -146,8 +145,6 @@
       settings = {
         wrapRc = true;
         aliases = ["vi" "vim" "nvim"];
-        neovim-unwrapped =
-          inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
       };
       categories = {
         general = true;

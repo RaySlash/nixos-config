@@ -1,7 +1,7 @@
-if vim.g.did_load_flash_plugin then
+if vim.g.did_load_formatter_plugin then
 	return
 end
-vim.g.did_load_flash_plugin = true
+vim.g.did_load_formatter_plugin = true
 
 local util = require("formatter.util")
 require("formatter").setup({
