@@ -33,8 +33,10 @@
                   config,
                   ...
                 }:
-                  import args.home {inherit inputs pkgs config;}
-                  // import ../systems/common/hm.nix {inherit inputs pkgs config;};
+                  inputs.nixpkgs.lib.recursiveUpdate
+                  (import args.home {inherit inputs pkgs config;})
+                  (import ../systems/common/hm.nix {inherit inputs pkgs config;});
+
                 sharedModules =
                   [inputs.nix-index-database.hmModules.nix-index]
                   ++ attrValues moduleSet.homeModules;
