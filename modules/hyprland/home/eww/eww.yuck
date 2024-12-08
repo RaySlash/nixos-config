@@ -10,7 +10,7 @@
 ; (deflisten primary_color :initial "#ffffff" "echo $EWW_PRIMARY_COLOR")
 
 (defwindow bar
-  :monitor 1
+  :monitor 0
   :geometry (geometry :x "0%"
             :y "0.5%"
             :width "99.3%"
@@ -23,7 +23,7 @@
 (fullbar))
 
 (defwindow menu
-  :monitor 1
+  :monitor 0
   :geometry (geometry :x "85%"
                       :y "0.5%")
   :stacking "ov"
@@ -51,7 +51,7 @@
 
 
 (defwidget powerbar []
-  (box :class "powerbar" 
+  (box :class "powerbar"
        :orientation "v"
        :space-evenly false
     (eventbox :class "powerbar-item"
@@ -123,7 +123,7 @@
 (defwidget customtray []
   (box :class "customicons"
        :orientation "h"
-       :space-evenly false 
+       :space-evenly false
     (tooltip :class "tooltip" "  ${spercent} |  ${mpercent}" (eventbox :class "tray-item" " " ))
     (tooltip :class "tooltip" "  ${round(EWW_RAM.used_mem_perc, 0)}%" (eventbox :class "tray-item" " " ))
     (tooltip :class "tooltip" "  ${round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}%" (eventbox :class "tray-item" " "))
@@ -143,14 +143,14 @@
     (label :class "time" :text {formattime(EWW_TIME, "%I:%M %p")})))
 
 (defwidget workspaces []
-  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}" 
+  (eventbox :onscroll "bash ~/.config/eww/scripts/change-active-workspace {} ${current_workspace}"
             :class "workspaces-widget"
-    (box :space-evenly true 
+    (box :space-evenly true
          :spacing 5
-      (label :text "${workspaces}${current_workspace}" 
+      (label :text "${workspaces}${current_workspace}"
              :visible false)
       (for workspace in workspaces
-        (eventbox :class "workspace-e" 
+        (eventbox :class "workspace-e"
                   :onclick "hyprctl dispatch workspace ${workspace.id}"
           (box :class "workspace ${workspace.id == current_workspace ? "current" : ""} ${workspace.windows > 0 ? "occupied" : "empty"}"
             (label :text "${workspace.id}")))))))

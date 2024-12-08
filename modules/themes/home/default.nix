@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
@@ -13,22 +12,36 @@ in {
   config = mkIf cfg.enable {
     gtk = {
       enable = true;
-      iconTheme.name = "Papirus-Dark";
-      iconTheme.package = pkgs.papirus-icon-theme;
-      font.name = "IosevkaTerm Nerd Font";
-      font.size = 12;
-      theme.name = "Catppuccin-Mocha-Standard-Lavender-Dark";
-      theme.package = pkgs.catppuccin-gtk.override {
-        accents = ["lavender"];
-        size = "standard";
-        variant = "mocha";
+      cursorTheme = {
+        name = "macOS-Monterey-White";
+        package = pkgs.apple-cursor;
+        size = 32;
+      };
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+      };
+      font = {
+        name = "IosevkaTerm Nerd Font";
+        size = 12;
+      };
+      theme = {
+        name = "Catppuccin-Mocha-Standard-Lavender-Dark";
+        package = pkgs.catppuccin-gtk.override {
+          accents = ["lavender"];
+          size = "standard";
+          variant = "mocha";
+        };
       };
     };
 
     home = {
       pointerCursor = {
         gtk.enable = true;
-        x11.enable = true;
+        x11 = {
+          enable = true;
+          defaultCursor = "X_cursor";
+        };
         name = "macOS-Monterey-White";
         package = pkgs.apple-cursor;
         size = 32;

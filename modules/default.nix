@@ -18,6 +18,7 @@ in {
     nix-addons = import ./nix/home.nix;
     theme-addons = import ./themes/home;
     wezterm-addons = import ./wezterm/home;
+    kitty = import ./kitty/home;
     smj = import ./users/smj/home;
   };
 

@@ -16,7 +16,7 @@
 
   custom = {
     firefox.enable = true;
-    wezterm.enable = true;
+    kitty.enable = true;
     nix-addons.enable = true;
     themes-addons.enable = true;
     users.smj.enable = true;

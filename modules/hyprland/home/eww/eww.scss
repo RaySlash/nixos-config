@@ -1,8 +1,8 @@
 $color_bg: #232931;
-$color_bg-secondary: #393E46;
-$color_fg: #EEEEEE;
-$color_fg-secondary: #8E05C2;
-$color_primary: #4ECCA3;
+$color_bg-secondary: #393e46;
+$color_fg: #eeeeee;
+$color_fg-secondary: #8e05c2;
+$color_primary: #4ecca3;
 $color_nix: #7eb2df;
 
 * {
@@ -33,16 +33,16 @@ $color_nix: #7eb2df;
 }
 
 .systray {
-  padding: 0 .5rem;
-  background-color: $color_bg-secondary
+  padding: 0 0.5rem;
+  background-color: $color_bg-secondary;
 }
 
 .tooltip {
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
 }
 
 .workspace-e:hover {
-  color: $color_primary
+  color: $color_primary;
 }
 
 tooltip {
@@ -51,11 +51,11 @@ tooltip {
 }
 
 .calendar {
-  padding: .3rem;
+  padding: 0.3rem;
 }
 
 .tray-item {
-  padding: .2rem;
+  padding: 0.2rem;
 }
 
 .tray-item:hover {
@@ -63,7 +63,8 @@ tooltip {
 }
 
 .current {
-  color: $color_primary;
+  color: $color_fg-secondary;
+  font-weight: 700;
 }
 
 .customicons > * {
@@ -73,7 +74,7 @@ tooltip {
 .powercontainer {
   background-color: $color_bg;
   color: $color_fg;
-  padding:  1rem;
+  padding: 1rem;
   border-radius: 1rem;
 }
 

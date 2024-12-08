@@ -56,7 +56,6 @@
       lshw
       networkmanager
       nmap
-      wezterm
       btrfs-progs
       chromium
     ];
