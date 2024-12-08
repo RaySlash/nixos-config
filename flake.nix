@@ -20,12 +20,11 @@
     };
 
     # Applications
-    wezterm.url = "github:wez/wezterm?dir=nix"; # (nixpkgs)wezterm does not support Wayland
-    hyprcursor-macos-theme = {
-      url = "github:driedpampas/macOS-hyprcursor";
-      flake = false;
+    # wezterm.url = "github:wez/wezterm?dir=nix";
+    firefox-nightly = {
+      url = "github:nix-community/flake-firefox-nightly";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     plugins-neogit = {

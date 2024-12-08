@@ -36,6 +36,7 @@ in {
       keybindings = {
         "ctrl+c" = "copy_and_clear_or_interrupt";
         "ctrl+v" = "paste";
+        "ctrl+shift+a" = "new_tab_with_cwd";
       };
     };
   };

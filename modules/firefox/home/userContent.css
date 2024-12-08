@@ -1,3 +1,15 @@
+@-moz-document url-prefix(about:blank) {
+  html > body:empty {
+    background-color: rgb(19, 19, 20) !important;
+  }
+}
+
+@-moz-document url(about:blank) {
+  html > body:empty {
+    background-color: rgb(19, 19, 20) !important;
+  }
+}
+
 /*Small scrollbar */
 :root {
   scrollbar-color: rgb(221, 182, 242) rgb(30, 30, 46);

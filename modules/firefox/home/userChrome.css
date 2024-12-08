@@ -20,3 +20,11 @@
 #urlbar-container {
   margin-left: 0 !important;
 }
+
+tabbrowser tabpanels {
+  background-color: rgb(19, 19, 20) !important;
+}
+
+browser {
+  background-color: #131314 !important;
+}
