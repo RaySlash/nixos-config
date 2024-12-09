@@ -118,12 +118,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
--- Formats file, loads the changes and aply edit to buffer
+-- Formats file, loads the changes and aply edit to buffer on save
 -- Formatter.nvim
 api.nvim_create_autocmd("BufWritePost", {
 	group = api.nvim_create_augroup("__formatter__", { clear = true }),
 	callback = function()
-		vim.cmd("Format")
+		vim.cmd([[Format]])
 		vim.cmd("checktime")
 	end,
 })

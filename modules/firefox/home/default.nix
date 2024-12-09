@@ -6,6 +6,7 @@
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
+  inherit (builtins) readFile;
   cfg = config.custom.firefox;
 in {
   options.custom.firefox = {enable = mkEnableOption "firefox";};
@@ -22,8 +23,8 @@ in {
           order = ["DuckDuckGo"];
           force = true;
         };
-        userChrome = builtins.readFile ./userChrome.css;
-        userContent = builtins.readFile ./userContent.css;
+        userChrome = readFile ./userChrome.css;
+        userContent = readFile ./userContent.css;
         settings = {
           "middlemouse.paste" = false;
           # BetterFox
@@ -171,6 +172,7 @@ in {
           sponsorblock
           sidebery
           tridactyl
+          enhancer-for-youtube
         ];
       };
     };

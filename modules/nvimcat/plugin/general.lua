@@ -9,7 +9,7 @@ local add_ftype = function(pattern)
 	})
 end
 
-add_ftype({ [".*/*/hyprland.conf"] = "hyprlang", [".*/*/hyprpaper.conf"] = "hyprlang" })
+add_ftype({ [".*/*/hypr.*%.conf"] = "hyprlang" })
 add_ftype({ [".*/*/.*%.yuck"] = "yuck" })
 add_ftype({ [".*%.purs"] = "purescript" })
 
