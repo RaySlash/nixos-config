@@ -4,15 +4,21 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-    nurpkgs.url = "github:nix-community/NUR";
+    nurpkgs = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
-      };
+    };
 
     # Flake Add-ons
-    flake-parts.url = "github:hercules-ci/flake-parts";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     # sops-nix.url = "github:Mic92/sops-nix";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -26,7 +32,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     plugins-neogit = {
       url = "github:NeogitOrg/neogit";
       flake = false;
