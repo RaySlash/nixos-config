@@ -81,25 +81,31 @@ in {
         enable = true;
         settings = {
           main = {
-            font = "AtkinsonHyperlegible";
+            font = "AtkinsonHyperlegible:size=14";
+            dpi-aware = false;
+            use-bold = true;
             icons-enabled = true;
+            icon-theme = "Papirus-Dark";
             terminal = "kitty -1";
             x-margin = 20;
             y-margin = 20;
+            horizontal-pad = 30;
+            vertical-pad = 20;
             tabs = 4;
-            icon-theme = "Papirus-Dark";
-            inner-pad = 30;
+            inner-pad = 50;
             line-height = 30;
           };
           colors = {
-            background = "1d2021ee";
+            background = "000000ee";
             text = "f9f5d7ff";
-            selection = "9d0006ee";
-            selection-text = "f9f5d7ff";
-            selection-match = "000000ee";
-            border = "cc241dee";
+            match = "563A9Cff";
+            selection = "433D8Bff";
+            selection-text = "FFE1FFff";
+            selection-match = "8B5DFFff";
+            border = "FFE1FFee";
           };
           border = {
+            width = 2;
             radius = 15;
           };
         };

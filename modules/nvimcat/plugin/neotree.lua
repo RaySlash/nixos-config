@@ -12,6 +12,7 @@ image.setup({
 local neotree = require("neo-tree")
 neotree.setup({
 	window = {
+		position = "right",
 		mappings = {
 			["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
 		},

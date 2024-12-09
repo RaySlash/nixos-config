@@ -13,6 +13,11 @@ in {
     programs = {
       zsh = {
         enable = true;
+        loginShellInit = ''
+          if [[ -z $DISPLAY && $XDG_SESSION_TYPE == " tty " ]]; then
+            exec Hyprland
+          fi
+        '';
         syntaxHighlighting.enable = true;
         autosuggestions.enable = true;
         zsh-autoenv.enable = true;
