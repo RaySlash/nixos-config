@@ -159,6 +159,7 @@ in {
     home = {
       packages = with pkgs; [
         swww
+        hyprpolkitagent
         wl-clipboard
         wlr-randr
         wlogout

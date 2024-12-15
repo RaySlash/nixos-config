@@ -32,7 +32,6 @@
     p7zip
     wget
     imv
-    pavucontrol
     ungoogled-chromium
     libreoffice-fresh
     protonup-qt

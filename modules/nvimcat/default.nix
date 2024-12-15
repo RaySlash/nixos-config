@@ -49,7 +49,9 @@
         nixd
         ccls
         rust-analyzer
+        haskell-language-server
         lua-language-server
+        vscode-langservers-extracted
         tailwindcss-language-server
         elmPackages.elm-language-server
         nodePackages.typescript-language-server
@@ -85,6 +87,7 @@
         cmp-cmdline-history
       ];
       ui = with pkgs.vimPlugins; [
+        render-markdown-nvim
         dressing-nvim
         noice-nvim
         nui-nvim

@@ -17,6 +17,10 @@ in {
       tumbler.enable = true;
       gnome.gnome-keyring.enable = true;
       displayManager.defaultSession = "hyprland";
+      xserver.displayManager.gdm = {
+        enable = true;
+        wayland = true;
+      };
     };
 
     hardware.graphics.enable = true;

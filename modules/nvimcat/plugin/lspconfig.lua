@@ -5,7 +5,14 @@ vim.g.did_load_lspconfig_plugin = true
 
 local lspconfig = require("lspconfig")
 lspconfig.ccls.setup({})
+lspconfig.cssls.setup({
+	less = { validate = true },
+	css = { validate = true },
+	scss = { validate = true },
+})
 lspconfig.elmls.setup({})
+lspconfig.html.setup({})
+lspconfig.hls.setup({})
 lspconfig.ts_ls.setup({})
 lspconfig.tailwindcss.setup({})
 lspconfig.nil_ls.setup({})

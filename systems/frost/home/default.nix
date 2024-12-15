@@ -9,7 +9,6 @@
     wget
     imv
     helvum
-    pavucontrol
     openrgb-with-all-plugins
     chromium
     libreoffice-fresh
