@@ -7,14 +7,14 @@
   luaPath = "${./.}";
   forEachSystem = utils.eachSystem nixpkgs.lib.platforms.all;
   extra_pkg_config = {
-    # allowUnfree = true;
+    allowUnfree = true;
   };
   inherit
     (forEachSystem (system: let
       dependencyOverlays =
+        # see :help nixCats.flake.outputs.overlays
         # (import ./overlays inputs) ++
         [
-          # see :help nixCats.flake.outputs.overlays
           (utils.standardPluginOverlay inputs)
         ];
     in {inherit dependencyOverlays;}))
@@ -23,10 +23,6 @@
 
   categoryDefinitions = {
     pkgs,
-    settings,
-    categories,
-    extra,
-    name,
     mkNvimPlugin,
     ...
   } @ packageDef: {
@@ -124,10 +120,10 @@
       ];
     };
 
-    optionalPlugins = {
-      gitPlugins = with pkgs.neovimPlugins; [];
-      general = with pkgs.vimPlugins; [];
-    };
+    # optionalPlugins = {
+    #   gitPlugins = with pkgs.neovimPlugins; [];
+    #   general = with pkgs.vimPlugins; [];
+    # };
 
     sharedLibraries = {general = with pkgs; [libgit2];};
 
@@ -160,7 +156,7 @@
       };
       extra = {};
     };
-    minimal = {pkgs, ...}: {
+    nvim-minimal = {pkgs, ...}: {
       settings = {
         wrapRc = true;
         aliases = ["vim" "nvim"];

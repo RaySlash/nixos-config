@@ -1,6 +1,77 @@
 {
   description = "Personal Flake NixOS config - RaySlash";
 
+  outputs = {flake-parts, ...} @ inputs: let
+    unstable-overlay = final: _prev: {
+      unstable = import inputs.nixpkgs-unstable {
+        system = final.system;
+        config.allowUnfree = true;
+      };
+    };
+    packages-overlay = final: _prev: {
+      custom = import ./packages final.pkgs;
+    };
+  in
+    (flake-parts.lib.mkFlake {inherit inputs;}) {
+      systems = inputs.nixpkgs.lib.systems.flakeExposed;
+      debug = true; # Enable debug log trace in repl
+
+      imports = [
+        inputs.flake-parts.flakeModules.flakeModules
+        inputs.devshell.flakeModule
+      ];
+
+      perSystem = {
+        system,
+        inputs',
+        ...
+      }: let
+        nvimcat =
+          (import ./modules {inherit inputs;}).pkgs.nvimcat.${system};
+      in {
+        formatter = inputs'.nixpkgs.legacyPackages.alejandra;
+        packages = import ./packages/default.nix inputs'.nixpkgs.legacyPackages // nvimcat;
+
+        _module.args.pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [unstable-overlay packages-overlay];
+        };
+
+        devshells.default = {
+          devshell = {
+            name = "nixos-config-shell";
+            meta.description = "Dev Environment for nixos-config";
+          };
+          commands = [
+            {
+              help = ''
+                USAGE: nix-switch [DOTFILE_DIR]#[HOSTNAME]
+                INFO: Rebuilds given host (Wrapper for nixos-rebuild)
+              '';
+              name = "nix-switch";
+              command = "sudo nixos-rebuild switch --flake";
+            }
+          ];
+          env = [
+            {
+              name = "EDITOR";
+              value = "nvim";
+            }
+          ];
+        };
+      };
+
+      flake = {...}: {
+        overlays = {
+          default = final: prev: (inputs.self.overlays.unstable final prev) // (inputs.self.overlays.custom-pkgs final prev);
+          unstable = unstable-overlay;
+          custom-pkgs = packages-overlay;
+        };
+
+        nixosConfigurations = import ./systems {inherit inputs;};
+      };
+    };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -18,6 +89,10 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     # sops-nix.url = "github:Mic92/sops-nix";
     nix-index-database = {
@@ -41,43 +116,4 @@
       flake = false;
     };
   };
-
-  outputs = {flake-parts, ...} @ inputs: let
-    unstable-overlay = final: _prev: {
-      unstable = import inputs.nixpkgs-unstable {
-        system = final.system;
-        config.allowUnfree = true;
-      };
-    };
-    packages-overlay = final: _prev: import ./packages final.pkgs;
-  in
-    (flake-parts.lib.mkFlake {inherit inputs;}) {
-      imports = [inputs.flake-parts.flakeModules.flakeModules];
-
-      systems = inputs.nixpkgs.lib.systems.flakeExposed;
-      debug = true;
-
-      perSystem = {
-        system,
-        inputs',
-        ...
-      }: {
-        formatter = inputs'.nixpkgs.legacyPackages.alejandra;
-        packages =
-          (import ./modules {inherit inputs;}).pkgs.nvimcat.${system};
-        _module.args.pkgs = import inputs.nixpkgs {
-          inherit system;
-          overlays = [unstable-overlay packages-overlay];
-        };
-      };
-
-      flake = {self, ...}: {
-        overlays = {
-          default = [self.overlays.unstable packages-overlay];
-          unstable = unstable-overlay;
-        };
-
-        nixosConfigurations = import ./systems {inherit inputs;};
-      };
-    };
 }
